@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[normalem]{ulem}
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+($\Longrightarrow$): Suppose $G$ is abelian.
+Fix $h_1,h_2\in H$. Then since $f$ is bijective, we know that there exist
+$g_1,g_2\in G$ such that $f(g_1)=h_1$ and $f(g_2)=h_2$. We also know that
+$f^{-1}:H\longrightarrow G$ is an isomorphism, so $g_1=f^{-1}(h_1)$ and
+$g_2=f^{-1}(h_2)$. $G$ is abelian, so
+\begin{align*}
+	&g_1g_2=g_2g_1\\
+	\implies&f^{-1}(h_1)f^{-1}(h_2)=f^{-1}(h_2)f^{-1}(h_1)\\
+	\implies&f^{-1}(h_1h_2)=f^{-1}(h_2h_1)\\
+	\implies&f(f^{-1}(h_1h_2))=f(f^{-1}(h_2h_1))\\
+	\implies&h_1h_2=h_2h_1
+\end{align*}
+($\Longleftarrow$): Suppose $H$ is abelian.
+Fix $g_1,g_2\in G$. Again we know that there exist $h_1,h_2\in H$ such that
+$f(g_1)=h_1$ and $f(g_2)=h_2$. $H$ is abelian, so
+\begin{align*}
+	&h_1h_2=h_2h_1\\
+	\implies&f(g_1)f(g_2)=f(g_2)f(g_1)\\
+	\implies&f(g_1g_2)=f(g_2g_1)\\
+	\implies&f^{-1}(f(g_1g_2))=f^{-1}(f(g_2g_1))\\
+	\implies&g_1g_2=g_2g_1
+\end{align*}
+Thus $G$ is abelian if and only if $H$ is abelian.
+\section{} % Section 2
+We first show that $(R,\oplus)$ is an abelian group:\\
+\underline{Associative}:
+\begin{align*}
+	((n\oplus m)\oplus k=(n+m+1)\oplus k=(n+m-1)+k-1\\
+	n\oplus(k\oplus m)=n+(m\oplus k)-1=n+(m+k-1)-1
+\end{align*}
+$(n+m-1)+k-1=n+(m+k-1)-1$, so associativity holds.\\
+\underline{Has identity}: $n\odot1=n+1-1=n$, $1\odot n=1+n-1=n$, so $1$ is the
+identity\\
+\underline{Has inverses}: $n\oplus n^{-1}=n-(n-2)-1=n-n+2-1=1$,
+$n^{-1}\oplus n=(n+2)-n-1=n+2-n-1=1$, so $n-2$ is the inverse for $n$.
+We now show that $\odot$ is associative on $R$:\\
+$(n\odot m)\odot k=(n+m-nm)\odot k=n+m-nm+k-(n+m-nm)k=n\odot(m\odot k)$.\\
+Finally, we show that $\odot$ distributes over $\oplus$:\\
+\begin{align*}
+	n\odot(a\oplus b)&=n\odot(a+b-1)\\
+	&=n+a+b-1-na-nb+n\\
+	&=n+a-na+n+b-nb-n\\
+	&=2n+a+b-na-nb-1\\\\
+	(n\odot a)\oplus(n\odot b)&=(n+a-na)\oplus(n+b-nb)\\
+	&=n+a-na+n+b-nb-1\\
+	&=2n+a+b-na-nb-1
+\end{align*}
+\end{document}

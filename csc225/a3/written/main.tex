@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm,algpseudocode,mathtools,authblk}
+\newtheorem*{claim}{Claim}
+\newtheorem*{base}{Base Case}
+\newtheorem*{hypothesis}{Inductive Hypothesis}
+\newtheorem*{step}{Inductive Step}
+\title{\vspace{-3.5cm}CSC 225 Written Assignment 3}
+\author{Oliver Tonnesen}
+\affil{V00885732}
+\date{July 24, 2018}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{Finding Cycles}
+\subsection{Pseudocode}
+\begin{algorithmic}[1]
+	\Function{shortestPath}{$G$}
+		\State{$minDist\gets{n+1}$} // Store length of smallest observed cycle
+		\For{each vertex $v\in{}Vertices(G)$}
+			\State{// The entire contents of this for-loop}
+			\State{// are just BFS being performed on $v$}
+			\State{// and checking for cycles along the way}
+			\State{$unvisited\gets$empty queue}
+			\State{$visited\gets$empty set}
+			\State{$parent\gets$array of size n} // Set all values to $-1$
+			\State{$distance\gets$array of size n} // Set all values to $n+1$
+			\State{// Set initial values for BFS}
+			\State{$parent[v]\gets{v}$}
+			\State{$distance[v]\gets{0}$}
+			\State{$unvisited.enqueue(v)$}
+			\While{unvisited is not empty}
+				\State{$subroot\gets{unvisited.dequeue()}$}
+				\State{$visited.add(subroot)$}
+				\For{each vertex $n\in{Neighbors(subroot)}$}
+					\If{$n$ is $parent[subroot]$}
+						\State{$Continue$}
+					\ElsIf{$n$ is not in $visited$}
+						\State{$parent[n]\gets{subroot}$}
+						\State{$distance[n]\gets{1+distance[n]}$}
+						\State{$unvisited.enqueue(n)$}
+					\Else{}
+						\State{$cycle\gets{distance[n]+1+distance[subroot]}$}
+						\If{$cycle<minDist$}
+							\State{$minDist\gets{cycle}$}
+						\EndIf{}
+					\EndIf{}
+				\EndFor{}
+			\EndWhile{}
+		\EndFor{}
+		\State{\Return{$minDist$}}
+	\EndFunction{}
+\end{algorithmic}
+
+$shortestPath$ simply iterates through each vertex in G and performs a breadth-first search traversal of the graph to determine the shortest cycle containing that vertex. By the end of the algorithm, the shortest cycle starting at every vertex will have been visited, so the shortest of these cycles must be the shortest cycle in the graph.
+\subsection{Worst-case input}
+Since this algorithm iterates through each unvisited neighbor of every vertex $n$ times, a worst-case input is one with many edges; thus the worst-case $n$-vertex input for $shortestPath$ is the complete graph on $n$ vertices.
+\section{Connectivity}
+\begin{proof}
+	Every connected graph must have a spanning tree. Any given tree must either contain only a single vertex (with zero edges) or
+	at least one leaf (with only one edge). In the first case --- a graph consisting of one vertex with zero edges
+	--- removing the lone vertex will not result in a disconnected graph. In the second case --- a graph containing at
+	least one leaf vertex --- removing the leaf cannot disconnect the graph, as it has only one edge incident to it.
+	Thus in all cases a vertex must exist that can be deleted without disconnecting the graph.
+\end{proof}
+\section{Forests}
+\begin{proof}
+	\begin{claim}
+		The number of edges on any acyclic graph on $n$ vertices with $k$ components is equal to $n-k$.
+	\end{claim}
+	\begin{base}
+		The number of edges in a connected acyclic graph on n vertices (an acyclic graph with 1 component) is $n-1$.\\
+	\end{base}
+	\begin{hypothesis}
+		There exists some $l>1$ such that the claim holds for all $k\le{l}$.
+	\end{hypothesis}
+	\begin{step}
+		Take any acyclic graph with $l$ components.\\
+		By the inductive hypothesis, this graph has $n-l$ edges.\\
+		If one edge is deleted, one component is added. This is due to
+		the fact that the graph is acyclic, and so when an edge is deleted one
+		or more vertices become unreachable from the `rest' of the graph.
+		So an acyclic graph with $l+1$ components has $n-l-1$ edges, or $n-(l+1)$ edges.\\\\
+		By induction, the claim holds that any acyclic graph on $n$ vertices with $k$ components has exactly $n-k$ edges.
+	\end{step}
+\end{proof}
+\section{Counting Problems}
+\subsection{}
+	Since each graph on $n$ vertices differs only based on which of its possible edges are present or absent,
+	the set of all graphs on $n$ vertices can be thought of as the powerset of $E$, $\mathcal{P}(E)$.
+	So then the number of possibles graphs on $n$ vertices is $|\mathcal{P}(E)|$.
+	\begin{align*}
+		|\mathcal{P}(E)| &= 2^{|E|}\\
+		&= 2^{\binom{n}{2}}
+	\end{align*}
+\subsection{}
+	A graph on $n$ vertices with one connected component can have up to $\binom{n}{2}$ edges.
+	To turn one connected component into two, a subset of one or more vertices can be chosen
+	from the component; for every vertex in this subset, any edge that connects it to a vertex
+	not in the subset must be deleted. To reduce the number of edges deleted in this process,
+	the number of vertices in the subset must be reduced. Naturally, to minimize the number of
+	edges deleted a single vertex can be chosen. If we repeat this process twice on a complete
+	graph on $n$ vertices, we will end up with two isolated vertices and a complete graph on $n-2$
+	vertices. Thus, the maximum number of edges on a graph on $n$ vertices with three connected
+	components is equal to the number of edges in each component:
+	\[\binom{n-2}{2}+0+0\]
+	\[=\binom{n-2}{2}\]
+\subsection{}
+	Split the set of vertices in $G$ into two sets, $M$ and $N$ of sizes $k$ and $n-k$ respectively. Take some vertex
+	$v\in{M}$ and draw one directed edge from it to every vertex in $N$. $v$ has no incoming directed edges, so it is a
+	minimum vertex, and every vertex in $M$ that is not $v$ has no edges, incoming or outgoing, and so is also a minimum
+	vertex. Each vertex in $N$ has exactly one incoming edge from $v$, and so no vertex in $N$ is a minimum. Thus, the
+	constructed graph has exactly $k$ minimum vertices and exactly $n-k$ directed edges. If any edge is deleted, one of
+	the vertices in $N$ will become a minimum vertex, and the number of vertices will no longer be $k$. The
+	minimum number of directed edges in $G$ must therefore be $n-k$.
+\end{document}

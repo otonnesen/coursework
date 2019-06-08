@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,tikz,cancel}
+\usepackage[margin=1in]{geometry}
+\title{MATH 322 Assignment 3}
+\author{Oliver Tonnesen\\V00885732}
+\date{March 11, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\roman{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.i
+\begin{align*}
+	b&=\frac{\lambda n(n-1)}{k(k-1)}\\
+	&=\frac{3\cdot25(24}{10(9)}\\
+	&=20\\\\
+	r&=\frac{\lambda(n-1)}{k-1}\\
+	&=\frac{3\cdot24}{9}\\
+	&=8
+\end{align*}
+By Fisher's Inequality, we see that this design cannot exist, since $b<n$.
+\subsection{} % Section 1.ii
+\begin{align*}
+	&n(n-1)=\frac{bk(k-1)}{\lambda}\\
+	&\Rightarrow n^2-n-\frac{bk(k-1)}{\lambda}=0\\
+	&\Rightarrow n^2-n-90=0\\
+	&\Rightarrow n = \frac{1\pm\sqrt{361}}{2}\\
+	&= \cancel{-9}, 10\\
+	&= 10\\
+\end{align*}
+\begin{align*}
+	r&=\frac{\lambda(n-1)}{k-1}\\
+	&=\frac{2(9)}{3}\\
+	&=6
+\end{align*}
+\subsection{} % Section 1.iii
+\begin{align*}
+	n&=\frac{r(k-1)}{\lambda}+1\\
+	&=\frac{13\cdot5}{1}+1\\
+	&=66\\\\
+	b&=\frac{\lambda n(n-1)}{k(k-1)}\\
+	&=\frac{1\cdot66(65)}{6(5)}=143
+\end{align*}
+\section{} % Section 2
+Our $n$ parameter is clearly 16.
+\newline
+For the $k$ parameter, notice that each block
+$B_i$ consists of each element in the same row as $i$ as well as each element
+in the same column as $i$, but not $i$. Each row and column has 4 elements, so
+each block thus contains 6 elements, and $k=6$.
+\newline
+For the $\lambda$ parameter, consider any pair of elements, say $A_{ij}$ and
+$A_{kl}$. It's clear to see that the only two elements whose rows or columns
+contain both $A_{ij}$ and $A_{kl}$ are $A_{il}$ and $A_{kj}$. Any other does
+not contain one or both of $A_{ij}$ and $A_{kl}$ in its block, so clearly each
+pair occurs in exactly two blocks (specifically, $B_{A_{il}}$ and $B_{A_{kj}}$).
+\section{} % Section 3
+Take an arbitrary pair of points, $x_1$ and $x_2$. $x_1$ and $x_2$ are contained
+in $\lambda$ blocks, and $x_1$ or $x_2$ (inclusive) are contained in $2r$ blocks.
+Thus, the number of blocks containing either $x_1$ or $x_2$ (exclusive) is
+$2r-\lambda$. Let $y$ be the number of blocks containing neither $x_1$ nor $x_2$.
+Then $b=y+2r-\lambda\Rightarrow y=b-2r+\lambda$. Thus if $y$ is the number of
+blocks in $\mathcal{B}$ not containing $x_1$ or $x_2$, then $y$ is the number
+of blocks containing both $x_1$ and $x_2$ in $\mathcal{B}'$. Thus
+$(X,\mathcal{B}')$ is an $(n,n-k,b-2r+\lambda)$-design.
+\section{} % Section 4
+\subsection{} % Section 4.i
+\begin{align*}
+&1-2=14\qquad&1-3=13\qquad&1-5=11\qquad&1-6=10\qquad&1-9=7\qquad\\
+&1-11=5\qquad&2-1=1\qquad&2-3=14\qquad&2-5=12\qquad&2-6=11\qquad\\
+&2-9=8\qquad&2-11=6\qquad&3-1=2\qquad&3-2=1\qquad&3-5=13\qquad\\
+&3-6=12\qquad&3-9=9\qquad&3-11=7\qquad&5-1=4\qquad&5-2=3\qquad\\
+&5-3=2\qquad&5-6=14\qquad&5-9=11\qquad&5-11=9\qquad&6-1=5\qquad\\
+&6-2=4\qquad&6-3=3\qquad&6-5=1\qquad&6-9=12\qquad&6-11=10\qquad\\
+&9-1=8\qquad&9-2=7\qquad&9-3=6\qquad&9-5=4\qquad&9-6=3\qquad\\
+&9-11=13\qquad&11-1=10\qquad&11-2=9\qquad&11-3=8\qquad&11-5=6\qquad\\
+&11-6=5\qquad&11-9=2
+\end{align*}
+We can clearly see that this is indeed a $(15,7,3)$-difference set.
+\subsection{} % Section 4.ii
+$D=\{1,4,5,6,7,9,11,16,17\}$
+\newline
+$\mathbb{Z}_{19}\setminus D=\{0,2,3,8,10,12,13,14,15,18\}$
+\begin{align*}
+&0-2=17\qquad&0-3=16\qquad&0-8=11\qquad&0-10=9\qquad&0-12=7\qquad\\
+&0-13=6\qquad&0-14=5\qquad&0-15=4\qquad&0-18=1\qquad&2-0=2\qquad\\
+&2-3=18\qquad&2-8=13\qquad&2-10=11\qquad&2-12=9\qquad&2-13=8\qquad\\
+&2-14=7\qquad&2-15=6\qquad&2-18=3\qquad&3-0=3\qquad&3-2=1\qquad\\
+&3-8=14\qquad&3-10=12\qquad&3-12=10\qquad&3-13=9\qquad&3-14=8\qquad\\
+&3-15=7\qquad&3-18=4\qquad&8-0=8\qquad&8-2=6\qquad&8-3=5\qquad\\
+&8-10=17\qquad&8-12=15\qquad&8-13=14\qquad&8-14=13\qquad&8-15=12\qquad\\
+&8-18=9\qquad&10-0=10\qquad&10-2=8\qquad&10-3=7\qquad&10-8=2\qquad\\
+&10-12=17\qquad&10-13=16\qquad&10-14=15\qquad&10-15=14\qquad&10-18=11\qquad\\
+&12-0=12\qquad&12-2=10\qquad&12-3=9\qquad&12-8=4\qquad&12-10=2\qquad\\
+&12-13=18\qquad&12-14=17\qquad&12-15=16\qquad&12-18=13\qquad&13-0=13\qquad\\
+&13-2=11\qquad&13-3=10\qquad&13-8=5\qquad&13-10=3\qquad&13-12=1\qquad\\
+&13-14=18\qquad&13-15=17\qquad&13-18=14\qquad&14-0=14\qquad&14-2=12\qquad\\
+&14-3=11\qquad&14-8=6\qquad&14-10=4\qquad&14-12=2\qquad&14-13=1\qquad\\
+&14-15=18\qquad&14-18=15\qquad&15-0=15\qquad&15-2=13\qquad&15-3=12\qquad\\
+&15-8=7\qquad&15-10=5\qquad&15-12=3\qquad&15-13=2\qquad&15-14=1\qquad\\
+&15-18=16\qquad&18-0=18\qquad&18-2=16\qquad&18-3=15\qquad&18-8=10\qquad\\
+&18-10=8\qquad&18-12=6\qquad&18-13=5\qquad&18-14=4\qquad&18-15=3\qquad\\
+\end{align*}
+Thus $\mathbb{Z}_{19}\setminus D$ is a $(19,10,5)$-difference set.
+\section{} % Section 5
+Fix $x\in\mathbb{Z}_n$. $x$ can be written as the difference of two elements in
+$\mathbb{Z}_n$ in exactly $n$ ways, as the difference of two elements in $D$ in
+$\lambda$ ways, and as the difference of two elements in $\overline{D}$ in
+$n-2k+\lambda$ ways. Thus, we have that $x$ can be written as the difference of
+two elements, one in $D$ and the other in $\overline{D}$ in
+\[n-\lambda-(n-2k+\lambda)=2k-2\lambda=2(k-\lambda)\]
+ways.
+\section{} % Section 6
+\subsection{} % Section 6.i
+$q=7$ is the only multiplier satisfying the Multiplier Theorem. Let $D$ be a
+difference set fixed by $q$, i.e. $7D=D$. $D$ must be some union of the
+following sets:
+\begin{align*}
+&\{0\}\\
+&\{1,7,9,10,12,16,26,33,34\}\\
+&\{2,14,15,18,20,24,29,31,32\}\\
+&\{3,4,11,21,25,27,28,30,36\}\\
+&\{5,6,8,13,17,19,22,23,35\}\\
+\end{align*}
+We see that $\{1,7,9,10,12,16,26,33,34\}$ is a $(37,9,2)$-difference set.
+\subsection{} % Section 6.ii
+$q=3$ and $q=9$ are the possible multipliers satisfying the Multiplier Theorem.
+Let $D$ be a difference set fixed by $q$, i.e. $3D=D$ or $9D=D$. $D$ must be
+some union of the either these sets ($q=3$):
+\begin{align*}
+&\{0\}\qquad&\{1,3,9,27,25,19\}\qquad&\{2,6,18,54,50,38\}\qquad\\
+&\{4,12,36,52,44,20\}\qquad&\{5,15,45,23,13,39\}\qquad&\{7,21\}\qquad\\
+&\{8,24,16,48,32,40\}\qquad&\{10,30,34,46,26,22\}\qquad&\{11,33,43,17,51,41\}\qquad\\
+&\{14,42\}\qquad&\{28\}\qquad&\{29,31,37,55,53,47\}\qquad\\
+\end{align*}
+or of these sets ($q=9$):
+\begin{align*}
+&\{0\}\qquad&\{1,9,25\}\qquad&\{2,18,50\}\qquad&\{3,27,19\}\qquad\\
+&\{4,36,44\}\qquad&\{5,45,13\}\qquad&\{6,54,38\}\qquad&\{7\}\qquad\\
+&\{8,16,32\}\qquad&\{10,34,26\}\qquad&\{11,43,51\}\qquad&\{12,52,20\}\qquad\\
+&\{14\}\qquad&\{15,23,39\}\qquad&\{17,41,33\}\qquad&\{21\}\qquad\\
+&\{22,30,46\}\qquad&\{24,48,40\}\qquad&\{28\}\qquad&\{29,37,53\}\qquad\\
+&\{31,55,47\}\qquad&\{35\}\qquad&\{42\}\qquad&\{49\}\qquad\\
+\end{align*}
+We see that no such union gives a difference set, and so no difference set exists.
+\end{document}

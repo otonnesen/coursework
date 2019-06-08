@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{tikz,amsmath,tkz-graph,caption,float}
+\usetikzlibrary{shapes,arrows,fit,calc,positioning,decorations.pathreplacing}
+\tikzset{box/.style={draw, thick, text centered, minimum height=0.5cm, minimum width=1cm}}
+\tikzset{line/.style={draw, thick, -latex'}}
+\title{CSC 226 Problem Set 1 Written Part}
+\author{%
+	Oliver Tonnesen\\
+	V00885732}
+\date{September 29, 2018}
+\begin{document}
+\maketitle
+\section{Lower bounds for sorting}
+	We define $S_m$ to be the sequence $\{x_{(m-1)k+1},x_{(m-1)k+2}\ldots{x_{mk}}\}$.\\
+	\newline
+	\newline
+	\newline
+	\begin{tikzpicture}
+		\node [box]										(1) {${x_1,x_2,\ldots,x_n}$};
+		\node [box, below=0.7cm of 1, xshift=-4cm]		(2) {$S_1$};
+		\node [box, below=0.7cm of 1, xshift=-2cm]		(3) {$S_2$};
+		\node [box, below=0.7cm of 1, xshift=0cm]		(4) {$S_3$};
+		\node [below=0.9cm of 1, xshift=2cm]			(5) {$\ldots$};
+		\node [box, below=0.7cm of 1, xshift=4cm]		(6) {$S_k$};
+		\node [below=0.9cm of 1, xshift=-5cm]			(L) {};
+		\node [below=0.9cm of 1, xshift=5cm]			(R) {};
+
+		\path [line] (1) -> (2);
+		\path [line] (1) -> (3);
+		\path [line] (1) -> (4);
+		% \path [line] (1) -> (5);
+		\path [line] (1) -> (6);
+
+		\draw [decoration={brace,mirror,raise=20pt}, decorate] (L) -- node [style={below=25pt}, pos=0.5] {$k$ sequences} (R);
+	\end{tikzpicture}
+	\newline
+	\newline
+	\newline
+	Since each sequence is of length $k$, each can be sorted in $\Omega(k\log{k})$ comparisons. $k$ sequences need to be sorted,
+	so sorting the entire sequence takes $\Omega(k^2\log{k})$ comparisons. Note that $k^2=n$, so $\Omega(k^2\log{k})$ is equivalent
+	to ${\Omega(n\log{k})}$, and so the entire sequence can therefore be sorted in $\Omega(n\log{k})$ time.
+\section{Quickselect with median-of-medians pivots}
+	For each iteration of select finding the median of medians, at least half of the medians are $\ge$ the actual median of medians.
+	So at least half of the $~\frac{n}{9}$ groups contribute $\ge5$ elements that are greater than the median of medians (assuming distinct elements).
+	\[5\cdot\frac{1}{2}\cdot\frac{n}{9}=\frac{5n}{18}\]
+	So at least $\frac{5n}{18}$ elements are greater than the median of medians. Conversely, at most $\frac{13n}{18}$ elements are lesser than the
+	median of medians, and likewise at most $\frac{13n}{18}$ elements are greater than the median of medians. So we can set up our recurrence as follows:
+	\[T(n)=T{\bigg(\frac{13n}{18}\bigg)}+T{\bigg(\frac{n}{9}\bigg)}+cn\]
+	\begin{tikzpicture}[every node/.style={minimum size=.5cm-\pgflinewidth, outer sep=0pt}]
+		\node [below=0.9cm of 1,xshift=10cm,yshift=2cm]			(top) {};
+		\node [below=0.9cm of 1,xshift=10cm,yshift=-5cm]			(bottom) {};
+		\draw [decoration={brace,raise=20pt}, decorate] (top) -- node [style={right=25pt}, pos=0.5] {$\infty$} (bottom);
+
+		\filldraw[draw=black,fill=white] (0,0) rectangle (9,-1) node[pos=.5] {$cn$};
+		\filldraw[draw=black,fill=white] (0,-1) rectangle (7,-2) node[pos=.5] {$\frac{7cn}{9}$};
+		\filldraw[draw=black,fill=white] (7,-1) rectangle (8,-2) node[pos=.5] {$\frac{cn}{9}$};
+		\filldraw[draw=black,fill=white] (0,-2) rectangle (5.44,-3) node[pos=.5] {$\frac{7cn}{9}$};
+		\filldraw[draw=black,fill=white] (5.44,-2) rectangle (6.22,-3) node[pos=.5] {$\frac{7cn}{81}$};
+		\filldraw[draw=black,fill=white] (6.22,-2) rectangle (7,-3) node[pos=.5] {$\frac{7cn}{81}$};
+		\filldraw[draw=black,fill=white] (7,-2) rectangle (7.11,-3) node[pos=.5,yshift=-10mm] {$\frac{cn}{81}$};
+		\filldraw[draw=white,fill=white] (0,-3.01) rectangle (9,-5) node[pos=.5] {\vdots};
+		\filldraw[draw=black,fill=white] (3.5,-5.01) rectangle (5.5,-6) node[pos=.5] {Base Case};
+	\end{tikzpicture}
+	\newline
+	\begin{align*}
+		&=\sum_{i=0}^{\infty}cn{\bigg(\frac{15}{18}\bigg)}^i\\
+		&=\frac{cn}{1-\frac{15}{18}}\\
+		&=6cn\\
+		&\in{O(n)}
+	\end{align*}
+\section{Insertion in 2\--3 trees}
+\captionsetup[figure]{labelformat=empty}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p1}
+			\caption{Step 1}
+		\end{minipage}\hfill
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p2}
+			\caption{Step 2}
+		\end{minipage}\hfill
+		\begin{minipage}{.25\textwidth}
+			\centering
+			\include{graphics/p3}
+			\caption{Step 3}
+		\end{minipage}\hfill
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p4}
+			\caption{Step 4}
+		\end{minipage}\hfill
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p5}
+			\caption{Step 5}
+		\end{minipage}\hfill
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p6}
+			\caption{Step 6}
+		\end{minipage}\hfill
+	\end{figure}
+	\begin{figure}[H]
+		\centering
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p7}
+			\caption{Step 7}
+		\end{minipage}\hfill
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p8}
+			\caption{Step 8}
+		\end{minipage}\hfill
+		\begin{minipage}{.33\textwidth}
+			\centering
+			\include{graphics/p9}
+			\caption{Step 9}
+		\end{minipage}\hfill
+	\end{figure}
+\section{Relaxed AVL trees}
+	First, we define $N(h)$ as a recurrence relation and prove its validity.\\
+	Claim: \[N(h) =
+				\begin{cases}
+					1 & h=0\\
+					2 & h=1\\
+					3 & h=2\\
+					N(h-1)+N(h-3)+1 & h > 2
+				\end{cases}
+			\]
+	Proof: (Induction)\\
+	$N(h)$ is defined as the minimum number of vertices in a Relaxed AVL tree. It is clear to see
+	from this definition that the the three base cases hold.\\
+	Suppose the claim holds for all $l<h$.\\
+	We will now show that the claim also holds for $h$ by constructing the Relaxed AVL tree of height $h$ with the minimum number of vertices.
+	Take one vertex and let it be the root of our new tree. Our tree must have height $h$, so at least one of its children must have height $h-1$.
+	By our hypothesis, $N(h-1)$ is the minimum number of vertices in a Relaxed AVL tree of height $h-1$. In order to satisfy the Relaxed height-balance
+	property, our tree's children's heights must not differ by more than two, so to minimize our vertices we shall choose our next child to have height $n-3$.
+	Again, by our hypothesis we know that the minimum number of vertices in a Relaxed AVL tree of height $h-3$ is $N(h-3)$. If we now consider our tree
+	with one root vertex and two children, both of which are also Relaxed AVL trees with $N(h-1)$ and $N(h-2)$ vertices, our number of vertices will be
+	$N(h-1)+N(h-3)+1$. Thus our definition of $N(h)$ holds for all $h$.
+	\newline
+	\newline
+	We will now show that $N(h)\in{\Omega{(k^h)}}$ for some $k>1$.\\
+	It is sufficient to show that $N(h)\ge{ck^h}$ for some $c>0,k>1$.
+	Claim: There exists some $c>0,k>1$ such that $N(h)\ge{ck^h}$ for all $h$.\\
+	Proof: (Induction)
+	\begin{align*}
+		N(0)=1: \quad& 1\ge{ck^0}\quad\text{if}\quad\frac{1}{k^0}\ge{c}\\[1em]
+		N(1)=2: \quad& 2\ge{ck^1}\quad\text{if}\quad\frac{1}{k^1}\ge{c}\\[1em]
+		N(2)=3: \quad& 3\ge{ck^2}\quad\text{if}\quad\frac{1}{k^2}\ge{c}
+	\end{align*}
+	Note that the cases for $h=0$ and $h=1$ also hold when $c\le\frac{1}{k^2}$, so let $c\le\frac{1}{k^2}$.\\
+	Suppose $N(l)\ge{ck^l}$ for all $l<h$.\\
+	We want to show that $N(h)\ge{ck^h}$ for some $c>0,k>1$. Recall the definition for $N(h)$:
+	\[N(h)=N(h-1)+N(h-3)+1\]
+	By our hypothesis, we have
+	\begin{align*}
+		N(h)&\ge{ck^{h-1}+ck^{h-3}+1}\\
+		&\ge{ck^{h-1}+ck^{h-3}}
+	\end{align*}
+	So if we can show that $ck^{h-1}+ck^{h-3}\ge{ck^h}$, it would be sufficient to show that $N(h)\ge{ck^h}$.
+	\begin{align*}
+		&ck^{h-1}+ck^{h-3}\ge{ck^h}\\
+		&\implies{\frac{ck^{h-1}+ck^{h-3}}{ck^{h-3}}\ge{\frac{ck^h}{ck^{h-3}}}}\\
+		&\implies{k^2+1\ge{k^3}}\\
+		&\implies{k^3-k^2-1\le{0}}
+	\end{align*}
+	The real root of the polynomial $k^3-k^2-1=0$ is approximately $1.4655$, so any value for $k$ less than this
+	value will do. Recall that we defined $c\le\frac{1}{k^2}$. So the claim holds for $k=1.4655$ and $c=\frac{1}{1.4655^2}$,
+	and therefore $N(h)\ge{\frac{1}{1.4655^2}1.4655^{h}}$ for any value of $h$.\\
+	Thus we have proven the claim that $N(h)\ge{ck^h}$ for some $c>0,k>1$, and therefore $N(h)\in\Omega{(1.4655^h)}$.
+
+\end{document}

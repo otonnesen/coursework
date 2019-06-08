@@ -1,0 +1,143 @@
+\documentclass{article}
+\usepackage{tikz,amsmath}
+\title{CSC 320 Assignment 2}
+\author{Oliver Tonnesen\\V00885732}
+\date{February 17, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Let $w=1^{2p}$, where $p$ is the pumping length of $L$. Let $w=xyz$ where
+$x=1^i$, $y=1^j$, and $z=1^k$. To satisfy the conditions of the pumping lemma,
+we have $i+j\le p$, and so $k=2p-i-j\ge p$. The pumping lemma then asserts that
+$xy^lz\in L\;\forall l\ge0$. So
+\[1^i(1^j)^l1^k\in L\;\forall l\ge0.\]
+So $|w|=i+jl+k$. Let $l=i+k$. Then
+\begin{align*}
+	|w|&=i+j(i+k)+k\\
+	&=i+ij+jk+k\\
+	&=i(1+j)+k(j+1)\\
+	&=(i+k)(j+1)
+\end{align*}
+Recall that $k\ge p$ and also note that $|y|=j>0$, so both $i+k$ and $j+1$ are
+larger than 1. Thus, $(i+k)(j+1)$ must be a composite number (in other words,
+$1^{(i+k)(j+1)}\not\in L$) and so $L$ is not regular.
+\section{} % Section 2
+Let $s=1^{2p}$ where $p$ is the pumping length of $L$. Let $s=uvwxy$ where
+$u=1^i$, $v=1^j$, $w=1^k$, $x=1^l$, and $y=1^m$. To satisfy the conditions of
+the pumping lemma, we have $j+k+l\le p$, and so $i+m=2p-j-k-l\ge p$. The
+pumping lemma then asserts that $uv^nwx^ny\in L\;\forall n\ge0$. So
+\[1^i(1^j)^n1^k(1^l)^n1^m\in L\;\forall n\ge0.\]
+So $|s|=i+jn+k+ln+m$. Let $n=i+k+m$. Then
+\begin{align*}
+	|s|&=i+k+m+n(j+l)\\
+	&=i+k+m+(i+k+m)(j+l)\\
+	&=(i+k+m)(j+l+1)
+\end{align*}
+Recall that $i+m\ge p$ and also note that $|vx|=j+l>0$, so both $i+k+m$ and
+$j+l+1$ are larger than 1. Thus, $(i+k+m)(j+l+1)$ must be a composite number
+(in other words, $1^{(i+k+m)(j+l+1)}\not\in L$) and so $L$ is not context-free.
+\section{} % Section 3
+The $CFG$ for $L$:
+\begin{align*}
+	(\{S\},\{a,b,\varepsilon,\emptyset,(,),\cup,\circ,*\},
+	\{S\rightarrow a,S\rightarrow b,S\rightarrow\varepsilon,S\rightarrow\emptyset,\\
+	S\rightarrow(S\cup S),S\rightarrow(S\circ S),S\rightarrow(S^*)\},S)
+\end{align*}
+Here are the language's productions in a more readable format:
+\begin{align*}
+	S&\rightarrow a\\
+	S&\rightarrow b\\
+	S&\rightarrow\varepsilon\\
+	S&\rightarrow\emptyset\\
+	S&\rightarrow(S\cup S)\\
+	S&\rightarrow(S\circ S)\\
+	S&\rightarrow(S^*)
+\end{align*}
+\section{} % Section 4
+\subsection{} % Section 4.a
+$G$ in Chomsky Normal Form:
+\begin{align*}
+	(\{S_0,S,A,B,S_A,S_B\},\{a,b,\varepsilon\},
+	\{S_0\rightarrow\varepsilon,A\rightarrow a,B\rightarrow b,S_0\rightarrow AS_A,\\
+	S\rightarrow AS_A,S_A\rightarrow SA,S_0\rightarrow BS_B,S\rightarrow BS_B,\\
+	S_B\rightarrow SB,S_0\rightarrow AA,S\rightarrow BB,S_0\rightarrow BB, S\rightarrow AA\},S_0)
+\end{align*}
+Again, the language's productions in a more readable format:
+\begin{align*}
+	S_0&\rightarrow\varepsilon\\
+	A&\rightarrow a\\
+	B&\rightarrow b\\
+	S_0&\rightarrow AS_A\\
+	S&\rightarrow AS_A\\
+	S_A&\rightarrow SA\\
+	S_0&\rightarrow BS_B\\
+	S&\rightarrow BS_B\\
+	S_B&\rightarrow SB\\
+	S_0&\rightarrow AA\\
+	S&\rightarrow BB\\
+	S_0&\rightarrow BB\\
+	S&\rightarrow AA\\
+\end{align*}
+\subsection{} % Section 4.b
+\begin{tabular}{|c|c|c|c|c|c|c|}
+	\hline
+	6 & $\{S_0,S\}$ &  &  &  &  & \\
+	\hline
+	5 & $\emptyset$ & $\{S_A\}$ &  &  &  & \\
+	\hline
+	4 & $\emptyset$ & $\{S_0,S\}$ & $\emptyset$ &  &  & \\
+	\hline
+	3 & $\emptyset$ & $\{S_B\}$ & $\{S_B\}$ & $\{S_A\}$ &  & \\
+	\hline
+	2 & $\emptyset$ & $\{S_0,S\}$ & $\{S_0,S\}$ & $\{S_0,S\}$ & $\emptyset$ & \\
+	\hline
+	1 & $\{A\}$ & $\{B\}$ & $\{B\}$ & $\{B\}$ & $\{B\}$ & $\{A\}$ \\
+	\hline
+	& a & b & b & b & b & a \\
+	\hline
+\end{tabular}
+\newline
+\newline
+There is a start variable in the top rightmost cell of the table, so $abbbba$
+is in the language.
+\section{} % Section 5
+The general idea is to push two 1s onto the stack for each 1 seen, and to pop
+one 1 for each 0 seen. We accept only when there are no 1s left on the stack
+when we reach the end of the input.
+\newline
+\begin{minipage}{\textwidth}
+\include{graphics/5}
+\end{minipage}
+\section{} % Section 6
+We read the first copy of $w$ onto the first stack. At some point, we ``guess''
+that we're in the middle of the string when we read a 1. We now pop all of $w$
+off of the first stack and onto the second stack. We now have a copy of $w$
+``backwards'' (as in the last letter is on the bottom, and the first letter is
+on the top) on the second stack. We compare each of these to what remains of
+the string, and accept when we find the bottom of the second stack with no
+input left.
+\newline
+\newline
+Here our transitions work as follows:
+\[(\lambda,a,b)\rightarrow(\alpha,\beta)\]
+reads $\lambda$ from the input, pops $a$ from stack 1 and pops $b$ from stack 2,
+then pushes $\alpha$ onto stack 1 and pushes $\beta$ onto stack 2.
+\newline
+\newline
+\begin{minipage}{\textwidth}
+\include{graphics/6}
+\end{minipage}
+\section{} % Section 7
+\subsection{} % Section 7.a
+\begin{minipage}{\textwidth}
+\include{graphics/7a}
+\end{minipage}
+\subsection{} % Section 7.b
+The double pushdown automaton would use the following transition:
+\[(q,A,\varepsilon,A)\rightarrow\{(p,B,\varepsilon\}\]
+First, we move from state $q$ to $p$. Then (more importantly) we pop $A$ from
+stack 2 (the portion of the ``tape'' to the right of the ``tape head'') and
+push $B$ onto stack 1, simulating writing to the tape and moving one cell
+to the right.
+\end{document}

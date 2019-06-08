@@ -1,0 +1,6 @@
+.FT 0
+This is a 
+		test case
+	for assignment
+number
+	three.

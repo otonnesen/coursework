@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+	\Vertex				{9 14}
+	\Vertex[x=-1,y=-1]	{2 6 7}
+	\Vertex[x=0,y=-1]	{13}
+	\Vertex[x=1,y=-1]	{15}
+	
+	\Edge				(9 14)(2 6 7)
+	\Edge				(9 14)(13)
+	\Edge				(9 14)(15)
+\end{tikzpicture}
+\begin{tikzpicture}
+	\Vertex					{6 9 14}
+	\Vertex[x=-1.5,y=-1]	{2}
+	\Vertex[x=-0.5,y=-1]	{7}
+	\Vertex[x=0.5,y=-1]		{13}
+	\Vertex[x=1.5,y=-1]		{15}
+	
+	\Edge				(6 9 14)(2)
+	\Edge				(6 9 14)(7)
+	\Edge				(6 9 14)(13)
+	\Edge				(6 9 14)(15)
+\end{tikzpicture}
+\begin{tikzpicture}
+	\Vertex					{9}
+	\Vertex[x=-1,y=-1]		{6}
+	\Vertex[x=1,y=-1]		{14}
+	\Vertex[x=-1.5,y=-2]	{2}
+	\Vertex[x=-0.5,y=-2]	{7}
+	\Vertex[x=0.5,y=-2]		{13}
+	\Vertex[x=1.5,y=-2]		{15}
+	
+	\Edge			(9)(6)
+	\Edge			(9)(14)
+	\Edge			(6)(2)
+	\Edge			(6)(7)
+	\Edge			(14)(13)
+	\Edge			(14)(15)
+\end{tikzpicture}

@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm,algpseudocode,mathtools,authblk}
+\newtheorem*{thm}{Theorem}
+\title{\vspace{-3.5cm}CSC 225 Written Assignment 2}
+\author{Oliver Tonnesen}
+\affil{V00885732}
+\date{July 4, 2018}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{Trees}
+	\begin{algorithmic}[1]
+		\Function{LowestCommonAncestor}{$v_1$, $v_2$}
+			\State{} $v_1path\gets{}$ New node array of size h
+			\State{} $v_2path\gets{}$ New node array of size h
+			\State{} // constructs path from $v_1$ to the root
+			\State{} // and from $v_2$ to the root
+			\State{} $v_1size\gets{}0$
+			\State{} $v_2size\gets{}0$
+			\For{$i\gets{}0, 1, 2,\ldots, h$}
+				\State{} $v_1\gets{}Parent(v_1)$
+				\State{} $v_2\gets{}Parent(v_2)$
+				\If{$v_1$ is not null}
+					\State{} $v_1path[i]\gets{}v_1$
+					\State{} $v_1size\gets{}v_1size+1$
+				\EndIf{}
+				\If{$v_2$ is not null}
+					\State{}$v_2path[i]\gets{}v_2$
+					\State{} $v_2size\gets{}v_2size+1$
+				\EndIf{}
+			\EndFor{}
+			\State{} $lca\gets{}v_1path[v_1size-1]$ // Root of $T$
+			\For{$i\gets{} 1, 2, 3,\ldots, h$}
+				\If{$v_1path[v_1size-i]=v_2path[v_2size-i]$}
+					\State{} $lca\gets{}v_1path[i]$
+				\Else{} // Paths diverge: lowest common ancestor found
+					\State{} \Return{} $lca$
+				\EndIf{}
+			\EndFor{}
+		\EndFunction{}
+	\end{algorithmic}
+
+	LowestCommonAncestor has two loops consisting only of assignments and comparisons, both of which run in constant time. Each loops runs at most h times, so the worst case running time is $O(2h)\in{}O(h)$.
+\newpage
+\section{The Master Theorem}
+\subsection{}
+	\[a=3, b=2, c=6, g(n)=n\]
+	The first case of the Master Theorem, i.e.
+	\[g(n)\in{}O(n^{\log_b{a}-\varepsilon})\textrm{ for some }\varepsilon>0\]
+	applies for $\varepsilon=0.5$, since
+	\[\log_2{3}\approx{}1.585,\]
+	so
+	\[n\in{}O(n^{\log_2{3}-0.5}).\]
+	Therefore,
+	\[T(n)\in{}\Theta(n^{\log_2{3}}).\]
+\subsection{}
+	\[a=9, b=3, c=10, g(n)=n^4\log_3{n}\]
+	The third case of the Master Theorem, i.e.
+	\[g(n)\in{}\Omega(n^{2+\varepsilon})\textrm{ for some }\varepsilon>0\]
+	applies for $\varepsilon=1$, since
+	\[\log_3{n}>1\text{ for }n>3,\]
+	so
+	\[n^4<n^4\log_3{n}\text{ for }n>3.\]
+	\\
+	\[n^4>n^3\text{ for }n>3,\]
+	so
+	\[n^4\in\Omega(n^3)\]
+	and since
+	\[n^4\log_3{n}>n^4\text{ for }n>3,\]
+	\[n^4\log_3{n}\in\Omega(n^3)\]
+	
+	We must also show that there exists some $\delta{}<1$ such that $ag(n/b)<\delta{}g(n)$ for large n.\\
+	We find that this condition is met when $\delta=1/3^4$ and $n>4$.
+\subsection{}
+	\[a=8, b=2, c=17, g(n)={(n\log_2{n})}^2\]
+	The second case of the Master Theorem, i.e.
+	\[g(n)\in{}\Theta(n^{\log_b{a}}{(\log_b{n})}^k)\textrm{ for some } k\ge0\]
+	applies for $k=3$, since
+	\[{(n\log_2{n})}^3=n^3{(\log_2{n})}^3\]
+	and
+	\[n^3{(\log_2{n})}^3\in\Theta(n^3{(\log_2{n})}^3).\]
+	\\
+	Therefore,
+	\[T(n)\in\Theta(n^3{(\log_2{n})}^4).\]
+\newpage
+\section{Binary Search Trees}
+	\begin{algorithmic}[1]
+		\Function{CountBetween}{R, a, b}
+		\State{} // Set R to the highest node in the range.
+		\State{} // All nodes in the range are descendants
+		\State{} // of this node.
+		\While{$a>R.key$ or $b<R.key$}
+			\If{$a>R.key$}
+				\State{} $R \gets{} R.right$
+			\ElsIf{$b<R.key$}
+				\State{} $R \gets{} R.left$
+			\Else{}
+				\State{} \Return{} $0$
+			\EndIf{}
+		\EndWhile{}
+		\State{} $t \gets{} R.left$
+		\State{} $lt \gets{} 0$ // Count number of nodes with keys less than a
+		\While{$t$ has children}
+			\If{$t.key\le{}a$}
+				\State{} $lt \gets{} lt+t.left.tree\_size$
+				\State{} $t \gets{} t.right$
+			\Else{}
+				\State{} $t \gets{} t.left$
+			\EndIf{}
+		\EndWhile{}
+		\State{} $t \gets{} R.right$
+		\State{} $gt \gets{} 0$ // Count number of nodes with keys greater than b
+		\While{$t$ has children}
+			\If{$t.key\ge{}a$}
+				\State{} $gt \gets{} lt+t.right.tree\_size$
+				\State{} $t \gets{} t.left$
+			\Else{}
+				\State{} $t \gets{} t.right$
+			\EndIf{}
+		\EndWhile{}
+		\State{} \Return{} $R.tree\_size-lt-gt$
+		\EndFunction{}
+	\end{algorithmic}
+\end{document}

@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsfonts,tikz,cancel,mathtools}
+\usepackage[margin=1in]{geometry}
+\title{MATH 322 Assignment 5}
+\author{Oliver Tonnesen\\V00885732}
+\date{April 4, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+A generator matrix for $C$:
+\begin{align*}
+\begin{bmatrix}
+	1 & 1 & 0 & 0 & 0\\
+	0 & 1 & 1 & 1 & 1\\
+	1 & 1 & 1 & 1 & 0\\
+	0 & 1 & 0 & 1 & 0
+\end{bmatrix}
+&\longrightarrow
+\begin{bmatrix}
+	1 & 0 & 0 & 0 & 1\\
+	0 & 1 & 0 & 0 & 1\\
+	0 & 0 & 1 & 0 & 1\\
+	0 & 0 & 0 & 1 & 1
+\end{bmatrix}
+\end{align*}
+A parity check matrix for $C$:
+\begin{align*}
+	\begin{bmatrix}
+		1 & 1 & 1 & 1 & 1
+	\end{bmatrix}
+\end{align*}
+\subsection{} % Section 1.b
+$dim(C)=4$, $dim(C^\perp)=1$.
+\subsection{} % Section 1.c
+$min dist(C)=2$, $min dist(C^\perp)=5$.
+
+\section{} % Section 2
+($\Longrightarrow$) $C$ has minimum distance $d$, so there exists a codeword
+$w\in C$ with weight $d$. Since $H\cdot w^\mathsf{T}=0$, we can use $w$ to
+construct a linear combination of $d$ columns in $H$ which sums to 0, thus
+there exists a set of $d$ linearly dependent columns of $H$. Similarly, since
+there does \underline{not} exist a codeword of weight $d-1$ in $C$, such a
+linear combination cannot be constructed using only $d-1$ columns of $H$.
+\newline
+\newline
+($\Longleftarrow$) There exists a set of $d$ linearly dependent columns of $H$.
+Thus there exists a linear combination of these columns summing to 0. We can
+simply construct a codeword of weight $d$ using this linear combination. Any
+set of $d-1$ columns of $H$ are linearly dependent, so a codeword cannot have
+weight less than $d$.
+\section{} % Section 3
+By definition, $C^\perp=\{v\in H_n\mid u\cdot v=0\;\forall u\in S\}$.
+$C=C^\perp$, so we have that $w\cdot w=0$ for any $w\in C$. Thus $x$ must have
+even weight, and so all codewords in $C$ must have even weight.
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+We row reduce $H_1$ and $H_2$, then, using their standard form (or equivalent
+permuted standard form) we construct their corresponding generator matrices:
+\begin{align*}
+	H_1:
+	&\begin{bmatrix}
+		1 & 1 & 1 & 0 & 1 & 0 & 0\\
+		1 & 1 & 0 & 1 & 0 & 1 & 0\\
+		1 & 0 & 1 & 1 & 0 & 0 & 1
+	\end{bmatrix}
+	\longrightarrow
+	\begin{bmatrix}
+		1 & 0 & 0 & 0 & 1 & 1 & 1\\
+		0 & 1 & 0 & 1 & 1 & 0 & 1\\
+		0 & 0 & 1 & 1 & 1 & 1 & 0
+	\end{bmatrix}\\
+	\Longrightarrow G_1=
+	&\begin{bmatrix}
+		0 & 1 & 1 & 1 & 0 & 0 & 0\\
+		1 & 1 & 1 & 0 & 1 & 0 & 0\\
+		1 & 0 & 1 & 0 & 0 & 1 & 0\\
+		1 & 1 & 0 & 0 & 0 & 0 & 1
+	\end{bmatrix},\text{ the generator matrix for $C_1$}
+\end{align*}
+\newline
+\begin{align*}
+	H_2:
+	&\begin{bmatrix}
+		1 & 0 & 1 & 0 & 1 & 0 & 1\\
+		0 & 1 & 1 & 0 & 0 & 1 & 1\\
+		0 & 0 & 0 & 1 & 1 & 1 & 1
+	\end{bmatrix}
+	\qquad\stackrel{\mathclap{\normalfont\mbox{$\sigma=(34657)$}}}{\longrightarrow}\qquad
+	\begin{bmatrix}
+		1 & 0 & 0 & 0 & 1 & 1 & 1\\
+		0 & 1 & 0 & 1 & 1 & 0 & 1\\
+		0 & 0 & 1 & 1 & 1 & 1 & 0
+	\end{bmatrix}\\
+	\Longrightarrow G_2'=
+	&\begin{bmatrix}
+		0 & 1 & 1 & 1 & 0 & 0 & 0\\
+		1 & 1 & 1 & 0 & 1 & 0 & 0\\
+		1 & 0 & 1 & 0 & 0 & 1 & 0\\
+		1 & 1 & 0 & 0 & 0 & 0 & 1
+	\end{bmatrix}
+\end{align*}
+We see that $G_1=G_2'$, and so $C_1$ and $C_2$ are indeed equivalent.
+\subsection{} % Section 4.b
+\begin{align*}
+	G_2'=
+	\begin{bmatrix}
+		0 & 1 & 1 & 1 & 0 & 0 & 0\\
+		1 & 1 & 1 & 0 & 1 & 0 & 0\\
+		1 & 0 & 1 & 0 & 0 & 1 & 0\\
+		1 & 1 & 0 & 0 & 0 & 0 & 1
+	\end{bmatrix}
+	\qquad\;\stackrel{\mathclap{\normalfont\mbox{$\sigma^{-1}=(75643)$}}}{\longrightarrow}\qquad\;
+	\begin{bmatrix}
+		1 & 1 & 0 & 1 & 0 & 1 & 0\\
+		1 & 0 & 0 & 1 & 0 & 0 & 1\\
+		0 & 1 & 0 & 1 & 1 & 0 & 0\\
+		1 & 1 & 1 & 0 & 0 & 0 & 0
+	\end{bmatrix}
+\end{align*}
+
+\section{} % Section 5
+We begin with the given parity check matrix and permute it to standard form:
+\begin{align*}
+	\begin{bmatrix}
+		0 & 0 & 0 & 1 & 1 & 1 & 1\\
+		0 & 1 & 1 & 0 & 0 & 1 & 1\\
+		1 & 0 & 1 & 0 & 1 & 0 & 1
+	\end{bmatrix}
+	\qquad\stackrel{\mathclap{\normalfont\mbox{$\sigma=(143)$}}}{\longrightarrow}\qquad
+	\begin{bmatrix}
+		1 & 0 & 0 & 0 & 1 & 1 & 1\\
+		0 & 1 & 0 & 1 & 0 & 1 & 1\\
+		0 & 0 & 1 & 1 & 1 & 0 & 1
+	\end{bmatrix}\\
+\end{align*}
+We then construct the corresponding generator matrix and apply the inverse
+permutation to get the desired generator matrix:
+\begin{align*}
+	\begin{bmatrix}
+		0 & 1 & 1 & 1 & 0 & 0 & 0\\
+		1 & 0 & 1 & 0 & 1 & 0 & 0\\
+		1 & 1 & 0 & 0 & 0 & 1 & 0\\
+		1 & 1 & 1 & 0 & 0 & 0 & 1
+	\end{bmatrix}
+	\qquad\stackrel{\mathclap{\normalfont\mbox{$\sigma^{-1}=(341)$}}}{\longrightarrow}\qquad
+	\begin{bmatrix}
+		1 & 1 & 1 & 0 & 0 & 0 & 0\\
+		1 & 0 & 0 & 1 & 1 & 0 & 0\\
+		0 & 1 & 0 & 1 & 0 & 1 & 0\\
+		1 & 1 & 0 & 1 & 0 & 0 & 1
+	\end{bmatrix}
+\end{align*}
+
+\end{document}

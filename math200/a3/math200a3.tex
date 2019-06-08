@@ -1,0 +1,170 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,tikz,pgfplots}
+\pgfplotsset{compat=1.16}
+\usepgfplotslibrary{fillbetween}
+\title{MATH 200 Assignment Three}
+\author{%
+	Oliver Tonnesen\\
+	V00885732\\
+	A02 \-- T03}
+\date{November 7, 2018}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Question 1
+We define the volume, length, width, and height as follows:
+\begin{align*}
+	l&=l(t)\\
+	w&=w(t)\\
+	h&=h(t)\\
+\end{align*}
+We are given the following:
+\begin{align*}
+	l(t_0)&=1\\
+	w(t_0)&=2\\
+	h(t_0)&=2\\
+	l'(t_0)&=2\\
+	w'(t_0)&=2\\
+	h'(t_0)&=-3\\
+\end{align*}
+\subsection{} % Section 1.a
+\begin{align*}
+	V&=lwh\\\\
+	\frac{\partial{V}}{\partial{t}}
+	&=\frac{\partial{V}}{\partial{l}}\cdot\frac{dl}{dt}
+	+\frac{\partial{V}}{\partial{w}}\cdot\frac{dw}{dt}
+	+\frac{\partial{V}}{\partial{h}}\cdot\frac{dh}{dt}\\
+	&=2wh+2lh-3lw\\
+	&=2(2)(2)+2(1)(2)-3(1)(2)\\
+	&=6m^3/s
+\end{align*}
+\subsection{} % Section 1.b
+\begin{align*}
+	A&=2lw+2lh+2wh\\\\
+	\frac{\partial{A}}{\partial{t}}
+	&=\frac{\partial{A}}{\partial{l}}\cdot\frac{dl}{dt}
+	+\frac{\partial{A}}{\partial{w}}\cdot\frac{dw}{dt}
+	+\frac{\partial{A}}{\partial{h}}\cdot\frac{dh}{dt}\\
+	&=(2w+2h)\cdot2+(2l+2h)\cdot2+(2l+2w)\cdot(-3)\\
+	&=(4+4)(2)+(2+4)(2)+(2+4)(-3)\\
+	&=10m^2/s
+\end{align*}
+\subsection{} % Section 1.c
+We will use the diagonal formed by the length ($l$) and width ($w$) of the box.
+\begin{align*}
+	D&=\sqrt{l^2+w^2}\\\\
+	\frac{\partial{D}}{\partial{t}}
+	&=\frac{\partial{D}}{\partial{l}}\cdot\frac{dl}{dt}
+	+\frac{\partial{D}}{\partial{w}}\cdot\frac{dw}{dt}
+	+\frac{\partial{D}}{\partial{h}}\cdot\frac{dh}{dt}\\
+	&=\frac{l}{\sqrt{l^2+w^2}}\cdot2+\frac{w}{\sqrt{l^2+w^2}}\cdot2\\
+	&=\frac{1}{\sqrt{5}}\cdot2+\frac{2}{\sqrt{5}}\cdot2\\
+	&=\frac{2}{\sqrt{5}}\big(1+2\big)\\
+	&=\frac{6}{\sqrt{5}}
+\end{align*}
+\section{} % Question 2
+\begin{align*}
+	% \frac{\partial{}}{\partial{}}
+	\frac{\partial{z}}{\partial{x}}
+	&=\frac{\partial{z}}{\partial{f}}\cdot\frac{df}{dx}
+	+\frac{\partial{z}}{\partial{g}}\cdot\frac{dg}{dx}\\
+	&=\frac{\partial{z}}{\partial{f}}
+	+\frac{\partial{z}}{\partial{g}}\\\\
+	\frac{\partial^2{z}}{\partial{x^2}}
+	&=\frac{\partial^2{z}}{\partial{f^2}}\cdot\frac{df}{dx}
+	+\frac{\partial^2{z}}{\partial{g^2}}\cdot\frac{dg}{dx}\\
+	&=\frac{\partial^2{z}}{\partial{f^2}}
+	+\frac{\partial^2{z}}{\partial{g^2}}
+\end{align*}
+\begin{align*}
+	\frac{\partial{z}}{\partial{t}}
+	&=\frac{\partial{z}}{\partial{f}}\cdot\frac{df}{dt}
+	+\frac{\partial{z}}{\partial{g}}\cdot\frac{dg}{dt}\\
+	&=a\frac{\partial{z}}{\partial{f}}
+	-a\frac{\partial{z}}{\partial{g}}\\\\
+	\frac{\partial^2{z}}{\partial{t^2}}
+	&=a\frac{\partial^2{z}}{\partial{f^2}}\cdot\frac{df}{dt}
+	-a\frac{\partial^2{z}}{\partial{g^2}}\cdot\frac{dg}{dt}\\
+	&=a^2\frac{\partial^2{z}}{\partial{f^2}}
+	+a^2\frac{\partial^2{z}}{\partial{g^2}}\\
+	&=a^2\bigg(\frac{\partial^2{z}}{\partial{f^2}}
+	+\frac{\partial^2{z}}{\partial{g^2}}\bigg)\\
+	&=a^2\bigg(\frac{\partial^2{z}}{\partial{x^2}}\bigg)\\\\
+	\frac{\partial^2{z}}{\partial{t^2}}
+	&=a^2\frac{\partial^2{z}}{\partial{x^2}}
+\end{align*}
+\section{} % Question 3
+\begin{align*}
+	f(x,y,z)&=3(x-1)^2+2(y+3)^2-z+7\\
+	\nabla{f}&=\big\langle6(x-1),4(y+3),-1\big\rangle\\
+	\nabla{f}(2,-2,12)&=\big\langle6,4,-1\big\rangle\\\\
+	P_0&=\big(3,-2,18\big)\text{\;is a point on the tangent plane}\\
+	xf_x+yf_y+zf_z&=3f_x-2f_y+18f_z\\
+	6x+4y-z&=-8
+\end{align*}
+\section{} % Question 4
+\begin{align*}
+	D_{\vec{PQ}}f(2,8)&=\nabla{f}\cdot\vec{PQ}\\
+	\nabla{f}&=\bigg\langle\frac{y}{2\sqrt{xy}},\frac{x}{2\sqrt{xy}}\bigg\rangle\\
+	\vec{PQ}&=\big\langle3,4\big\rangle\\
+	\hat{PQ}&=\bigg\langle\frac{3}{5},\frac{4}{5}\bigg\rangle\\\\
+	\nabla{f}\cdot\hat{PQ}&=\frac{y}{2\sqrt{xy}}\cdot\frac{3}{5}+\frac{x}{2\sqrt{xy}}\cdot\frac{4}{5}\\
+	\nabla{f}(2,8)\cdot\hat{PQ}&=\frac{2}{5}\\
+\end{align*}
+\section{} % Question 5
+Recall that $\nabla{f}$ goes in the direction of maximum change.
+\begin{align*}
+	\nabla{f}&=\big\langle y\cos{xy},x\cos{xy} \big\rangle\\
+	\nabla{f}(1,0)&=\big\langle0,1\big\rangle\\
+	|\nabla{f}(1,0)|=1
+\end{align*}
+So the maximum rate of change is 1 and occurs in the direction of $\big\langle0,1\big\rangle$.
+\section{} % Question 6
+\begin{align*}
+	D_{\vec{u}}f(0,2)&=1\\
+	\nabla{f}(0,2)\cdot\vec{u}&=1\\
+	\nabla{f}&=\big\langle-y^2e^{-xy},e^{-xy},-xye^{-xy}\big\rangle\\
+	\nabla{f}(0,2)&=\big\langle-4,1\big\rangle
+\end{align*}
+So we have the following system of equations:
+\begin{align*}
+	-4u_1+u_2=1\\
+	u_1^2+u_2^2=1
+\end{align*}
+and must simply solve for $u_1$ and $u_2$.
+\begin{align*}
+	u_2=4u_1+1\\
+	u_1^2+(4u_1+1)^2=1\\
+	17u_1^2+8u_1=0\\
+	u_1=\frac{-8\pm\sqrt{64}}{34}\\
+	u_1=0,-\frac{8}{17}
+\end{align*}
+So thus
+\[\big\langle0,1\big\rangle\]
+and
+\[\big\langle-\frac{8}{17},-\frac{15}{17}\big\rangle\]
+are the two directions in which the directional derivative is 1 at (0,2).
+\section{} % Question 7
+\begin{align*}
+	f_x=e^x\cos{y}\\
+	f_y=-e^x\sin{y}
+\end{align*}
+Critical points are wherever the partial derivatives are 0 or undefined, so
+\begin{align*}
+	f_x=0:\bigg(k,\frac{\pi}{2}+k\pi\bigg),k\in\mathbb{Z}\\
+	f_y=0:\bigg(k,k\pi\bigg),k\in\mathbb{Z}\\
+\end{align*}
+\section{} % Question 8
+\begin{align*}
+	f_x=2x-4y\\
+	f_y=8x-4y\\
+	0=2x-4y\text{\;and\;}0=8y-4x
+\end{align*}
+Both of these equations are lines, and thus each has infinitely many solutions.
+\begin{align*}
+	f_{xx}=2\\
+	f_{yy}=8\\
+	f_{xy}=-4\\
+	D=16-16=0\text{\;for all $x$ and $y$}\\
+\end{align*}
+\end{document}

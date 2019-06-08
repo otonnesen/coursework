@@ -1,0 +1,104 @@
+\documentclass[12pt]{article}
+\usepackage{fancyhdr}
+\usepackage{blindtext}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\setlength{\headheight}{55 pt}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[R]{Oliver Tonnensen\\Ashley Van Spankeren\\Selma Yazganoglu\\Colton Broughton}
+\fancyhead[L]{Due: 05/02/2019}
+\fancyfoot[C]{\thepage}
+\fancyhead[C]{\textbf{M212 A2}}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0pt}
+\AtBeginDocument{\fancyhfoffset{0pt}}
+\def\QEDmark{\ensuremath{\square}}
+\def\proof{\paragraph{Proof:}}
+\def\endproof{\hfill\QEDmark}
+\begin{document}
+	\subsection*{Question 1:}
+	\begin{proof}
+		Let our relation be:
+		\[g\sim h \coloneqq g=khk^{-1}\]
+		To prove this is an equivalence relation we need it to have the reflexivity, symmetry, and transitivity properties.
+		\begin{enumerate}	
+			
+			\item [Reflexivity:]
+			Since $\mathcal{G}$ is a group there is an identity, denoted $e$. For reflexivity let $k=e$ so:
+			\[g=ege^{-1}=g\] as required.
+			\item [Symmetry:]
+			Need to show if $g\sim h$ then $h\sim g$\\ \\
+			So $g=khk^{-1}\rightarrow h=pgp^{-1}$ taking:
+			\[g=khk^{-1} \]
+			Multiplying both sides (on the right) by $k$ gives:
+			$$gk=kh$$
+			doing the same on the left with $k^{-1}$ gives:
+			$$k^{-1}gk=h$$ since $k^{-1},k\in\mathcal{G}$ then $p=k^{-1}$ and $p^{-1}=k$ and so it is symmetric.
+			\item [Transitivity:] We need to show if $g\sim h$ and $h\sim j$ then $g\sim j$\\ \\
+			Let $g=khk^{-1}$ and $h=pjp^{-1}$ where $g,k,h,p,j\in\mathcal{G}$\\
+			So then $g=k(h)k^{-1}$ and since we know what $h$ is we sub it in to give $g=k(pjp^{-1})k^{-1}$. Since $\mathcal{G}$ is associative we use bracketing mastery to give $g=(kp)j(p^{-1}k^{-1})$ since $k,p\in\mathcal{G}$ their inverses are as well, thus. 
+			$$g\sim j$$
+			as required.
+		\end{enumerate}
+		Equivalence class of the identity is j conjugate to e such that $j=kek^{-1}$
+		but this is simply $j=e$ since this is an equivalence relation and is symmetric the obverse is true as well. If $\mathcal{G}$ is abelian the relation is simply the traditional $"="$
+	\end{proof}
+\newpage
+	\setlength{\headheight}{5pt}
+	\fancyhead[R]{}
+	\subsection*{Question 2:}
+	\begin{proof}
+		\begin{enumerate}
+			\item[($\Rightarrow$)] If $\mathcal{G}$ is abelian then for all elements $g,h\in\mathcal{G}$ there exists an inverse denoted by $g^{-1}$ and $h^{-1}$. By proposition 1.2.9:
+			$$(gh)^{-1}=h^{-1}g^{-1}$$
+			Since $\mathcal{G}$ is abelian we can commute the right hand side giving:
+			$$(gh)^{-1}=h^{-1}g^{-1}=g^{-1}h^{-1}$$
+			as required.
+			\item[$(\Leftarrow)$] By proposition 1.2.9 we have:
+			$$(gh)^{-1}=h^{-1}g^{-1}$$
+			similarly we have:
+			$$(hg)^{-1}=g^{-1}h^{-1}$$
+			if $(gh)^{-1}=g^{-1}h^{-1}=(hg)^{-1}$ then $\mathcal{G}$ is commutative. A commutative group is an abelian group.
+		\end{enumerate}	
+	\end{proof}
+	\newpage
+	\subsection*{Question 3:}
+	ord(Z)/gcd(x,50) and solve for x in the case of gcd = 10 and gcd = 2
+\newpage
+	\subsection*{Question 4:}
+	\begin{proof}
+	%	For $\mathcal{G}$ to be finite order it means that for some $g$ in $\mathcal{G}$: $g^{ord\left(\mathcal{G}\right)}=e$\\
+	%	We also know that for $g\ne e$  that if $\mathcal{G}$ is a group then every element has an inverse and so $gg^{-1}=e$. We know that $g^n =e =gg^{-1}$ Further for $g^{n-1}g^1 = g^n = e$ So either $g^{n-1}$ or $g^{1}$ is the inverse. But since both are in $\mathcal{G}$ and we need to show there exists at least one, we need not find which is the inverse.
+	\end{proof}
+	\newpage
+	\subsection*{Question 5:}
+	\begin{enumerate}
+		\item 
+	\end{enumerate}
+	\newpage
+	\subsection*{Question 6:}
+	\begin{enumerate}
+		\item TRUE. we defined the order as the least possible $k\in\mathbb{Z^+}$ such that for some $g$ in an arbitrary set $g^k=e$ for and identity denoted $e$, $e^1=e$ and so the order of $e$ is $1$
+		\item FALSE. $gcd(k,6)=1$ for $0\le k\le 5$ is only true when $k=1,5$. when $k=2$ the gcd is 2, when $k=3$ the gcd is 3, and when $k=4$ the gcd is 2.
+		\item FALSE for $n\ge3$ $S_n$ is not abelian:
+		\begin{proof}
+			define $\alpha$ as the permutation only switching 1 and 2, and $\beta$ as the permutation that only switches 1 and 3.Then:\\
+			$\alpha\beta(1)=3$ and $\beta\alpha(1)=2$ and so it is not commutative and thus the group $S_n$ is not abelian. 	
+		\end{proof}
+	\end{enumerate}
+	\newpage
+	\subsection*{Question 7:}
+	\begin{enumerate}
+		\item[a] (1 9 6 5 7 8 3 4 2)
+		\item[b]
+		\item[c] 9
+		\item[d] even
+	\end{enumerate}
+\end{document}

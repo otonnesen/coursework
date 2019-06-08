@@ -1,0 +1,232 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,tikz}
+\title{MATH 322 Assignment 2}
+\author{Oliver Tonnesen\\V00885732}
+\date{February 7, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+An idempotent symmetric Latin square of order 5:
+\newline
+\newline
+\begin{tabular}{ccccc}
+	1 & 3 & 5 & 2 & 4\\
+	3 & 2 & 4 & 5 & 1\\
+	5 & 4 & 3 & 1 & 2\\
+	2 & 5 & 1 & 4 & 3\\
+	4 & 1 & 2 & 3 & 5\\
+\end{tabular}
+\newline
+\newline
+Using the Bose Construction, we have
+\begin{alignat*}{3}
+	&S=\{&&x_i,y_i,z_i\;|\;1\le i\le5\}\\
+	&T=\{&&\{x_1,y_1,z_1\},
+	\{x_2,y_2,z_2\},
+	\{x_3,y_3,z_3\},
+	\{x_4,y_4,z_4\},
+	\{x_5,y_5,z_5\},
+	\{x_1,x_2,y_3\},\\
+	&&&\{y_1,y_2,z_3\},
+	\{z_1,z_2,x_3\},
+	\{x_1,x_3,y_5\},
+	\{y_1,y_3,z_5\},
+	\{z_1,z_3,x_5\},
+	\{x_1,x_4,y_2\},\\
+	&&&\{y_1,y_4,z_2\},
+	\{z_1,z_4,x_2\},
+	\{x_1,x_5,y_4\},
+	\{y_1,y_5,z_4\},
+	\{z_1,z_5,x_4\},
+	\{x_2,x_3,y_4\},\\
+	&&&\{y_2,y_3,z_4\},
+	\{z_2,z_3,x_4\},
+	\{x_2,x_4,y_5\},
+	\{y_2,y_4,z_5\},
+	\{z_2,z_4,x_5\},
+	\{x_2,x_5,y_1\},\\
+	&&&\{y_2,y_5,z_1\},
+	\{z_2,z_5,x_1\},
+	\{x_3,x_4,y_1\},
+	\{y_3,y_4,z_1\},
+	\{z_3,z_4,x_1\},
+	\{x_3,x_5,y_2\},\\
+	&&&\{y_3,y_5,z_2\},
+	\{z_3,z_5,x_2\},
+	\{x_4,x_5,y_3\},
+	\{y_4,y_5,z_3\},
+	\{z_4,z_5,x_3\}
+	\}
+\end{alignat*}
+\subsection{} % Section 1.b
+A symmetric half-idempotent Latin square of order 6:
+\newline
+\newline
+\begin{tabular}{cccccc}
+	1 & 4 & 5 & 6 & 3 & 2\\
+	4 & 2 & 6 & 3 & 5 & 1\\
+	5 & 6 & 3 & 2 & 1 & 4\\
+	6 & 3 & 2 & 1 & 4 & 5\\
+	3 & 5 & 1 & 4 & 2 & 6\\
+	2 & 1 & 4 & 5 & 6 & 3\\
+\end{tabular}
+\newline
+\newline
+Using the Skolem Construction, we have
+\begin{alignat*}{3}
+	&S=\{&&x_i,y_i,z_i\;|\;1\le i\le6\}\cup\{w\}\\
+	&T=\{&&\{x_1,y_1,z_1\},
+	\{x_2,y_2,z_2\},
+	\{x_3,y_3,z_3\},
+	\{x_1,z_4,w\},
+	\{y_1,x_4,w\;\},
+	\{z_1,y_4,w\;\},\\
+	&&&\{x_2,z_5,w\},
+	\{y_2,x_5,w\;\},
+	\{z_2,y_5,w\;\},
+	\{z_3,y_6,w\;\},
+	\{z_3,y_6,w\;\},
+	\{z_3,y_6,w\;\},\\
+	&&&\{x_1,x_2,y_4\},
+	\{y_1,y_2,z_4\},
+	\{z_1,z_2,x_4\},
+	\{x_1,x_3,y_5\},
+	\{y_1,y_3,z_5\},
+	\{z_1,z_3,x_5\},\\
+	&&&\{x_1,x_4,y_6\},
+	\{y_1,y_4,z_6\},
+	\{z_1,z_4,x_6\},
+	\{x_1,x_5,y_3\},
+	\{y_1,y_5,z_3\},
+	\{z_1,z_5,x_3\},\\
+	&&&\{x_1,x_6,y_2\},
+	\{y_1,y_6,z_2\},
+	\{z_1,z_6,x_2\},
+	\{x_2,x_3,y_6\},
+	\{y_2,y_3,z_6\},
+	\{z_2,z_3,x_6\},\\
+	&&&\{x_2,x_4,y_3\},
+	\{y_2,y_4,z_3\},
+	\{z_2,z_4,x_3\},
+	\{x_2,x_5,y_5\},
+	\{y_2,y_5,z_5\},
+	\{z_2,z_5,x_5\},\\
+	&&&\{x_2,x_6,y_1\},
+	\{y_2,y_6,z_1\},
+	\{z_2,z_6,x_1\},
+	\{x_3,x_4,y_2\},
+	\{y_3,y_4,z_2\},
+	\{z_3,z_4,x_2\},\\
+	&&&\{x_3,x_5,y_1\},
+	\{y_3,y_5,z_1\},
+	\{z_3,z_5,x_1\},
+	\{x_3,x_6,y_4\},
+	\{y_3,y_6,z_4\},
+	\{z_3,z_6,x_4\},\\
+	&&&\{x_4,x_5,y_4\},
+	\{y_4,y_5,z_4\},
+	\{z_4,z_5,x_4\},
+	\{x_4,x_6,y_5\},
+	\{y_4,y_6,z_5\},
+	\{z_4,z_6,x_5\},\\
+	&&&\{x_5,x_6,y_6\},
+	\{y_5,y_6,z_6\},
+	\{z_5,z_6,x_6\}
+	\}
+\end{alignat*}
+\section{} % Section 2
+Due to the nature of sets (namely the fact that $\{i,j,k\}=\{j,i,k\}$),
+for any $i,j\in[n],i\neq j$, $a_{ij}=a_{ji}$, satisfying the property that the
+matrix must be a \textit{symmetric} Latin square. Since $(S,T)$ is a Steiner
+triple system, we know that any $i,j,k\in[n]$ are contained in exactly one
+triple together in $T$. In other words, if we fix $i$, we will find a different
+$k$ for any choice of $j$, and if we fix $j$, we will find a different $k$ for
+any choice of $i$. Thus for any row or column of $A$, no two numbers will occur
+twice. Thus we have proven that the matrix $A$ as defined would be a symmetric
+Latin square.
+\section{} % Section 3
+As we know, the number of triples containing any $x\in S$ in a Steiner triple
+system is $\frac{|S|-1}{2}$, so in our \textit{2-fold triple system} we have
+$|S|-1$ triples containing any $x\in S$. We also know that each triple contains
+$\binom{3}{2}$ pairs, so in total, we have $\frac{|S|(|S|-1)}{\binom{3}{2}}=
+\frac{|S|(|S|-1)}{3}$ triples. We know that $|S|(|S|-1)$ is even, since
+$\frac{|S|(|S|-1)}{2}$ is an integer. Thus, since $\frac{|S|(|S|-1)}{3}$ is also
+an integer, we know that it must be even. So we check to see for which numbers
+this property holds:
+\begin{align*}
+	|S|&\equiv0\text{ (mod 3)}:\ \frac{3l(3l-1)}{3}=3l^2-l&\qquad\text{ Always even, so holds.}\\
+	|S|&\equiv1\text{ (mod 3)}:\ \frac{(3l+1)(3l)}{3}=3l^2+l&\qquad\text{ Always even, so holds}\\
+	|S|&\equiv2\text{ (mod 3)}:\ \frac{(3l+2)(3l+1)}{3}=\frac{9l^2+9l+3}{3}=3l^2+3l+1&\qquad\text{ Always odd, so does not hold}\\
+\end{align*}
+So we see that $|S|\equiv0\text{ or }1\text{ (mod 3)}$ is a necessary condition for the
+existence of a \textit{2-fold triple system}.
+\section{} % Section 4
+The system has at a total of $\binom{10}{2}$ pairs. We can also count this number
+as $3|T|$, since each triple counts three distinct pairs. Thus,
+$\binom{10}{2}\le3|T|$. We also know that there exists no Steiner triple system
+of order 10, so not all pairs can be counted in our packing. In other words, we
+must miss at least one pair, so we update our inequality:
+$\binom{10}{2}-1\le3|T|$. And so
+$\Big\lfloor\frac{\binom{10}{2}-1}{3}\Big\rfloor\le|T|$. So $|T|$ can be at most
+$\big\lfloor\frac{44}{3}\big\rfloor=14$.\\
+Below is a maximal packing on 10 elements, with $|T|=13$.
+\begin{align*}
+	S=&\{1,2,3,4,5,6,7,8,9,10\}\\
+	T=&\{\{2,3,4\},\{1,4,8\},\{6,7,8\},\{2,6,9\},\{3,7,10\},\\
+	&\{3,5,9\},\{1,5,7\},\{1,2,10\},\{8,9,10\},\{1,3,6\},\\
+	&\{4,7,9\},\{4,5,6\},\{2,5,8\}\}
+\end{align*}
+\section{} % Section 5
+$L$ and $L'$ both have at least 3 points, and share exactly 1. Consider a point
+on $L$ but not on $L'$; this point must be crossed by another line, $L''$. $L''$
+has at least 2 points not on $L$, by $(P_2)$. Both of these points cannot be on
+$L'$, by $(P_4)$. Thus, at least one of these must be on neither $L$ nor $L'$.
+\section{} % Section 6
+We aim to show that a projective plane $(\mathcal{P},\mathcal{L})$ satisfies
+$(P_1),(P_2),(P_3),(P_4),(P_5)$ if and only if it satisfies $(Q),(P_4),(P_5)$.
+We prove the two directions separately:
+\newline
+\newline
+$(\implies)$: By $(P_1)$, there exists at least one line, $L$. By $(P_2)$, $L$ has at least
+three points. By $(P_3)$, not all points are on $L$, so there exists
+another line, $L'$, also having at least three points. By $(P_5)$, $L$ and $L'$
+share exactly one point, so $L'$ has at least two points not on $L$. At this
+point, we have a set of four points, two on $L$ and two on $L'$. By $(P_4)$, the
+two points on $L$ cannot share another line, and similarly, the two points on
+$L'$ cannot share another line, so no three of these fours points are colinear,
+satisfying $(Q)$.
+\newline
+\newline
+$(\impliedby)$: By $(Q)$, we have four points, $a,b,c,d$, no three of which
+share a line. Now to show the implication holds, we must do so for any possible
+combination of $a,b,c,\text{ and }d$, so we have three cases:\\
+Case 1: We have two lines, each containing exactly two of $a,b,c,d$.\\
+Case 2: We have three lines, one of which containing two of $a,b,c,d$, and the
+other two containing one each of the two points not on the first line.\\
+Case 3: We have four lines, each containing exactly one of $a,b,c,d$.\\
+\newline
+Case 1: Suppose WLOG that $a,b\in L_1$ and $c,d\in L_2$. By $(P_5)$, $L_1$ and
+$L_2$ must intersect at a point. By $(Q)$, this point cannot be any of $a,b,c,d$,
+so let $e\in L_1\cap L_2$. $L_1$ and $L_2$ now both have at least $3$ points,
+and so all of $(P_1)$, $(P_2)$, and $(P_3)$ are satisfied.\\
+\newline
+Case 2: Suppose WLOG that $a,b\in L_1$, $c\in L_2$, and $d\in L_3$. By $(P_5)$,
+$L_1$ intersects $L_2$ at some point not $c$ or $d$, so again we define
+$e\in L_1\cap L_2$. Note that $|L_1|\ge3$. We know that for a projective plane
+$(\mathcal{P},\mathcal{L})$, $|L_1|=|L_2|$ for all $L_1,L_2\in\mathcal{L}$, so
+again, our conditions $(P_1)$, $(P_2)$, and $(P_3)$ are satisfied.\\
+\newline
+Case 3: We have four lines, each of which contains exactly one of $a,b,c,d$.
+Let $a\in L_1$, $b\in L_2$, and $c\in L_3$. By $(P_4)$, $L_1$ and $L_2$
+intersect, but not at any of $a,b,c,d$, by our assumption. Similarly, $L_1$ and
+$L_3$ must also intersect, also at none of $a,b,c,d$. Note that $L_1$ cannot
+intersect $L_3$ at the same point as that at which it intersects $L_2$, so
+$|L_1|\ge3$. As before, we know that any two lines in a projective plane have
+the same number of points, and so our conditions $(P_1)$, $(P_2)$, and $(P_3)$
+are once again satisfied.\\
+\newline
+Thus we have shown that a projective plane $(\mathcal{P},\mathcal{L})$ satisfies
+$(P_1),(P_2),(P_3),(P_4),(P_5)$ if and only if it satiesfies $(Q),(P_4),(P_5)$.
+\end{document}

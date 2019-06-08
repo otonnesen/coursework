@@ -1,0 +1,14 @@
+.LW 30
+Properly formatting  a   file where
+there
+is
+    a smattering of white space throughout
+  really means eliminating that
+extra
+   white 
+      space
+such that the result
+    looks neat
+                   and
+                         very
+            tidy.

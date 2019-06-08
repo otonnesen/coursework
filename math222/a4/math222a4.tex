@@ -1,0 +1,352 @@
+\documentclass{article}
+\usepackage{amsmath}
+\title{MATH 222 Assignment Four}
+\author{Oliver Tonnesen\\V00885732}
+\date{November 2, 2018}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+We define the following:
+\begin{align*}
+	\mathcal{U}&\equiv\text{Contains the pattern $LUCY$}\\
+	c_1&\equiv\text{Contains the pattern $BROWN$}\\
+	c_2&\equiv\text{Contains the pattern $JOHN$}\\
+	c_3&\equiv\text{Contains the pattern $SMITH$}\\
+\end{align*}
+Note also that the pattern $LUCY$ does not share any characters with any of
+$BROWN$, $JOHN$, or $SMITH$, hence our definition of $\mathcal{U}$.
+\newline
+\newline
+We wish to find $N(\overline{c_1}\;\overline{c_2}\;\overline{c_3})$. Using the
+Principle of Inclusion and Exclusion, we have
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3})=
+	|\mathcal{U}|
+	&-\big[N(c_1)+N(c_2)+N(c_3)\big]\\
+	&+\big[N(c_1\;c_2)+N(c_1\;c_3)+N(c_2\;c_3)\big]\\
+	&-\big[N(c_1\;c_2\;c_3)\big]
+\end{align*}
+We find the follwing values:
+\begin{align*}
+	|\mathcal{U}|&=23!\\
+	N(c_1)&=19!\\
+	N(c_2)&=20!\\
+	N(c_3)&=19!\\
+	N(c_1\;c_2)&=0\\
+	N(c_1\;c_3)&=15!\\
+	N(c_2\;c_3)&=0\\
+	N(c_1\;c_2\;c_3)&=0\\
+\end{align*}
+So we get
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3})&=23!-[19!+20!+19!]+[0+15!+0]-[0]\\
+	&=23!-20!-2\cdot19!+15!
+\end{align*}
+\section{} % Section 2
+Let walls 1, 2, 3, and 4 be the East, North, West, and South walls,
+respectively. Let corner $ij$ be the corner connecting wall $i$ and wall $j$.
+\newline
+\newline
+We define the following:
+\begin{align*}
+	c_1&\equiv\text{Corner 12 is the same colour}\\
+	c_2&\equiv\text{Corner 23 is the same colour}\\
+	c_3&\equiv\text{Corner 34 is the same colour}\\
+	c_4&\equiv\text{Corner 41 is the same colour}\\
+\end{align*}
+We wish to count
+$N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})$.
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3})=
+	|\mathcal{U}|
+	&-\big[N(c_1)+N(c_2)+N(c_3)+N(c_4)\big]\\
+	&+\big[N(c_1\;c_2)+N(c_1\;c_3)+N(c_1\;c_4)+N(c_2\;c_3)+N(c_2\;c_4)+N(c_3\;c_4)\big]\\
+	&-\big[N(c_1\;c_2\;c_3)+N(c_1\;c_2\;c_4)+N(c_1\;c_3\;c_4)+N(c_2\;c_2\;c_4)\big]\\
+	&+\big[N(c_1\;c_2\;c_3\;c_4)\big]\\
+	=\;6^4
+	&-\big[6^3+6^3+6^3+6^3\big]\\
+	&+\big[6^2+6^2+6^2+6^2+6^2+6^2\big]\\
+	&-\big[6+6+6+6\big]\\
+	&+\big[6\big]\\
+	=630
+\end{align*}
+\section{} % Section 3
+We define the following:
+\begin{align*}
+	x_1&=\text{Number of red marbles}\\
+	x_2&=\text{Number of blue marbles}\\
+	x_3&=\text{Number of white marbles}\\
+	x_4&=\text{Number of green marbles}\\
+\end{align*}
+And so we can count the number of ways we can select the marbles by counting
+the number of solutions to the following system:
+\begin{equation*}
+	\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=9\\
+		0\le{x_i}\le3,\;i=1,2,3,4
+	\end{array}\right.
+\end{equation*}
+We know that
+\begin{equation*}
+	\mathcal{U}=\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=9\\
+		x_i\ge0,\;i=1,2,3,4
+	\end{array}\right.
+\end{equation*}
+So
+\begin{align*}
+	|\mathcal{U}|=\binom{4+9-1}{9}
+	=\binom{12}{9}
+\end{align*}
+We define $c_i\equiv{x_i\ge4}$. We can now find
+$N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})$ using the
+Principle of Inclusion and Exclusion. First we notice that when three or more
+of the conditions are true there are 0 solutions, so we need only consider
+singletons and pairs. We also notice that $N(c_i)=N(c_j)$ for all valid values
+of $i$ and $j$. Similarly, we notice that $N(c_i\;c_j)=N(c_k\;c_l)$ for all
+valid values of $i$, $j$, $k$, and $l$. So overall, we get
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})=
+	\binom{12}{9}
+	&-\binom{4}{1}\bigg[N(c_1)\bigg]\\
+	&+\binom{4}{2}\bigg[N(c_1\;c_2)\bigg]\\
+\end{align*}
+We find $N(c_1)$:
+\begin{align*}
+	x'_1=&x_1-4\\
+	&\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=9\\
+		x_i\ge0,\;i=1,2,3,4
+	\end{array}\right.\\
+	=&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+4+x_2+x_3+x_4=9\\
+		x'_1\ge0\\
+		x_i\ge0,\;i=2,3,4
+	\end{array}\right.\\
+	=&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x_2+x_3+x_4=5\\
+		x'_1\ge0\\
+		x_i\ge0,\;i=2,3,4
+	\end{array}\right.
+\end{align*}
+So $N(c_1)=\binom{4+5-1}{5}=\binom{8}{5}$.
+\newline
+\newline
+Similarly, we find $N(c_1\;c_2)$:
+\begin{align*}
+	x'_1=&x_1-4\\
+	x'_2=&x_2-4\\
+	&\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=9\\
+		x_i\ge0
+	\end{array}\right.\\
+	=&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+4+x'_2+4+x_3+x_4=9\\
+		x'_i\ge0,\;i=1,2\\
+		x_i\ge0,\;i=3,4
+	\end{array}\right.\\
+	=&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x_3+x_4=1\\
+		x'_i\ge0,\;i=1,2\\
+		x_i\ge0,\;i=3,4
+	\end{array}\right.
+\end{align*}
+So $N(c_1\;c_2)=\binom{4+1-1}{1}=\binom{4}{1}$.
+We can now find $N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})$
+using our above equation:
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})=
+	|\mathcal{U}|
+	&-\binom{4}{1}\bigg[\binom{8}{5}\bigg]\\
+	&+\binom{4}{2}\bigg[\binom{4}{1}\bigg]\\
+	=\;20
+\end{align*}
+\section{} % Section 4
+\subsection{} % Section 4.a
+\begin{equation*}
+	\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=17\\
+		x_i\ge-1,\;i=1,2,3,4
+	\end{array}\right.
+\end{equation*}
+We define $x'_i=x_i+1$, and so
+\begin{align*}
+	&\left\{
+		\begin{array}{@{}ll@{}}
+		x'_1-1+x'_2-1+x'_3-1+x'_4-1=17\\
+		x'_i\ge0,\;i=1,2,3,4
+	\end{array}\right.\\
+	\implies&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x'_3+x'_4=21\\
+		x'_i\ge0,\;i=1,2,3,4
+	\end{array}\right.
+\end{align*}
+So there are $\binom{4+21-1}{21}=\binom{24}{21}$ integer solutions.
+\subsection{} % Section 4.b
+\begin{equation*}
+	\left\{
+	\begin{array}{@{}ll@{}}
+		x_1+x_2+x_3+x_4=17\\
+		-1\le{x_i}\le5,\;i=1,2,3,4
+	\end{array}\right.
+\end{equation*}
+We define $x'_x-1+1$, and so
+\begin{align*}
+	&\left\{
+\begin{array}{@{}ll@{}}
+		x'_1-1+x'_2-1+x'_3-1+x'_4-1=17\\
+		0\le{x'_i}\le6,\;i=1,2,3,4
+	\end{array}\right.\\
+	\implies&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x'_3+x'_4=21\\
+		0\le{x'_i}\le6,\;i=1,2,3,4
+	\end{array}\right.\\
+	=&\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x'_3+x'_4=21\\
+		x'_i\ge0,\;i=1,2,3,4
+	\end{array}\right.
+	-\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x'_3+x'_4=21\\
+		x'_i\ge7,\;i=1,2,3,4
+	\end{array}\right.\\
+	=&\binom{24}{21}
+	-\left\{
+	\begin{array}{@{}ll@{}}
+		x'_1+x'_2+x'_3+x'_4=21\\
+		\text{at least one $x_i\ge7$}
+	\end{array}\right.
+\end{align*}
+We define $c_i\equiv{x_i\ge7}$, and we wish to find
+$N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})$. From here,
+we use the same strategy we used for question 3, and through the Principle of
+Inclusion and Exclusion, we get
+\begin{align*}
+	N(\overline{c_1}\;\overline{c_2}\;\overline{c_3}\;\overline{c_4})=
+	\binom{24}{21}
+	&-\binom{4}{1}\bigg[\binom{17}{14}\bigg]\\
+	&+\binom{4}{2}\bigg[\binom{10}{7}\bigg]\\
+	&-\binom{4}{1}\bigg[\binom{3}{0}\bigg]\\
+	=20
+\end{align*}
+\section{} % Section 5
+We define the following:
+\begin{align*}
+	c_1\equiv\text{divisible by 3}\\
+	c_2\equiv\text{divisible by 5}\\
+	c_3\equiv\text{divisible by 7}\\
+\end{align*}
+We wish to find $N(\overline{{\overline{c_1}\;\overline{c_2}}}\;\overline{c_3})$.
+\begin{align*}
+	N(c_1)&=\bigg\lfloor\frac{2018}{3}\bigg\rfloor\\
+	N(c_2)&=\bigg\lfloor\frac{2018}{5}\bigg\rfloor\\
+	N(c_1\;c_2)&=\bigg\lfloor\frac{2018}{15}\bigg\rfloor\\
+	N(c_1\;c_3)&=\bigg\lfloor\frac{2018}{21}\bigg\rfloor\\
+	N(c_2\;c_3)&=\bigg\lfloor\frac{2018}{35}\bigg\rfloor\\
+	N(c_1\;c_2\;c_3)&=\bigg\lfloor\frac{2018}{105}\bigg\rfloor\\
+\end{align*}
+So
+\begin{align*}
+	N(\overline{{\overline{c_1}\;\overline{c_2}}}\;\overline{c_3})
+	=&N(c_1)+N(c_2)\\
+	&-\bigg[N(c_1\;c_2)+N(c_1\;c_3)+N(c_2\;c_3)\bigg]\\
+	&+N(c_1\;c_2\;c_3)\\
+	=&\bigg\lfloor\frac{2018}{3}\bigg\rfloor
+	+\bigg\lfloor\frac{2018}{5}\bigg\rfloor\\
+	&-\Bigg[\bigg\lfloor\frac{2018}{15}\bigg\rfloor
+	+\bigg\lfloor\frac{2018}{21}\bigg\rfloor
+	+\bigg\lfloor\frac{2018}{35}\bigg\rfloor\Bigg]\\
+	&+\bigg\lfloor\frac{2018}{105}\bigg\rfloor\\
+\end{align*}
+\section{} % Section 6
+\subsection{} % Section 6.a
+Recall the following:
+\begin{align*}
+	\phi(n)&=n-\sum_{1\le{i}\le{t}}\frac{n}{p_i}
+	+\sum_{1\le{i}\le{j}\le{t}}\frac{n}{p_{i}p_{j}}
+	-\sum_{1\le{i}\le{j}\le{k}\le{t}}\frac{n}{p_{i}p_{j}p_{k}}
+	+\cdots
+	+(-1)^{n}\frac{n}{p_{1}p_{2}\ldots{p_{t}}}\\
+	&=n\bigg(1-\frac{1}{p_1}\bigg)\bigg(1-\frac{1}{p_2}\bigg)\cdots\bigg(1-\frac{1}{p_t}\bigg)
+\end{align*}
+We now note the following:
+\begin{align*}
+	\phi(n^m)&=n^m-\sum_{1\le{i}\le{t}}\frac{n^m}{p_i}
+	+\sum_{1\le{i}\le{j}\le{t}}\frac{n^m}{p_{i}p_{j}}
+	-\sum_{1\le{i}\le{j}\le{m}\le{t}}\frac{n^m}{p_{i}p_{j}p_{m}}
+	+\cdots
+	+(-1)^{n^m}\frac{n^m}{p_{1}p_{2}\ldots{p_{t}}}\\
+\end{align*}
+Since $n^m$ is composed strictly of multiples of $n$, it will share all of its
+primes with $n$. In other words, $n$ and $n^m$ will have the same number of
+distinct prime factors. So
+\begin{align*}
+	\phi(n^m)&=n^m\bigg(1-\frac{1}{p_1}\bigg)\bigg(1-\frac{1}{p_2}\bigg)\cdots\bigg(1-\frac{1}{p_t}\bigg)\\
+	&=n^{m-1}\bigg[n\bigg(1-\frac{1}{p_1}\bigg)\bigg(1-\frac{1}{p_2}\bigg)\cdots\bigg(1-\frac{1}{p_t}\bigg)\bigg]\\
+	&=n^{m-1}\bigg[\phi(n)\bigg]\\
+	&=n^{m-1}\phi(n)
+\end{align*}
+\subsection{} % Section 6.b
+When considering the following two equations:
+\[n=\frac{32}{1-\frac{1}{p_1}}\]
+and
+\[n=\frac{32}{(1-\frac{1}{p_1})(1-\frac{1}{p_2})}\]
+the first two solutions found were $n=64$ and $n=80$. Upon closer inspection,
+64 works, since $\big\lfloor\frac{64}{2}\big\rfloor=32$ and 80 works, since
+$80-\bigg[\big\lfloor\frac{80}{2}\big\rfloor+\big\lfloor\frac{80}{5}\big\rfloor
+-\big\lfloor\frac{80}{10}\big\rfloor\bigg]=32$.
+\section{} % Section 7
+To prove this identity, we will count the number of ways we can paint $m$ walls
+with $n$ colours.
+\newline
+\newline
+First, we will select one of $n$ colours, for the first wall, then do the same
+for the second and onward to the $m^{\text{th}}$. We count $n^m$ possible ways.
+\newline
+\newline
+$S(m,k)$ is the number of ways each of $m$ colours can be distributed into $k$
+nonempty subsets.
+\newline
+\newline
+$\binom{n}{k}n!=P(n,k)$ is the number of ways $k$ elements can be selected from
+$n$ elements and assign each to one of the $k$ subsets.
+\newline
+\newline
+For the first iteration of our sum (where $k=1$ we make one subset of all of
+the walls. Out of $n$ colours, we choose one to assign to the one subset.
+\newline
+We continue this for every value of $k$. Since we use a different number of
+colours each iteration, we know that we are not overcounting. So we end up
+with all possible permutations of $m$ walls being painted with $n$ colours.
+We count $\sum_{k=1}^{n}\binom{n}{k}(k!)S(m,k)$ possible ways.
+\newline
+\newline
+Thus, $n^m=\sum_{k=1}^{n}\binom{n}{k}(k!)S(m,k)$.
+\section{Bonus} % Section 8
+We will distribute distinct marbles numbered $1,2,\ldots,n$ into distinct urns
+numbered $1,2,\ldots,n$ without placing marble $i$ into urn $i$.
+\newline
+\newline
+Place marble 1 into an urn other than urn 1 and note its number, $i$. There are
+$(n-1)$ ways to do this. Now take the $i^{\text{th}}$ marble. You have two
+options: place it into urn 1, or place it into some other urn. If you place it
+into urn 1, then marble 1, urn 1, marble $i$ and urn $i$ are now no longer
+being considered, and so the remaining problem is $d_{n-2}$. If you place it
+into some other urn, then there are now $n-1$ marbles and $n-1$ urns, including
+marble $i$ and urn 1. Since we specifically chose not to put marble $i$ into
+urn 1, this situation is the exact same as $d_{n-1}$, in that each marble has
+exactly one urn into which it cannot be put. Thus $d_n=(n-1)(d_{n-1}+d_{n-2})$.
+\end{document}

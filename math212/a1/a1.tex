@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,graphicx}
+\usepackage[normalem]{ulem}
+\title{MATH 212 Assignment 1}
+\author{Colton Broughton\\
+		Oliver Tonnesen\\
+		Ashley Van Spankeren\\
+		Selma Yazganoglu}
+\date{January 22, 2019}
+\begin{document}
+\maketitle
+\newcommand{\msout}[1]{\text{\sout{\ensuremath{#1}}}}
+\newcommand{\heart}{\ensuremath\heartsuit}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+No. Suppose $a=b\neq0$. Then $a-b=0$. But $0\not\in X$, so * is not a binary
+operation on $X$.
+\subsection{} % Section 1.b
+Yes. Let $A\subseteq B\subseteq\mathcal{P}(\{1,2,3\})$. $A\cap B$ is defined
+for all values of $A$ and $B$, and $A\cap B\in\mathcal{P}(\{1,2,3\})$ for all $A,B$.
+\subsection{} % Section 1.c
+No. Let $A=\{1\},B=\{1\}$. $A\times B=\{(1,1)\}$.
+$\{(1,1)\}\not\in\mathcal{P}(\{1,2,3\})$, so $\times$ is not a binary operation.
+\newline
+In general, one must check that the range of * is contained in $X$, that * is
+defined on all $x\in X\times X$, and that no input $x\in X\times X$ exists such
+that it corresponds to two outputs.
+\section{} % Section 2
+Associativity:\\
+Let $a=b=c=2\in\mathbb{Z}$. We show that $(a*b)*c\neq a*(b*c)$:
+\begin{align*}
+	(2*2)*2=(2\cdot2^2)\cdot2^2=32\\
+	2*(2*2)=2\cdot(2\cdot2^2)^2=128
+\end{align*}
+So * is not associative.
+\newline
+\newline
+Commutativity:\\
+Let $a=2,b=3,a,b\in\mathbb{Z}$. We show that $a*b\neq b*a$.
+\begin{align*}
+	a*b=2\cdot3^2=18\\
+	b*a=3\cdot2^2=12
+\end{align*}
+So * is not commutative.
+\newline
+\newline
+Identity:\\
+Suppose $e$ is an identity for * on $\mathbb{Z}$. Then $e*a=a=a*e$.
+Then $e\cdot a^2=a=a\cdot e^2$. Consider the equation $e\cdot a^2=a$ where
+$a\neq0$:
+\begin{align*}
+	&e\cdot a^2=a\\
+	\iff&e\cdot a=1
+\end{align*}
+This clearly cannot hold for all $0\neq a\in\mathbb{Z}$, so $e$ cannot exist.
+\section{} % Section 3
+Symmetric:\\
+All of $a,b,c,d\in\mathbb{Z}$, so then both of $ad,bc\in\mathbb{Z}$. By the
+properties of = on $\mathbb{Z}$, we know that $ad=bc\implies bc=ad$, so
+$((a,b),(c,d))\in\sim\iff((c,d),(a,b))\in\sim$.
+\newline
+\newline
+Reflexive:\\
+Similarly, we know that = on $\mathbb{Z}$ is reflexive, so
+$ab=ab$ for all $(a,b)\in\mathbb{Z}\times\mathbb{Z}\setminus\{0\}$.
+\newline
+\newline
+Transitive:\\
+For all $(a,b),(c,d),(e,f)\in B$, suppose $ad=bc$ and $ef=de$.
+Suppose $c\neq0$.
+\begin{align*}
+	ad=bc\\
+	adcf=bcde&\qquad\text{($cf=de$)}\\
+	a\msout{dc}f=b\msout{cd}e&\qquad\text{($c,d\neq0$)}\\
+	af=be
+\end{align*}
+Now suppose $c=0$. Then $bc=cf=0$, and consequently, $ad=de=0$. $d\neq0$, so
+$a=e=0$, so $af=be=0$. Thus, transitivity holds both when $c=0$ and when
+$c\neq0$.
+\section{} % Section 4
+\subsection{} % Section 4.a
+For $+$, $x$ is the identity, since $x+x=x$, and $x+y=y=y+x$, so $x:=0$.\\
+For $\cdot$, $y$ is the identity, since $y\cdot y=y$ and $y\cdot x=x=x\cdot y$,
+so $y:=1$.
+\subsection{} % Section 4.b
+For every $a\in\mathbb{Z}$, exactly one of the following holds: $a\in\mathbb{Z}^+$,
+$-a\in\mathbb{Z}^+$, $a=0$. $x$ is defined to be in the set of positive integers,
+but is also the additive identity. This contradicts the definition of $\mathbb{Z}$,
+and so $X\neq\mathbb{Z}$.
+\section{} % Section 5
+\subsection{} % Section 5.a
+No. $b*a=a\neq b=a*b$.
+\subsection{} % Section 5.b
+Yes.
+\newline
+\newline
+\begin{tabular}{c|ccc}
+	\# & a & b & c \\
+	\hline
+	a & a & b & b \\
+	b & b & c & b \\
+	c & b & b & c \\
+\end{tabular}
+\subsection{} % Section 5.c
+Yes.
+\newline
+\newline
+\begin{tabular}{c|ccc}
+	* & a & b & c \\
+	\hline
+	a & a & b & a \\
+	b & a & c & b \\
+	c & a & b & c \\
+\end{tabular}
+\subsection{} % Section 5.d
+No. None of $a,b,c$ can be an identity for \#:\\
+$a$: $a\#c=b\neq c$\\
+$b$: $b\#b=c\neq b$\\
+$c$: $a\#c=b\neq a$\\
+\subsection{} % Section 5.e
+\heart\, is commutative on $Y$ if and only if the table representing \heart\, is
+symmetric about the main diagonal. In other words, if the entry at row $x$ and
+column $y$ is the same as that at row $y$ and column $x$, $\forall x,y\in Y$.
+\newline
+\newline
+$c\in Y$ is \heart's identity if and only if its row and column exactly match
+the order of the elements along the top and left of the table, respectively. In
+other words,
+\newline
+\newline
+\begin{tabular}{c|ccccc}
+	\heart & a & b & c & d & e \\
+	\hline
+	a & $\boldsymbol\cdot$ && a && $\boldsymbol\cdot$  \\
+	b && $\boldsymbol\cdot$ & b & $\boldsymbol\cdot$ & \\
+	c & a & b & c &d & e \\
+	d && $\boldsymbol\cdot$ & d & $\boldsymbol\cdot$ & \\
+	e & $\boldsymbol\cdot$ && e && $\boldsymbol\cdot$ \\
+\end{tabular}
+\end{document}

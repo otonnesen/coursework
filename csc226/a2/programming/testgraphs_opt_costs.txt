@@ -1,0 +1,4 @@
+Weights of minimum spanning trees for test graphs
+
+First graph (250 vertices): 1046336
+Second graph (1000 vertices): 2077252

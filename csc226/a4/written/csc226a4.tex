@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{tikz,amsmath,amsthm,amssymb,tkz-graph,algpseudocode,booktabs,graphicx}
+\usetikzlibrary{positioning}
+\tikzset{box/.style={draw, thick, text centered, minimum height=0.5cm, minimum width=1cm}}
+\tikzset{line/.style={draw, thick, -latex'}}
+\graphicspath{{./images/}}
+\title{CSC 226 Problem Set 4 Written Part}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\author{%
+	Oliver Tonnesen\\
+	V00885732}
+\date{November 28, 2018}
+\begin{document}
+\maketitle
+\section{Tragic Comedy and Network Flows}
+We represend this problem with the following network graph:\\
+Let $N(S)\equiv$number of people $p$ such that $p$ tolerates exactly $S$, $S\subseteq\{c_1,c_2,\ldots,c_k\}$.
+\newline
+\newline
+\begin{figure}[h]
+	\includegraphics[scale=0.4]{NetGraph.png}
+\end{figure}
+\newline
+\newline
+Each comedian $c_i\in\{c_1,c_2,\ldots,c_j\}$ has a corresponding vertex $t_i$
+in the network graph. Each subset $v_k\subseteq\{c_1,c_2,\ldots,c_j\}$ has a
+corresponding vertex $n_k$ such that $n_k$ flows to $t_i$ if and only if
+$c_i\in V_k$. Every passenger $p_l$ represents the one unit of flow from the
+source vertex to the vertex $n_k$ such that the subset of comedians that $p_l$
+will tolerate is equal to $v_k$.
+\newline
+\newline
+If we restrict the capacity of the flow from any $n_k$ to any $n_k$ to 2, then
+this network graph fully represents the given problem. If we now apply an
+algorithm to this graph to determine its maximum flow, we will have efficiently
+answered the question of whether or not it is possible to evacuate everyone
+onboard.
+\section{Max-Flow with Node Capacities}
+\begin{tikzpicture}
+\end{tikzpicture}
+We can simply construct a standard network graph given such a node-capacited
+network. The Ford-Fulkerson algorithm can then be applied directly. We
+construct the network graph as follows:\\
+For every vertex in the graph -- starting from the sink -- do the following:\\
+Let each edge flowing to it have the nodes capacity. Let every edge flowing
+from it have capacity equal to
+$\min(\text{edge's currenct capacity},\text{node's capacity})$. Perform this
+process recursively until each edge has a capacity.\\\\
+This transformation takes $O(n+m)$ operations. Note that the Ford-Fulkerson
+algorithm takes $O(m|f^*|)$ operations, where $f^*$ is the maximum flow in the
+network. We know $m\ge n-1$, so $n+m\in O(m|f^*|)$, and our transformation does
+not change the asymptotic running time of the solution.
+\section{Min-cut and increasing all edge capacities by 1}
+Suppose $(A^*,B^*)$ is no longer a minimum cut after the transformation. Then
+there must exist some $(A',B')$ such that:
+\begin{align}
+	\sum_{a\in A^*}\sum_{b\in B^*} f(a,b)-\sum_{a\in A^*}\sum_{b\in B^*} f(b,a)\le
+	\sum_{a\in A'}\sum_{b\in B'} f(a,b)-\sum_{a\in A'}\sum_{b\in B'} f(b,a)
+\end{align}
+and
+\begin{align}
+	\sum_{a\in A^*}\sum_{b\in B^*} [f(a,b)+1]-\sum_{a\in A^*}\sum_{b\in B^*} [f(b,a)+1]>
+	\sum_{a\in A'}\sum_{b\in B'} [f(a,b)+1]-\sum_{a\in A'}\sum_{b\in B'} [f(b,a)+1]
+\end{align}
+\begin{align*}
+	&\sum_{a\in A^*}\sum_{b\in B^*} [f(a,b)+1]-\sum_{a\in A^*}\sum_{b\in B^*} [f(b,a)+1]\\
+	&=\Bigg[\sum_{a\in A^*}\sum_{b\in B^*} f(a,b) + \sum_{a\in A^*}\sum_{b\in B^*} 1\Bigg]
+	-\Bigg[\sum_{a\in A^*}\sum_{b\in B^*} f(b,a) + \sum_{a\in A^*}\sum_{b\in B^*} 1\Bigg]\\
+	&=\sum_{a\in A^*}\sum_{b\in B^*} f(a,b) - \sum_{a\in A^*}\sum_{b\in B^*} f(b,a)\\\\
+	&\sum_{a\in A'}\sum_{b\in B'} [f(a,b)+1]-\sum_{a\in A'}\sum_{b\in B'} [f(b,a)+1]\\
+	&=\Bigg[\sum_{a\in A'}\sum_{b\in B'} f(a,b) + \sum_{a\in A'}\sum_{b\in B'} 1\Bigg]
+	-\Bigg[\sum_{a\in A'}\sum_{b\in B'} f(b,a) + \sum_{a\in A'}\sum_{b\in B'} 1\Bigg]\\
+	&=\sum_{a\in A'}\sum_{b\in B'} f(a,b) - \sum_{a\in A'}\sum_{b\in B'} f(b,a)
+\end{align*}
+So clearly (1) and (2) cannot both be correct, and therefore no such cut
+$(A',B')$ exists.\hfill\ensuremath{\square}
+\section{Knuth-Morris-Pratt}
+\begin{minipage}{.5\textwidth}
+\include{graphics/DFA}
+\end{minipage}
+\begin{center}
+	\begin{tabular}{c|cccccccc}
+		&0&1&2&3&4&5&6&7 \\
+		\toprule
+		A&0&2&0&4&0&0&7&7 \\
+		B&0&0&0&0&5&0&0&7 \\
+		C&1&1&3&1&3&6&1&7 \\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\section{Rabin-Karp and Wildcards}
+Since we know at which index the wildcard occurs, we can simply modify the hash
+function to disregard whatever character falls on that index when computing the hash value.
+\end{document}

@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{tikz,amsmath}
+\title{CSC 320 Assignment 4}
+\author{Oliver Tonnesen\\V00885732}
+\date{March 31, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\section{} % Section 1
+Let $M\in \text{NP},M\neq\emptyset,\Sigma^*$ be the language to which we wish
+to reduce $L$. $M\neq\emptyset,\Sigma^*$, so we know that both $M$ and
+$\overline{M}$ are nonempty. That is, there exists at least one string in $M$
+and one string in $\overline{M}$. Let $m_0\in M$ and $m_1\in\overline{M}$. We
+give a reduction $L\le_P M$:
+\begin{align*}
+	f:\Sigma^*&\longrightarrow\Sigma^*\\
+	w&\longmapsto
+	\begin{cases}
+		m_0, &\text{if }w\in L\\
+		m_1, &\text{if }w\not\in L
+	\end{cases}
+\end{align*}
+Since $L\in P$, we know that there exists a polynomial time algorithm to
+decide whether or not a string is in $L$, and so our reduction does indeed
+run in polynomial time.
+\newline
+\newline
+It is clear to see from the definition of $f$ that $w\in L\iff f(w)\in M$, and
+so our reduction holds.
+
+\section{} % Section 2
+We know that 3-SAT is NP-complete, so we give the reduction 3-SAT $\le_P$ 4-SAT
+to prove that 4-SAT is NP-complete:
+\begin{align*}
+	f:\Sigma^*&\longrightarrow\Sigma^*\\
+	w&\longmapsto f(w)\\
+	X=\{x_1,x_2,\ldots,x_n\}&\longmapsto X\\
+	C_i=\{a,b,c\}&\longmapsto C_i'=\{a,b,c,c\}
+\end{align*}
+Our reduction simply duplicates the third variable in every clause, and so runs
+in polynomial time.
+\newline
+\newline
+If $w\in$ 3-SAT, then there exists a satisfying truth assignment for $w$. But
+f(w) is simply $w$ with redundant variables added to each clause, so any truth
+assignment satisfying $w$ with automatically satisfy f(w), and vice versa. Thus
+$w\in$ 3-SAT $\iff f(w)\in$ 4-SAT.
+
+\section{} % Section 3
+We know that PARTITION is NP-complete, so we give the reduction PARTITION $\le_P$
+THREE SHOPPING BAG PROBLEM (TSBP) to prove that TSBP is NP-complete:
+\begin{align*}
+	f:\Sigma^*&\longrightarrow\Sigma^*\\
+	w&\longmapsto f(w)\\
+	f\Big(\Big\langle\{x_1,x_2,\ldots,x_m\}\Big\rangle\Big)&\longmapsto
+		\Big\langle\{x_1,x_2,\ldots,x_m,y\},\frac{s}{2}\Big\rangle
+\end{align*}
+where y has weight $\frac{s}{2}$ and $s$ is the sum of the weights of
+$\{x_1,x_2,\ldots,x_m\}$.
+\newline
+\newline
+If $w\in$ PARTITION, then $x_1,x_2,\ldots,x_m$ can be partitioned into two
+subsets whose weight is exactly $\frac{s}{2}$. Since we added one element of
+weight $\frac{s}{2}$ to create $f(w)$, then the contents of $w$ can be split
+into two of the bags and the new item can be put in the third, and so $f(w)\in$
+TSBP. Conversely, if $f(w)\in$ TSBP, then $x_1,x_2,\ldots,x_m,y$ can be split
+into three bags holding at most $\frac{s}{2}$. The newest item weighs exactly
+$\frac{s}{2}$, and so the only choice is to place it into its own bag alone.
+Since the sum of the remaining elements ($x_1,x_2,\ldots,x_m$) is $s$, then it
+must be the case that they were split evenly among the remaining two bags, and
+so $w\in$ PARTITION.
+
+\section{} % Section 4
+We know that CLIQUE is NP-complete, so we give the reduction CLIQUE $\le_P$
+HALF-CLIQUE to prove that HALF-CLIQUE is NP-complete. Define the reduction $f$
+as follows:
+\newline
+\newline
+\underline{Case $k=\frac{|V|}{2}$}:
+$f\Big(\big\langle G,k\big\rangle\Big)=\big\langle G\big\rangle$\\\\
+It is clear to see that, in this case,
+$\big\langle G,k\big\rangle\in\text{ CLIQUE }\iff\big\langle G\big\rangle\in\text{ HALF-CLIQUE}$.
+\newline
+\newline
+\underline{Case $k>\frac{|V|}{2}$}:
+$f\Big(\big\langle G,k\big\rangle\Big)=\big\langle(V\cup Y,E)\big\rangle$\\\\
+where $Y=\{y_1,y_2,\ldots,y_{2k-|V|}\}$ and $V\cap Y=\emptyset$. We add $2k-|V|$
+``useless'' vertices, so $|V\cup Y|=2k$, and so
+$\big\langle G,k\big\rangle\in\text{ CLIQUE }\iff\big\langle(V\cup Y,E)\big\rangle\in\text{ HALF-CLIQUE}$
+is again quite clear to see.
+\newline
+\newline
+\underline{Case $k<\frac{|V|}{2}$}:
+$f\Big(\big\langle G,k\big\rangle\Big)=\big\langle(V\cup Y,E\cup F)\big\rangle$\\\\
+where $Y=\{y_1,y_2,\ldots,y_{|V|-2k}\}$ and $V\cap Y=\emptyset$, and
+$F=\{\{v,y\}\mid v\in V,y\in Y\}$.  In this case, we add $|V|-2k$ vertices, so
+$|V\cup Y|=2|V|-2k$. If $(V\cup Y,E\cup F)\in$ HALF-CLIQUE, then
+$(V\cup Y,E\cup F)$ contains $K_{|V|-k}$ as a subgraph. Since we added $|V|-2k$
+vertices to this subgraph to get $G'$, then exactly $(|V|-k)-(|V|-2k)=k$ vertices
+came from $G$, and so $G$ has $K_k$ as a subgraph. Similarly, if
+$\big\langle G,k\big\rangle\in$ CLIQUE, then $G$ has $K_k$ as a subgraph, and so
+adding $|V|-2k$ vertices connected to each vertex in $V$ results in $G'$ having
+$K_{k+(|V|-2k)}=K_{|V|-k}$ as a subgraph. In each case, our polynomial time
+reduction $f$ guarantees that $\big\langle G,k\big\rangle\in$ CLIQUE
+$\iff f\Big(\big\langle G,k\big\rangle\Big)\in$ HALF-CLIQUE. CLIQUE is NP-complete,
+and so HALF-CLIQUE is NP-complete.
+\end{document}

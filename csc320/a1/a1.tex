@@ -1,0 +1,108 @@
+\documentclass{article}
+\usepackage{tikz,amsmath}
+\title{CSC 320 Assignment 1}
+\author{Oliver Tonnesen\\V00885732}
+\date{January 29, 2019}
+\begin{document}
+\maketitle
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+\begin{minipage}{\textwidth}
+\include{graphics/1a}
+\end{minipage}
+\subsection{} % Section 1.b
+\begin{minipage}{\textwidth}
+\include{graphics/1b}
+\end{minipage}
+\subsection{} % Section 1.c
+\begin{minipage}{\textwidth}
+\include{graphics/1c}
+\end{minipage}
+\subsection{} % Section 1.d
+\begin{minipage}{\textwidth}
+\include{graphics/1d}
+\end{minipage}
+\newline
+To prove minimality, we provide a distinguishing string $w$ for each pair of
+states in the given DFA:
+\begin{align*}
+	\{\{q_1,q_1\}\}\text{ and }\{\{q_2,q_2\},\{q_2,q_1\}\}: 01\\
+	\{\{q_1,q_1\}\}\text{ and }\{\{q_4,q_2\},\{q_4,q_1\}\}: 01\\
+	\{\{q_1,q_1\}\}\text{ and }\{\{q_3,q_1\}\}: 001\\
+	\{\{q_1,q_1\}\}\text{ and }\{\{q_3,q_2\}\}: 001\\
+	\{\{q_2,q_2\},\{q_2,q_1\}\}\text{ and }\{\{q_4,q_2\},\{q_4,q_1\}\}: 1\\
+	\{\{q_2,q_2\},\{q_2,q_1\}\}\text{ and }\{\{q_3,q_1\}\}: 01\\
+	\{\{q_2,q_2\},\{q_2,q_1\}\}\text{ and }\{\{q_3,q_2\}\}: 01\\
+	\{\{q_4,q_2\},\{q_4,q_1\}\}\text{ and }\{\{q_3,q_1\}\}: 1\\
+	\{\{q_4,q_2\},\{q_4,q_1\}\}\text{ and }\{\{q_3,q_2\}\}: 1\\
+	\{\{q_3,q_2\}\}\text{ and }\{\{q_3,q_1\}\}: 1\\
+\end{align*}
+We clearly see each pair of states is distinguishable, and so our DFA is minimal.
+\section{} % Section 2
+We construct an NFA recognizing One-off$(L)$ given the DFA recognizing
+$L$, $M$.\\
+We first define $M'$ to be the same as $M$, but with non-accepting states in
+place of accepting states. Our NFA has a start state with $\varepsilon$-transitions
+to $M'$'s start state, and to another state with a transition arrow for 0 and 1
+going to the start state of $M$. We now create another accepting state with
+transition arrows for 0 and 1 coming from every state in $M'$ that was an
+accepting state in $M$.
+\newline
+\newline
+We now have an NFA that accepts any string beginning with a 0 or a 1 followed by
+a string in $L$, and also accepts any string beginning with a string in $L$
+followed by a 0 or a 1. Thus, our NFA accepts One-off$(L)$.
+\section{} % Section 3
+\subsection{} % Section 3.a
+We shall construct an NFA recognizing $A^R$ given the DFA recognizing $A$.
+We first change all accepting states in the DFA to non-accepting states in the
+NFA. Then, we reverse all transitions in the DFA, and create a new state with
+$\varepsilon$-transtions to all former accepting states, and let it be the start
+state. The former start state is now the single accepting state. We have now
+constructed an NFA recognizing $A^R$, and so $A^R$ is regular.
+\subsection{} % Section 3.b
+\subsection*{i.} % Section 3.b.i
+We showed above that $A^R$ is regular if $A$ is regular, and we know that the
+regular languages are closed under concatenation. Thus, if $A$ and $B$ are
+regular, then $A^RB^R=\{w^Ry^R|w\in A,y\in B\}$ is regular.
+\subsection*{ii.} % Section 3.b.ii
+We construct a DFA recognizing the language as follows:
+\newline
+\newline
+Let $D_A=(Q_A,\Sigma_A,\delta_A,q_{0_A},F_A)$ and $D_B=(Q_B,\Sigma_B,\delta_B,q_{0_B},F_B)$
+be DFAs recognizing $A$ and $B$, respectively.
+\begin{align*}
+	&Q=\{(q_i,q_j,x)|q_i\in A,q_j\in B,x\in\{0,1,2\ldots,2n\}\}\\
+	&\Sigma=\Sigma_B\cup\Sigma_A\\
+	&\delta((q_i,q_j,x),a)=\left\{
+	\begin{array}{@{}ll@{}}
+		(\delta_A(q_i,a),q_j,x+1)\text{ if $x\equiv0$ (mod 2)}\\
+		(q_i,\delta_B(q_j,a),x+1)\text{ if $x\equiv1$ (mod 2)}
+	\end{array}\right.\\
+	&q_0=(q_{0_A},q_{0_B},0)\\
+	&F=\{(q_i,q_j,2n)|q_i\in F_A,q_j\in F_B\}
+\end{align*}
+Our DFA follows both $D_A$ and $D_B$ in an alternating fashion and accepts only
+when it has found an accepting string of length $n$ from both languages.
+\section{} % Section 4
+\subsection{} % Section 4.a
+Only 2.
+\subsection{} % Section 4.b
+\begin{minipage}{\textwidth}
+\include{graphics/4b1}
+\end{minipage}
+\begin{minipage}{\textwidth}
+\include{graphics/4b2}
+\end{minipage}
+\begin{minipage}{\textwidth}
+\include{graphics/4b3}
+\end{minipage}
+\begin{minipage}{\textwidth}
+\include{graphics/4b4}
+\end{minipage}
+\begin{minipage}{\textwidth}
+\include{graphics/4b5}
+\end{minipage}
+So the regular expression is $\varepsilon0^*1(0(0\cup2)\cup2)^*\varepsilon$.
+\end{document}

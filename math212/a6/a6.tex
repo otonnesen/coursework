@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[normalem]{ulem}
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+We consider two cases:
+\underline{Case $a\neq0$}:\\
+Let $[a,b]\in Q$ with $0\neq a=p+q\sqrt{3}$ and $b=n+m\sqrt{3}$. Then suppose
+there exists $c\in R,k\in\mathbb{Z}^\times$ such that $[a,b]=[c,k]$. Let
+$c=x+y\sqrt{3}$. It must be the case that $ak=bc$.
+\begin{align*}
+	bc&=(n+m\sqrt{3})(x+y\sqrt{3})\\
+	&=(nx+3my)+(ny+mx)\sqrt{3}
+\end{align*}
+\begin{align*}
+	ak&=(p+q\sqrt{3})(k)\\
+	&=(pk)+(qk)\sqrt{3}
+\end{align*}
+Thus $nx+3my=pk$ and $qk=ny+mx$. $x=\frac{pk-3my}{n}$, so
+$qk=ny+m\bigg(\frac{pk-3my}{n}\bigg)$.
+\begin{align*}
+	&qkn=n^2y+mpk-3m^2y\\
+	&\Longrightarrow qkn-mpk=y(n^2-3m^2)\\
+	&\Longrightarrow y=\frac{k(qn-mp)}{n^2-3m^2}\\
+	&\Longrightarrow y=\frac{qk-mx}{n}\\
+\end{align*}
+\begin{align*}
+	&nx+3m\bigg(\frac{qk-mx}{n}\bigg)=pk\\
+	&\Longrightarrow n^2x+3mqk-3m^2x=pkn\\
+	&\Longrightarrow x(n^2-3m^2)=pkn-3mqk\\
+	&\Longrightarrow x=\frac{k(pn-3mq)}{n^2-3m^2}
+\end{align*}
+Then let $c=x+y\sqrt{3}$ such that $x,y\in\mathbb{Z}$ and $c=R$, and let
+$k=n^2-3m^2$. Then there exists $c\in R,k\in\mathbb{Z}$ such that
+$[a,b]=[c,k],b\neq0$.
+\underline{Case $a=0$}:\\
+$a=0$ and $ak=bc$, so $bc=0$, by definition, $b\neq0$, and so $c=0$ and thus
+$[a,b]=[c,k]$ for all $k\in\mathbb{Z}^\times$.
+\subsection{} % Section 1.b
+Let $m\in F$ where $m=x+y\sqrt{3}$,
+$x=\frac{a}{b}$, $y=\frac{p}{q}$, with $a,p\in\mathbb{Z}$ and
+$b,q\in\mathbb{Z}^\times$. Then $m=x+\sqrt{3}y=\frac{a}{b}+\sqrt{3}\frac{p}{q}=
+\frac{aq+\sqrt{3}pb}{bq}$.\\\\
+Finally, we define our isomorphism:
+\begin{align*}
+	f:F&\longrightarrow Q\\
+	\frac{aq+\sqrt{3}pb}{bq}&\longmapsto{[aq+\sqrt{3}bp},bq]
+\end{align*}
+Surjective: take any $[c,u]\in Q$, then $c=n+\sqrt{3}m$, $k=i+\sqrt{3}j$
+then by (a), $[c,k]=[n+\sqrt{3}m,i+\sqrt{3}j]=[v+w\sqrt{3},k]$.\\
+****Thus WTS $[v+w\sqrt{3},k]=[aq+\sqrt{3}bp,bq]$ such that $v=aq$,
+$w=bp$, $k=bq$****.
+\end{document}
