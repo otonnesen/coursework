@@ -1,0 +1,16 @@
+\begin{tikzpicture}[black/.style={circle,draw,fill=black,inner sep=0pt, minimum width=4pt}]
+\node[black] at (1,0)	(0) {};
+\node[black] at (0,0.5)	(1) {};
+\node[black] at (2,0.5)	(2) {};
+\node[black] at (1,1)	(3) {};
+\node[black] at (0,1.5)	(4) {};
+\node[black] at (2,1.5)	(5) {};
+
+\draw (0) -- (1);
+\draw (0) -- (2);
+\draw (0) -- (3);
+\draw (3) -- (1);
+\draw (3) -- (2);
+\draw (4) -- (1);
+\draw (5) -- (2);
+\end{tikzpicture}

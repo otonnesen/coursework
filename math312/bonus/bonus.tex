@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 312}
+\newcommand\duedate{November 14, 2019}
+
+\lhead{V00885732}
+\chead{\textbf{\Large Bonus Assignment}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb,mathtools}
+
+
+\DeclareMathOperator{\im}{im}
+
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+$G$ is a finite abelian group, so it is isomorphic to the direct product of
+finite cyclic groups of prime power order, and can thus be written as
+$\bigoplus_i\mathbb{Z}_{p_i^{k_i}}$, where each $p_i$ is prime and each $k_i$
+is an integer.
+
+We know that every group of the form $\mathbb{Z}_n$ is a ring when equipped
+with multiplication modulo $n$, so the direct product of finite cyclic groups
+above is also a direct product of rings, giving us a ring whose additive group
+is isomorphic to $G$, as desired.
+
+
+\section{} % Section 2
+Let $\frac{a}{b}+\mathbb{Z}\in\mathbb{Q}/\mathbb{Z}$, and suppose WLOG that
+$\gcd(a,b)=1$. Then $\abs{\frac{a}{b}+\mathbb{Z}}=b$, since
+$b\cdot\frac{a}{b}\in\mathbb{Z}$, and $a$ and $b$ are coprime. Thus any
+element in $\mathbb{Q}/\mathbb{Z}$ has finite order $b$, but since
+$b\in\mathbb{Z}$ and $\mathbb{Z}$ has no maximum element, this order can be
+arbitrarily large.
+
+Suppose for a contradiction that $R$ is a commutative unital ring whose
+additive group is isomorphic to $\mathbb{Q}/\mathbb{Z}$. Let 1 be $R$'s
+multiplicative identity. $(R,+)\cong\mathbb{Q}/\mathbb{Z}$, so 1 has finite
+order, say $n$. Then for any $r\in R$, we have
+\begin{align*}
+	n\cdot r&=n\cdot(1\cdot r)\\
+	&=(n\cdot1)\cdot r\\
+	&=0\cdot r\\
+	&=0
+\end{align*}
+so $\abs{r}\le n$, a contradiction, since the order of an element in
+$\mathbb{Q}/\mathbb{Z}$ (and hence $(R,+)$) can be arbitrarily large, thus
+greater than $n$, and so no such ring $R$ exists, as desired.
+
+
+\section{} % Section 3
+By the first isomorphism theorem, we know that $F/\ker\varphi\cong\im\varphi$.
+We also know that the kernel of a homomorphism is an ideal. $F$ is a field, so
+its only ideals are $\{0\}$ and itself. Suppose $\ker\varphi=F$. Then
+$\im\varphi\cong F/F\cong\{0\}$. This is not possible since $\varphi$ is
+unital, so it must be the case that $\ker\varphi=\{0\}$, and thus $\varphi$ is
+injective, as desired.
+
+
+\end{document}

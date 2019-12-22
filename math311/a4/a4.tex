@@ -1,0 +1,184 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 311}
+\newcommand\hwnumber{4}
+\newcommand\duedate{December 8, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb}
+
+
+\DeclareMathOperator{\nullity}{Nullity}
+\DeclareMathOperator{\rank}{Rank}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\im}{Im}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+We know $V_i\cap\sum_{i\neq j}V_j=\{0\}$, so
+$\dim(V_1+V_2+V_3)=\dim V_1+\dim V_2+\dim V_3\le\dim\mathbb{R}^3=3$, and
+$\dim V_\lambda\ge1$ for any $\lambda\in\spec T$, so
+$3\le\dim V_1+\dim V_2+\dim V_3$, thus $\dim(V_1+V_2+V_3)=\dim\mathbb{R}^3$,
+so $T$ is diagonalizeable.
+
+
+\subsection{} % Section 1.b
+Let $v$ be an eigenvector of $T$ with eigenvalue $\lambda$. $TSv=STv=S\lambda
+v=\lambda Sv$, so $Sv$ is an eigenvector of $T$. $T$ is diagonalizable, so
+$\dim V_1+\dim V_2+\dim V_3=\dim V=3$. That is, each eigenspace has dimension
+1, so $Sv$ and $v$ must be in the same eigenspace. Thus $Sv=\lambda v$. This
+holds for any vectors $v_1,v_2,v_3$ in an eigenbasis for $T$, so $S$ is
+diagonalizable using the same eigenvectors as $T$, as desired.
+
+
+\subsection{} % Section 1.c (1)
+Let $\beta=\{v_1,v_2,v_3\}$ be an eigenbasis for $T$.
+$\left[T\right]_\beta^\beta=\left[1\right]_\varepsilon^\beta\left[T\right]_\varepsilon^\varepsilon\left[1\right]_\beta^\varepsilon$
+is clearly diagonal. We saw in part b) that $\beta$ is also an eigenbasis for
+$S$, so $\left[T\right]_\beta^\beta=\left[1\right]_\varepsilon^\beta\left[T\right]_\varepsilon^\varepsilon\left[1\right]_\beta^\varepsilon$
+is also diagonal. Thus $Q=\left[1\right]_\varepsilon^\beta$ has the desired
+property.
+
+
+\subsection*{1.c} % Section 1.c (2)
+Let $A_D=QAQ^{-1}$, $B_D=QBQ^{-1}$. Then $A=Q^{-1}A_DQ$, $B=Q^{-1}B_DQ$.
+$A+B=Q^{-1}A_DQ+Q^{-1}B_DQ=Q^{-1}(A_D+B_D)Q$. Since $A_D+B_D$ is diagonal with
+entries from $\spec T+\spec S$, and since $A+B$ corresponds to $T+S$, the
+eigenvalues in $\spec(T+S)$ must also come from $\spec T+\spec S$, so
+$\spec(T+S)\subset\spec T+\spec S$, as desired.
+
+
+\subsection{} % Section 1.d
+Using the same definition of $A_D$ and $B_D$ as above,
+$AB=Q^{-1}A_DQQ^{-1}B_DQ=Q^{-1}(A_DB_D)Q$. Since $A_DB_D$ is diagonal with
+entries from $\spec T\cdot\spec S$, and since $AB$ corresponds to $TS$, the
+eigenvalues in $\spec(TS)$ must also come from $\spec T\cdot\spec S$, so
+$\spec(TS)\subset\spec T\cdot\spec S$, as desired.
+
+
+\section{} % Section 2
+\underline{$\lambda-ST$ is invertible}:
+$\lambda-TS$ is invertible, so $\ker(\lambda-TS)=\{0\}$. Thus there is no
+$v\in V$ such that $TSv=\lambda v$, so $\lambda$ is not an eigenvalue of $TS$.
+Let $0\neq\lambda'\in\spec ST$. Then there is some $0\neq v\in V$ such that
+$STv=\lambda'v$. Then $TS(Tv)=T(STv)=T(\lambda'v)=\lambda'Tv$. Since
+$S(Tv)=\lambda'v\neq0$, $Tv\neq0$, thus $\lambda'\in\spec TS$. But
+$\lambda\not\in\spec TS$, so $\lambda'\neq\lambda$. Thus $\lambda\not\in\spec ST$,
+so $\ker(\lambda-ST)=\{0\}$, and so $\lambda-ST$ is invertible, as desired.
+\newline
+\newline
+\underline{$(\lambda-TS)^{-1}=\lambda^{-1}+\lambda^{-1}T(\lambda-ST)^{-1}S$}:
+\begin{align*}
+	&(\lambda-TS)(\lambda^{-1}+\lambda^{-1}T(\lambda-ST)^{-1}S)\\
+	=\;&1+T(\lambda-ST)^{-1}S-\lambda^{-1}TS-\lambda^{-1}TST(\lambda-ST)^{-1}S\\
+	=\;&1+T((\lambda-ST)^{-1}-\lambda^{-1}-\lambda^{-1}ST(\lambda-ST)^{-1})S\\
+	=\;&1+T((1-\lambda^{-1}ST)(\lambda-ST)^{-1}-\lambda^{-1})S\\
+	=\;&1+T(\lambda^{-1}(\lambda-ST)(\lambda-ST)^{-1}-\lambda^{-1})S\\
+	=\;&1+T(\lambda^{-1}1-\lambda^{-1})S\\
+	=\;&1+T(0)S\\
+	=\;&1\\
+\end{align*}
+So the equality holds.
+\newline
+\newline
+\underline{$ST$ and $TS$ have the same nonzero eigenvalues}: 
+Let $0\neq\lambda\in\spec TS$. Then there is some $v\in V$ such that
+$TSv=\lambda v$. $ST(Sv)=S(TSv)=\lambda Sv$, so $ST(Sv)=\lambda Sv$, thus
+$\lambda\in\spec ST$. So $\spec TS\setminus\{0\}\subseteq\spec ST\setminus\{0\}$.
+\newline
+\newline
+Now let $0\neq\lambda\in\spec ST$. Then there is some $v\in V$ such that
+$STv=\lambda v$. $TS(Tv)=T(STv)=\lambda Tv$, so $TS(Tv)=\lambda Tv$, thus
+$\lambda\in\spec TS$. So $\spec ST\setminus\{0\}\subseteq\spec TS\setminus\{0\}$.
+\newline
+\newline
+Thus $\spec ST\setminus\{0\}=\spec TS\setminus\{0\}$, so $TS$ and $ST$ have
+the same nonzero eigenvalues, as desired.
+\newline
+\newline
+\underline{Example of $S$,$T$ such that 0 is an eigenvalue of $ST$ but 0 is not an eigenvalue of $TS$}:
+Let $V=\{(a_n)_{n=1}^\infty\mid a_n\in\mathbb{N}\}$, and let $T$ and $S$ be
+the right and left shift operators,  respectively. Then $TS=I$, so $0-TS=-I=I$
+is invertible, thus $0\not\in\spec TS$, but $ST$ is not invertible, since
+$(1,0,\ldots)\not\in\ran ST$, and so $0-ST$ is not invertible, thus
+$0\not\in\spec ST$, as desired.
+
+
+\section{} % Section 3
+\underline{$T^*$ is linear}:
+Let $f,g\in W^*$, $\lambda\in F$.
+\begin{align*}
+	T^*(f+\lambda g)&=(f+\lambda g)\circ T\\
+	&=f\circ T+\lambda g\circ T\\
+	&=T^*(f)+\lambda T^*(g)
+\end{align*}
+So $T^*$ is linear.
+\newline
+\newline
+\underline{Transpose map is linear}:
+Let $S,T\in\mathcal{L}(V,W)$, $\lambda\in F$. Let $f\in W^*$.
+\begin{align*}
+	(S+\lambda T)^*(f)&=f\circ(S+\lambda T)\\
+	&=f\circ S+f\circ\lambda T\\
+	&=S^*(f)+\lambda T^*(f)
+\end{align*}
+So the transpose map is linear.
+
+
+\subsection{} % Section 3.a
+\underline{$i$ is linear}:
+Let $w_1,w_2\in W$, $\lambda\in F$.
+\begin{align*}
+	i(w_1+\lambda w_2)&=w_1+\lambda w_2\\
+	&=i(w_1)+\lambda i(w_2)
+\end{align*}
+So $i$ is linear.
+\newline
+\newline
+\underline{$r$ is linear}:
+Let $f,g\in V^*$, $\lambda\in F$. If $f\in V^*$, let $f_W$ be $f$ restricted
+to $W$.
+\begin{align*}
+	r(f+\lambda g)&=f_W+\lambda g_W\\
+	&=r(f)+\lambda r(g)
+\end{align*}
+So $r$ is linear.
+
+
+\subsection{} % Section 3.b
+\begin{align*}
+	\ker r&=\{f\in V^*\mid r(f)=0\}\\
+	&=\{f\in V^*\mid f_W=0\}\\
+	&=\{f\in V^*\mid f(w)=0\ \text{for any $w\in W$}\}\\
+	&=W^\perp
+\end{align*}
+
+
+\subsection{} % Section 3.c
+Let $f\in V^*$. $r(f)=f_W=f\circ i$, since $\im i=W$, so $r=i^*$.
+
+
+\section{} % Section 4
+\underline{$f$ is surjective $\implies$ $f^*$ is injective}:
+Let $g\in\ker f^*$. Then $f^*(g)=0$, so $g\circ f(v)=0$ for any $v\in V$. $f$
+is surjective, so $g(w)=0$ for any $w\in W$, so $g=0$. Thus $\ker f^*=\{0\}$,
+so $f^*$ is injective.
+\newline
+\newline
+\underline{$f*$ is surjective $\implies$ $f$ is injective}:
+$f$ is injective, so it has an inverse map $f^{-1}\colon\im f\longrightarrow
+V$. Fix some $v\in V^*$. If we define $g\in W^*$ by $g(x)=v(f^{-1}(x))$, then
+$f^*(g)=g\circ f$. $g\circ f(x)=v(f^{-1}(f(x)))=v(x)$ for any $x\in V$, so
+$f^*(g)=v$, thus $f^*$ is surjective.
+
+
+\end{document}

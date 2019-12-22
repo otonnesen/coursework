@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+	<title>Data</title>
+</head>
+<body>
+	{% for d in data %}
+	<h2><code>{{d[0]}}</code></h2>
+	<p>
+		{% for i in d[1] %}
+		<code>{{i}}</code>
+		{% endfor %}
+	</p>
+	{% endfor %}
+</body>

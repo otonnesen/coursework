@@ -1,0 +1,19 @@
+v_approx=42.6426
+
+v_approx =
+
+   42.6426
+
+v_true=sqrt(9.81*43.5/0.234)*tanh(sqrt(9.81*0.234/43.5)*15)
+
+v_true =
+
+   42.6175
+
+err_relative=abs(1-(v_approx/v_true))
+
+err_relative =
+
+   5.8784e-04
+
+diary off

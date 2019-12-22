@@ -1,0 +1,18 @@
+\begin{tikzpicture}[black/.style={circle,draw,fill=black,inner sep=0pt, minimum width=4pt}]
+\node[circle,draw] at (2,3) (z) {z};
+\node[circle,draw] at (1,1.5) (x) {x};
+\node[circle,draw] at (3,1.5) (y) {y};
+\node[circle,draw] at (0,0) (u) {u};
+\node[circle,draw] at (2,0) (v) {v};
+\node[circle,draw] at (4,0) (w) {w};
+
+\draw (z) -- (x);
+\draw (z) -- (y);
+\draw (x) -- (y);
+\draw (x) -- (u);
+\draw (x) -- (v);
+\draw (u) -- (v);
+\draw (y) -- (v);
+\draw (y) -- (w);
+\draw (v) -- (w);
+\end{tikzpicture}

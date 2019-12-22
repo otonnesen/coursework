@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 423}
+\newcommand\hwnumber{2}
+\newcommand\duedate{October 3, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath}
+\usepackage{tikz}
+
+
+\begin{document}
+
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\section{} % Section 1
+($\Longrightarrow$): We know that the number of edges in a tree is $n-1$. By
+the handshaking lemma, $\sum_{v\in V(G)}d(v)=2e(G)$. Since $e(G)=n-1$, and
+$\sum_{v\in V(G)}d(v)=\sum_{i=1}^nd_i$, we have $\sum_{i=1}^nd_i=2n-2$.
+\newline
+\newline
+($\Longleftarrow$): [Induction on $n$]: When $n=2$, we have
+$\sum_{i=1}^2d_i=2(2)-2=2$, so the only graphic sequence is $(1,1)$,
+corresponding to the tree on 2 vertices. Assume this holds for $n$. Let
+$d_1,\ldots,d_{n+1}$ be integers such that $\sum_{i=1}^{n+1}d_i=2(n+1)-2$.
+Suppose WLOG that $d_{n+1}\le\ldots\le d_1$. Then $d_{n+1}=1$, otherwise
+$d_i\ge2$ for all $1\le i\le k$, and $\sum_{i=1}^{n+1}d_i\ge2(n+1)>2(n+1)-2$.
+So if we remove the vertex corresponding to $d_{n+1}$ from our list (note that
+we must also subtract 1 from some other degree, say $d_j$, so that our sequence
+remains graphic) then $\sum_{i=1}^nd_i=2(n+1)-4=2n-2$. By the induction
+hypothesis, there exists a tree with degrees $d_1,\ldots,d_j-1,\ldots,d_n$.
+Take this tree, and add a new leaf to it, adjacent to a vertex with degree
+$d_j-1$. Then we have a tree with degrees $d_1,\ldots,d_{n+1}$. Thus by
+induction, the claim holds.
+
+
+\section{} % Section 2
+We claim that for each $m<n$, if $G$ is a graph with $n$ vertices and more than
+$n(m-1)-\binom{m}{2}$ edges, then $G$ contains each tree with $m$ edges.
+\newline
+\newline
+[Induction on $n$]: When $n=1$, the only choice of $m$ is 0, so the claim is
+clearly true. Assume the above claim holds for $n$. Let $G$ be a graph with $n$
+vertices and $n(m-1)-\binom{m}{2}$ edges. We want to add a vertex $v$ to $G$
+such that $e(G+v)>(n+1)m-\binom{m+1}{2}$.
+
+\begin{align*}
+	e(G+v)&>(n+1)m-\binom{m+1}{2}\\
+	&=(n+1)(m-1+1)-\frac{(m+1)m}{2}\\
+	&=n(m-1+1)+(m-1+1)-\frac{(m-1+2)m}{2}\\
+	&=n(m-1)+n+m-\frac{m(m-1)+2m}{2}\\
+	&=n(m-1)-\frac{m(m-1)}{2}+n+m-\frac{2m}{2}\\
+	&=n(m-1)-\binom{m}{2}+n
+\end{align*}
+We see that to obtain the desired inequality, the vertex we add must have
+degree $n$. By the induction hypothesis, $G$ contains every tree with $m$ edges.
+Since $v$ is adjacent to every vertex in $G$, $G+v$ must therefore contain every
+tree with $m+1$ edges. So by induction, the claim holds.
+
+\section{} % Section 3
+Suppose for a contradiction that $X$ has no leaf. $d(x)\ge2$ for any $x\in X$.
+Each edge has exactly one endpoint in $X$, so $\sum d(x)=e(T)$. But
+$\sum d(x)\ge2|X|\ge2\bigl(\frac{n}{2}\bigr)\ge n$, so $e(T)\ge n$, a
+contradiction since $T$ is a tree. Thus $X$ must contain a leaf.
+
+
+\section{} % Section 4
+Consider a vertex cover for $G$. Any vertex in this cover can cover at most
+$\Delta(G)$ edges, so it must have size at most $\frac{e(G)}{\Delta(G)}$.
+Thus, by the K\H{o}nig-Egerv\'{a}ry Theorem, since a minimum vertex cover for
+$G$ has size at most $\frac{e(G)}{\Delta(G)}$, a maximum matching for $G$ must
+have size at least $\frac{e(G)}{\Delta(G)}$.
+\newline
+\newline
+$\Delta(K_{n,n})=n-1$, so a vertex cover $S$ of a subgraph of $K_{n,n}$ with at
+least $(k-1)n$ edges has $|S|\ge\frac{(k-1)n}{n-1}>\frac{(k-1)n}{n}=k-1$, thus
+$|S|>k-1$, or $|S|\ge k$.  By the K\H{o}nig-Egerv\'{a}ry Theorem, there exists
+a maximum matching $M$ with $|M|=k$.
+
+
+\section{} % Section 5
+($\Longrightarrow$): Let $S\subseteq X$, and $S'\subseteq S$ be the smallest
+subset such that $N(S')=N(S)$. Suppose for a contradiction that $|S'|>k$. Then
+for any $s'\in S'$, there exists $y\in N(S')$ that is uniquely covered by $s'$.
+If we pair off each such set of $s'$ and $y$, we end up with a copy of
+$|S'|K_2$, where $|S'|>k$, a contradiction, so $|S'|\le k$.
+\newline
+\newline
+($\Longleftarrow$): Let $S\subseteq X$ such that $N(S)=Y$ and $|S|$ is as small
+as possible, and let $S=\{s_1,\ldots,s_n\}$. Since $S$ is minimal, we have that
+$N(s_i)\not\subseteq\bigcup_{j\neq i}N(s_j)$, for all $1\le i\le n$. So the
+only $S'\subseteq S$ with $N(S')=N(S)$ is $S'=S$, and $k=|S'|$. For any
+$s_i\in S$, there is an element in $N(s_i)$ which is not in any $N(s_j)$,
+$j\neq i$; call this element $y_i$. Then $\{s_iy_i\mid1\le i\le n\}$ is in fact
+a (maximum) set of copies of $K_2$, since $y_i$ is not adjacent to $s_j$ for
+any $j\neq i$.  Since the set of copies of $K_2$ we constructed is maximum, and
+since it contains exactly $k$ copies, $G$ contains $kK_2$, but more
+importantly, it does \textit{not} contain $(k+1)K_2$, as desired.
+
+
+
+\section{Bonus} % Section 6
+Let $S$ be a maximal independent set in $D$. In the underlying graph, each
+vertex not in $S$ is adjacent to one or more vertices in $S$.
+\newline
+\newline
+[Induction on $n(D)$]: When $n(D)=1$, any vertex is already in the only
+indpendent set, so we're done. Suppose there exists some $k$ such that our
+claim holds for all $n(D)\le k$. Let $v\in V\setminus S$, either there exists
+an edge from $v$ into $S$, or all edges between $S$ and $v$ point towards $v$.
+Let $X$ be the set of all latter such vertices. By the induction hypothesis,
+there exists an independent set $X'\subseteq X$ in $D[X]$ such that any vertex
+in $X$ can reach $X'$ in at most two steps. Let $Y$ be the set of vertices in
+$S$ that have edges leading to a vertex in $X'$, and let
+$S'=(S\setminus Y)\cup X'$. We claim $S'$ is an independent set reachable by
+any vertex in $V$ in at most two steps. It is clear from its definition that
+$S'$ is independent, so we must show that any vertex in $V$ reaches it in at
+most two steps. We have five cases to check:
+\newline
+\newline
+\underline{Case 1: $v\in S'$}\\
+We're done.\\
+\underline{Case 2: $v\in X\setminus X'$}\\
+$v$ reaches $x'\in X'\subseteq S'$ in at most two steps by definition, so we're
+done.\\
+\underline{Case 3: $v\in Y$}\\
+$v$ is adjacent to a vertex in $X'\subseteq S'$, so it reaches $S'$ in one
+step, and we're done.\\
+\underline{Case 4: $v$ is adjacent to a vertex in $S\setminus Y$}\\
+$v$ reaches $S\setminus Y\subseteq S'$ in one step, so we're done.\\
+\underline{Case 5: $v$ is adjacent to $y\in Y$}\\
+$y$ is adjacent to a vertex in $X'\subseteq S'$, so $v$ reaches $S'$ in two
+steps, and we're done.
+\newline
+\newline
+So by induction, the claim holds.
+
+
+\end{document}

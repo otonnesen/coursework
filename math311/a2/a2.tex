@@ -1,0 +1,143 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 311}
+\newcommand\hwnumber{2}
+\newcommand\duedate{October 24, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb}
+
+
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\rank}{rank}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+Suppose that $\{f,f',\ldots,f^{(n)}\}$ is linearly dependent, and let
+$f(x)=\sum_{i=0}^na_nx^n$. Then there exist $b_0,\ldots,b_n$, not all 0,  such
+that $b_0f(x)+\cdots+b_nf^{(n)}(x)=0$.  Equivalently,
+$b_0f(x)+\cdots+b_nf^{(n)}(x)=\sum_{i=0}^n0x^i$. $f$ has degree exactly $n$,
+and $f',\ldots,f^{(n)}$ have degree strictly less than $n$, so in
+$b_0f(x)+\cdots+b_nf^{(n)}(x)$, the degree $n$ term is $b_0a_nx^n$.
+$a_n\neq0$, since $f(x)$ has degree $n$, so since the degree $n$ term in
+$b_0f(x)+\cdots+b_nf^{(n)}(x)$ is also $0x^i$, we can conclude that
+$b_0a_n=0$.  $\mathbb{R}$ is a field, so since $a_n\neq0$, $b_0=0$. Then
+$b_0f(x)+\cdots+b_nf^{(n)}(x)=b_1f'(x)+\cdots+b_nf^{(n)}(x)$, and as before,
+the degree $n-1$ term in this expression is
+$(b_0a_{n-1}+b_1na_n)x^{n-1}=b_1na_nx^{n-1}$. Again, $b_1na_nx^{n-1}=0$. Since
+$a_n\neq0$ and $n\neq0$, we can conclude that $b_1=0$. This argument can be
+continued recursively to prove that $b_2=\cdots=b_n=0$, a contradiction since
+we assumed that $b_0,\ldots,b_n$ were not all 0. So $\{f,\ldots,f^{(n)}\}$ is
+linearly independent in $P_n(\mathbb{R})$. We know that $P_n(\mathbb{R})$ has
+dimension $n+1$, so since $|\{f,\ldots,f^{(n)}\}|=n+1$, it must be a basis for
+$P_n(\mathbb{R})$.
+\newline
+\newline
+Let $\beta=\{f,\ldots,f^{(n)}\}=\{v_1,\ldots,v_n\}$. $\beta$ is an ordered
+basis for $P_n(\mathbb{R})$. We calculate $[T]_\beta$:
+\newline
+\newline
+$A=[T]_\beta$ if $A_{ij}=a_{ij}$ such that
+$Tv_j=\sum_{i=1}^na_{ij}v_i$, $1\le j\le n$.
+$Tv_i=Tf^{(j)}=f^{(j-1)}=v_{j+1}$, so $a_{ij}=\begin{cases}
+	1 & \text{if $i=j+1$}\\
+	0 & \text{otherwise}
+\end{cases}$, meaning that
+\[A=\begin{pmatrix}
+	0 & 0 & 0 & \cdots & 0 & 0\\
+	1 & 0 & 0 & \cdots & 0 & 0\\
+	0 & 1 & 0 & \cdots & 0 & 0\\
+	0 & 0 & 1 & \cdots & 0 & 0\\
+	\vdots & \vdots & \vdots & \ddots & \vdots & \vdots\\
+	0 & 0 & 0 & \cdots &  1 & 0\\
+\end{pmatrix}\]
+Or an identity matrix with an extra 0 row vector on top and 0 column vector on
+the right.
+
+
+\section{} % Section 2
+Let $v_1+v_2,u_1+u_2\in V_1+V_2$, $\lambda\in F$.
+\newline
+\newline
+\begin{align*}
+	v_1+v_2+\lambda(u_1+u_2)&=v_1+v_2+\lambda u_1+\lambda u_2\\
+	&=v_1+\lambda u_1+v_2+\lambda u_2\\
+	&=(v_1+\lambda u_1)+(v_2+\lambda u_2)
+\end{align*}
+$v_1+\lambda u_1\in V_1$ and $v_2+\lambda u_2\in V_2$, since $V_1$ and $V_2$
+are both vector spaces over $F$, so
+$(v_1+\lambda u_1)+(v_2+\lambda u_2)\in V_1+V_2$, and thus $V_1+V_2$ is a
+subspace of $V$.
+\newline
+\newline
+Let $\beta,\gamma$ be bases for $V_1$, and $V_2$, respectively. Let
+$v_1+v_2\in V_1+V_2$. Then $v_1$ and $v_2$ can be written as linear
+combinations of vectors in $\beta$ and $\gamma$, respectively, so
+$V_1+V_2\subseteq\Span\beta\cup\gamma$, thus any basis for $V_1+V_2$ has at
+most $|\beta\cup\gamma|$ vectors, thus
+$\dim(V_1+V_2)\le|\beta\cup\gamma|\le|\beta|+|\gamma|=\dim(V_1)+\dim(V_2)$, or
+$\dim(V_1+V_2)\le\dim(V_1)+\dim(V_2)$, as desired.
+\newline
+\newline
+We show the necessity and sufficiency of $V_1\cap V_2=\{0\}$ for equality to
+hold:
+\newline
+\newline
+$(\Longrightarrow)$: Assume $\dim(V_1+V_2)=\dim(V_1)+\dim(V_2)$. Let $\beta_0$
+be a basis for $V_1\cap V_2$. By the Replacement Theorem, $\beta_0$ can be
+extended to $\beta_1,\beta_2$, bases for $V_1$ and $V_2$, respectively.
+Then $\dim(V_1+V_2)=|\beta_1\cup\beta_2|$, so
+$|\beta_1\cup\beta_2|=\dim(V_1+V_2)=\dim(V_1)+\dim(V_2)=|\beta_1|+|\beta_2|$.
+Thus $\beta_1\cap\beta_2=\emptyset$. But $\beta_1\cap\beta_2=\beta_0$, so
+$\beta_0=\emptyset$, thus $\Span\beta_0=V_1\cap V_2=\{0\}$.
+\newline
+\newline
+$(\Longleftarrow)$: Assume $V_1\cap V_2=\{0\}$. Let $\beta_1$ and $\beta_2$ be
+bases for $V_1$ and $V_2$, respectively. $\beta_1\cap\beta_2=\emptyset$, so
+$\dim(V_1)+\dim(V_2)=|\beta_1|+|\beta_2|=|\beta_1\cup\beta_2|=\dim(V_1+V_2)$.
+\newline
+\newline
+Thus $\dim(V_1+V_2)=\dim(V_1)+\dim(V_2)\Longleftrightarrow V_1\cap V_2=\{0\}$,
+as desired.
+
+
+\section{} % Section 3
+If $S=0$, then $\{S,T\}$ is trivially linearly dependent, so assume $S\neq0$.
+Assume for a contradiction that $S=\lambda T$ for some $\lambda$, $S\neq0$, so
+$\lambda\neq0$. Let $0\neq w\in\ran(S)$, and $v\in V$ such that $Sv=w$. Then
+$\lambda Tv=w$. By linearity, $\lambda^{-1}\lambda Tv=\lambda^{-1}w$,
+but $\lambda^{-1}\lambda Tv=Tv$, so $\lambda^{-1}w\in\ran(T)$. Similarly,
+since $Sv=w$, $S(\lambda^{-1}w)=\lambda^{-1}(Sv)=\lambda^{-1}w\in\ran(S)$. So
+$\lambda^{-1}w\in\ran(S)\cap\ran(T)$, and since $\lambda\neq0$,
+$\lambda^{-1}\neq0$, a contradiction, so there exists no $\lambda$ such that
+$S=\lambda T$, and thus $\{S,T\}$ is linearly independent in
+$\mathcal{L}(V,W)$.
+
+
+\section{} % Section 4
+$\ker(T)=\{0\}$, so $T$ is injective.
+\newline
+\newline
+Let $\beta=\{v_1,\ldots,v_n\}$ be an ordered basis for $V$. $T$ is injective,
+so $\gamma=\{Tv_1,\ldots,Tv_n\}$ is linearly independent in $V$. Thus
+$\gamma$ is an ordered basis for $V$. We find $[T]_\beta^\gamma$:
+\newline
+\newline
+$A=[T]_\beta^\gamma$ if $A_{ij}=a_{ij}$ such that
+$Tv_j=\sum_{i=1}^na_{ij}Tv_i$, $1\le i\le n$. Clearly $a_{ij}=\begin{cases}
+	1 & \text{if $i=j$}\\
+	0 & \text{otherwise}
+\end{cases}$, so $A=I$, as desired.
+
+
+\end{document}

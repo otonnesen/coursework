@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+\usepackage{listings}
+\lstset{language=Matlab,
+breaklines=true,
+keywordstyle=\color{blue},
+identifierstyle=\color{black},
+stringstyle=\color{mylilas},
+commentstyle=\color{mygreen},
+showstringspaces=false,
+numbers=left,
+numberstyle={\small \color{black}},
+numbersep=9pt,
+emph=[1]{for,end,break},
+emphstyle=[1]\color{red}
+}
+
+\usepackage{color}
+\definecolor{mygreen}{RGB}{28,172,0}
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 349A}
+\newcommand\hwnumber{1}
+\newcommand\duedate{September 17, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+\lstinputlisting{mfiles/Euler.m}
+
+
+\subsection{} % Section 1.b
+\lstinputlisting[numbers=none]{mfiles/Q1b}
+
+
+\subsection{} % Section 1.c
+\lstinputlisting[numbers=none]{mfiles/Q1c}
+
+
+\subsection{} % Section 1.d
+\lstinputlisting[numbers=none]{mfiles/Q1d}
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+\lstinputlisting{mfiles/Euler2.m}
+
+
+\subsection{} % Section 2.b
+\lstinputlisting[numbers=none]{mfiles/Q2b}
+
+
+\subsection{} % Section 2.c
+\lstinputlisting[numbers=none]{mfiles/Q2c}
+
+
+\section{} % Section 3
+Below is a function to approximate $e^{-x}$ directly from its MacLaurin series
+expansion, and a sample output using it to approximate $e^{-3}$..
+\lstinputlisting{mfiles/exp_inv_1.m}
+\lstinputlisting[numbers=none]{mfiles/Q31}
+Below is a function to approximate $e^{-x}$ by taking the inverse of the MacLaurin
+series expansion of $e^x$, and a sample output using it to approximate $e^{-3}$..
+\lstinputlisting{mfiles/exp_inv_2.m}
+\lstinputlisting[numbers=none]{mfiles/Q32}
+
+We can see when using the first method that the relative error did not appear
+to begin converging to any value as we increased $n$, while the second method's relative error
+appears to be getting smaller as $n$ increases. Note that the first method
+always gives a polynomial, so its limits as $x\to\pm\infty$ are $\infty$ or
+$-\infty$ (except when $n=0$, of course), but the second method gives the
+inverse of a polynomial, so its limits as $x\to\pm\infty$ are 0. Overall,
+the series of functions given by the second method look much more similar to
+one another than those given by the first, perhaps leading to a more stable
+approximation.
+
+\end{document}

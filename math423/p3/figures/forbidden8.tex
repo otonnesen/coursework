@@ -1,0 +1,14 @@
+\begin{tikzpicture}[black/.style={circle,draw,fill=black,inner sep=0pt, minimum width=4pt}]
+\foreach \x in {0,...,2}
+{
+	\node[black] at (\x, 1) (a\x) {};
+	\node[black] at (\x+0.5, 0) (b\x) {};
+	\draw (a\x) -- (b\x);
+}
+\foreach \x/\y in {0/1,1/2}
+{
+	\draw (a\x) -- (a\y);
+	\draw (b\x) -- (b\y);
+	\draw (b\x) -- (a\y);
+}
+\end{tikzpicture}

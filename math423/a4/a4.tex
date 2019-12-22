@@ -1,0 +1,172 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 423}
+\newcommand\hwnumber{4}
+\newcommand\duedate{November 7, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,mathtools}
+
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\roman{subsection}}
+
+
+\section{} % Section 1
+We know that $\delta(G)<n(G)$, and if $\delta(G)=n(G)-1$, then $G=K_{n(G)}$,
+so $\kappa(G)$ is defined to be $n(G)-1$. So we show that if
+$\delta(G)=n(G)-2$, then $\kappa(G)=n(G)-2$:
+
+Assume not for a contradiction that $\kappa(G)<n(G)-2$. Then there exists
+$S\subseteq V(G)$ with $\abs{S}<n(G)-2$ such that $G-S$ is disconnected. For
+any $v\in V(G)$, there is at most one vertex $u\in V(G)$ not adjacent to $v$
+(not that $u$ is adjacent to every vertex other than $v$, otherwise $deg(u)\le
+n(G)-3<\delta(G)$). So $G$ can be obtained by removing at most one edge
+incident to any vertex in $K_{n(G)}$. Consider $v,u\in V(G)$, $v\not\sim u$.
+To disconnect $v$ and $u$, we must remove all $n(G)-2$ edges incident to $v$
+or $u$, and thus we must remove exactly $n(G)-2$ vertices (all vertices other
+than $v$ and $u$). So $\kappa(G)=n(G)-2$.
+
+
+\section{} % Section 2
+$(\Longrightarrow)$: Let $F$ be the cut $[S,\overline{S}]$. For any cycle in
+$G$, if we follow it starting from some vertex $v$ in $S$, whenever it crosses
+to $\overline{S}$, it must cross back in order to return to $v$, so $F$
+contains an even number of the cycle's edges.
+\newline
+\newline
+$(\Longleftarrow)$: Take $G-F$ and contract each of its connected components
+to a single vertex, and connect any two vertices whose original components
+shared an edge in $F$. Call this new graph $G'$. We show that $G'$ is
+bipartite:
+
+Let $C$ be an arbitrary cycle in $G'$, $v$ a vertex in $C$. $v$ is incident to
+two edges in $F$, $e_1$ and $e_2$. If $e_1$ and $e_2$ are incident to $u_1$
+and $u_2$ in $G$, respectively, then (since $u_1$ and $u_2$ are in the same
+component) there is a path of the form $e_1u_1\sim\ldots\sim u_2e_2$ in $G$.
+But any cycle in $G$ has an even number of its edges in $F$, so the same must
+be true of $C$ in $G'$. Since $G'$ only has edges from $F$, $C$ must then be
+an even cycle, and so $G'$ is bipartite. So let $S$ be the set of vertices in
+those components of $G-F$ corresponding to the vertices in one of $G'$'s
+partite sets. Then $[S,\overline{S}]$ is an edge cut corresponding to $F$.
+
+
+\section{} % Section 3
+If $G-v$ is 2-connected, then we're done. So assume $G-v$ is not 2-connected.
+Then $G-v$ has a cut vertex, say $c$. Let $C$ be a block of $G-v$ containing
+$c$. $v$ has a neighbor in $C$, since if it didn't, $c$ would still be a cut
+vertex, and so $G$ would not be 2-connected. If $v$'s neighbor in $C$ was $c$,
+then $c$ would again still be a cut vertex. So $v$ has a neighbor in $C-c$,
+say $u$. $C$ is a block, and thus would not be disconnected by the removal of
+$u$. So $u$ is not a cut vertex in $G-v$, and so $G-v-u$ is connected, as
+desired.
+
+
+\section{} % Section 4
+\subsection{} % Section 4.i
+We decompose $G$ into ears. If the last ear added to make $G$ has more than
+one edge, then it contains a vertex of degree 2, and we're done. If the last
+ear has only one edge, then $G-e$ has an ear decomposition, and thus by
+Whitney's theorem is 2-connected. But $G-e$ is not 2-connected by assumption,
+so the last ear added must have a vertex of degree 2. No vertex added in any
+previous ear can have degree less than 2, so $\delta(G)=2$, as desired.
+
+
+\subsection{} % Section 4.ii
+[Induction on $n(G)$]: The only such graph on 4 vertices is $C_4$, for which
+the claim clearly holds.
+
+Assume the claim holds for all $n(G)\le n$. Let $G$ be a graph on $n+1$
+vertices. Consider an ear decomposition $P_0,\ldots,P_k$ of $G$. If $k=0$,
+then $G=C_{n+1}$, and $m(G)=n+1$. $n+1\le2(n+1)-4$ is true for $n>4$, so we're
+done. Otherwise, if $k>0$, then remove $P_k$ from $G$. If $P_k$ has $l$
+vertices, then it has $l+1$ edges. $G-P_k$ is minimally 2-connected, since it
+is 2-connected, and if $G-P_k-e$ was 2-connected, then $G-e$ would be
+2-connected (removing $P_k$ doesn't make $G$ ``more'' connected). So by
+the induction hypothesis, the claim holds for $G-P_k$. That is,
+$m(G-P_k)\le2n(G-P_k)-4$.  We also have that $m(G-P_k)=m(G)-(l+1)$ and
+$n(G-P_k)=n(G)-l$. Together this gives us:
+\begin{align*}
+	m(G)-(l+1)&\le2(n(G)-l)-4\\
+	m(G)-l-1&\le2n(G)-2l-4\\
+	m(G)&\le2n(G)-l-3
+\end{align*}
+As we saw in question 4.ii), $\delta(G)=2$, so if we simply use a
+decomposition for $G$ whose final ear $P_k$ is just a vertex of degree 2, then
+we get $l=1$, giving us $m(G)\le2n(G)-l-3=2n(G)-4$. Thus by induction the
+claim holds.
+
+
+\section{} % Section 5
+\subsection{} % Section 5.i
+We prove the contrapositive: if $k>5$, then there exists a pair of
+nonintersecting odd cycles. Any colouring of $G$ has at least 6 colours.
+Consider the vertices of $G$ coloured 4, 5, or 6. If the subgraph induced by
+these vertices was 2-colourable, then that colouring along with the original
+colouring for the vertices coloured 1, 2, or 3 would be a 5-colouring for $G$,
+so the subgraph is not 2-colourable, hence not bipartite, and so it contains
+an odd cycle. No vertex in this set is coloured 1, 2, or 3, so in particular
+no vertex in the odd cycle is coloured 1, 2, or 3. We can use the same
+argument to show the subgraph induced by the set of vertices coloured 1, 2, or
+3 contains an odd cycle. Since these two sets of vertices are disjoint, the
+two odd cycles are disjoint, as desired.
+
+
+\subsection{} % Section 5.ii
+Consider some $k$-colouring of $G$. Let $C_i$, $C_j$ be the subgraphs of $G$
+containing those vertices coloured $i$ and $j$, respectively The graph induced
+by $C_i$ and $C_j$ is bipartite, since no two vertices sharing a colour are
+adjacent. No vertex in this graph has degree $3$ or more, otherwise it would
+contain a claw (and hence so would $G$). So any vertex in this graph has
+degree 1 or 2, and is thus either in a path or an even cycle. If
+the number of vertices in $C_i$ and $C_j$ differ by more than one, then there
+exist more odd paths beginning and ending in WLOG $C_i$ than there are
+beginning and ending in $C_j$. If we recolour them such that the number of odd
+paths beginning and ending in $C_i$ and $C_j$ differs by at most one (by
+choosing a number of odd paths and simply colouring all vertices coloured $i$
+with $j$ and colouring all vertices coloured $j$ with $i$), then the number of
+vertices coloured $i$ and $j$ in the new colouring will differ by at most one.
+This recolouring does not affect any other pairs of colours, and so this
+process can be done between all pairs of colour classes to obtain a colouring
+in which the size of any two colour classes differs by at most one, as desired.
+
+
+\section{Bonus} % Section 6
+Let $v_1,\ldots,v_n$ be some ordering of the vertices of $G$, and let $k$ be
+the number of colours used in a greedy colouring of $G$. We want to find a
+clique of size $k$ in $G$. We know $G$ has a clique, and that it has highest
+colour $k$. So let $C$ be a maximum clique in $G$, and let its vertices be
+$\{c_1,\ldots,c_l\}$. We show that $l=k$. If $l<k$, then since $c_l$ has
+colour $k$, every vertex in $C$ must be adjacent to a vertex with colour
+$k-l-1$. If each vertex in $C$ were adjacent to the same vertex of this
+colour, we could add it to $C$ to get a larger clique, but $C$ is maximum so
+no such vertex exists. Let $a$ have colour $k-l-1$ be adjacent to as many
+vertices in $C$ as possible, and let $c_i$ be some vertex in $C$ that is not
+adjacent to $a$. $c_i$ is adjacent to some vertex with colour $k-l-1$, say
+$b$. Note that $a$ and $b$ are coloured the same, and hence are nonadjacent.
+Neither $a$ nor $b$ are adjacent to all vertices in $C$, but $a$ is adjacent
+to more vertices in $C$ than $b$ is, so choose some vertex in $C$ that is
+adjacent to $a$ but not $b$ and that is not $c_i$, call it $c_j$. Then we have
+four vertices: $a,c_j,c_i,b$. $a$ and $b$ are the same colour and thus not
+adjacent, $c_i$ was chosen to be not adjacent to $a$, $c_j$ was chosen to be
+not adjacent to $b$, and $a\sim c_j\sim c_i\sim b$, so $G$ contains $P_4$ as
+an induced subgraph, a contradiction, and so our assumption that $l<k$ was
+false, so $l=k$, and thus the largest clique in $G$ has the same size as the
+number of colours used in a greedy colouring of, hence the greedy colouring
+was optimal.
+
+
+\end{document}

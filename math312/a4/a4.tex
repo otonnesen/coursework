@@ -1,0 +1,131 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 312}
+\newcommand\hwnumber{4}
+\newcommand\duedate{November 7, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amsfonts,mathtools}
+
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+$H\cap K\le G$, so since $H\cap K\subseteq H$, $H\cap K\le H$. By Lagrange's
+theorem, we have that $\abs{H\cap K}\mid\abs{H}$, but $\abs{H}$ is
+prime, so either $\abs{H\cap K}=1$ or $p$. In the first case, $H\cap
+K=\{1_G\}$, and in the second case $H\cap K=H=K$, as desired.
+
+
+\section{} % Section 2
+$(\Longrightarrow)$: Assume for a contradiction that $\abs{G}$ is not prime. Let
+$p\mid\abs{G}$, with $p\neq1$ or $\abs{G}$. Then there exists some
+subgroup $P\le G$ with $\abs{P}=p$, but $G$ is abelian, so $P\trianglelefteq
+G$, a contradiction.  Thus $\abs{G}$ must be prime.
+\newline
+\newline
+$(\Longleftarrow)$: Let $H\le G$. $\abs{H}\mid\abs{G}$, but $\abs{G}$
+is prime, so $\abs{H}=1$ or $\abs{G}$, thus any subgroup (hence any normal
+subgroup) of $G$ is trivial, so $G$ is simple.
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+By the third Sylow theorem, $n_{11}\equiv1\pmod{11}$ and $n_{11}\mid\abs{G}$,
+so $n_{11}=1,11,11^2,17,17^2,11\cdot17,11^2\cdot17,11\cdot17^2$, or
+$11^2\cdot17^2$. Obviously any number divisible by $11$ is not congruent to
+$1\pmod{11}$, so $n_{11}=1,17$, or $17^2$. $17\equiv6\pmod{11}$ and
+$17^2\equiv3\pmod{11}$, so it must be the case that $n_{11}=1$. Thus there is
+only one Sylow 11-subgroup of $G$, and it follows then from the second Sylow
+theorem that this subgroup must be normal. By a similar argument,
+$n_{17}=1,11$, or $11^2$, but $11\equiv11\pmod{17}$ and
+$11^2\equiv2\pmod{17}$, so $n_{17}=1$, and therefore the unique Sylow
+17-subgroup is also normal in $G$.
+
+
+\subsection{} % Section 3.b
+We know that any group with order $p^2$, $p$ a prime is abelian, so both the
+Sylow 11-subgroup and the Sylow 17-subgroup are abelian (since they have
+orders $11^2$ and $17^2$, respectively). Let $N_{11},N_{17}\trianglelefteq G$
+be the Sylow 11- and Sylow 17-subgroups, respectively. We show that
+$G=N_{11}\times N_{17}$:
+\newline
+\newline
+\underline{$N_{11},N_{17}\trianglelefteq G$}: Showed in part 3.a).
+\newline
+\newline
+\underline{$N_{11}\cap N_{17}=\{0\}$}: Let $g\in N_{11}\cap N_{17}$.
+$\abs{g}\mid\abs{N_{11}}$ and $\abs{g}\mid\abs{N_{17}}$, so $\abs{g}\mid11^2$
+and $\abs{g}\mid17^2$, thus $\abs{g}=1$, so $g=0$.
+\newline
+\newline
+\underline{$G=N_{11}N_{17}$}: $N_{11}\cap N_{17}=\{0\}$, so since
+$\abs{G}=11^2\cdot17^2=\abs{N_{11}}\abs{N_{17}}$, $G=N_{11}N_{17}$.
+
+Thus $G=N_{11}\times N_{17}$, so $G\cong N_{11}\oplus N_{17}$. $N_{11}$ and
+$N_{17}$ are abelian, so their direct product is abelian, and thus $G$ is
+abelian, as desired.
+
+
+\subsection{} % Section 3.c
+$N_{11}\cong\mathbb{Z}_{11^2}$, or $\mathbb{Z}_{11}\oplus\mathbb{Z}_{11}$, and
+$N_{17}\cong\mathbb{Z}_{17^2}$, or $\mathbb{Z}_{17}\oplus\mathbb{Z}_{17}$, so
+since $G\cong N_{11}\oplus N_{17}$, any group of order 34969 is isomorphic to
+exactly one of the following:
+\begin{align*}
+	&\mathbb{Z}_{11^2}\oplus\mathbb{Z}_{17^2}\\
+	&\mathbb{Z}_{11^2}\oplus\mathbb{Z}_{17}\oplus\mathbb{Z}_{17}\\
+	&\mathbb{Z}_{11}\oplus\mathbb{Z}_{11}\oplus\mathbb{Z}_{17^2}\\
+	&\mathbb{Z}_{11}\oplus\mathbb{Z}_{11}\oplus\mathbb{Z}_{17}\oplus\mathbb{Z}_{17}\\
+\end{align*}
+
+
+\section{} % Section 4
+$N_1=4$. We know that there are exactly two groups of order 4: $\mathbb{Z}_4$
+and $\mathbb{Z}_2\oplus\mathbb{Z}_2$. $Z_4$ is abelian and
+$\langle[2]_4\rangle\le\mathbb{Z}_4$, so
+$\langle[2]_4\rangle\trianglelefteq\mathbb{Z}_4$.
+$\mathbb{Z}_2\oplus\mathbb{Z}_2$ is also abelian, and
+$\langle([1]_2,[0]_2\rangle\le\mathbb{Z}_2\oplus\mathbb{Z}_2$, so
+$\langle([1]_2,[0]_2\rangle\trianglelefteq\mathbb{Z}_2\oplus\mathbb{Z}_2$.
+Thus, neither group of order 4 is simple.
+
+
+\section{} % Section 5
+$N_2=46$. $46=2\cdot23$. Let $G$ be a group of order 46. We know by the first
+Sylow theorem that there exists a subgroup of $G$ with order 23. This subgroup
+has order half that of $G$, so $H$ is normal, and hence $G$ is not simple.
+
+
+\section{} % Section 6
+$N_3=30$. $30=2\cdot3\cdot5$. By the third Sylow theorem,
+$n_5\equiv1\pmod{5}$, and $n_5\mid\abs{G}$, so $n_5=1$ or $6$. Similarly,
+$n_3\equiv1\pmod{3}$, and $n_3\mid\abs{G}$, so $n_3=1$ or $10$. If $n_5=1$, or
+$n_3=1$, then $G$ has a normal Sylow 5- or Sylow 3-subgroup, and hence is not
+simple. So assume $n_5=6$ and $n_3=10$. 5 and 3 are prime, so all of these
+subgroups are cyclic and every nonidentity element generates the entire
+subgroup. This means that any pair of these 16 subgroups intersects only at
+the identity. So $G$ is the union of 6 5-subgroups and 10 3-subgroups, and this
+union is disjoint when we remove the identity from each subset. So we have
+\[\abs{G}=1+6(5-1)+10(3-1)=45>30=\abs{G},\]
+a contradiction, and so our assumption that $n_5=6$ and $n_3=10$ was false, so
+$n_5=1$ or $n_3=1$, meaning $G$ has a normal subgroup, and is therefore not
+simple.
+
+
+\end{document}

@@ -1,0 +1,176 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 312}
+\newcommand\hwnumber{1}
+\newcommand\duedate{September 19, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+\subsection{} % Section 1.a
+Let $gh_1g^{-1},gh_2g^{-1}\in gHg^{-1}$. We wish to show the following:
+\begin{align}
+	gHg^{-1}\neq\emptyset\\
+	gh_1g^{-1}\cdot(gh_2g^{-1})^{-1}\in gHg^{-1}
+\end{align}
+proving that $gHg^{-1}$ is a subgroup of $G$.
+\newline
+\newline
+(1): We have that $H\le G$, so $e\in H$. Thus $geg^{-1}=gg^{-1}=e\in gHg^{-1}$, and so
+$gHg^{-1}\neq\emptyset$.
+\newline
+\newline
+(2): $h_2\in H$, so $h_2^{-1}\in H$, and thus $(gh_2g^{-1})^{-1}=gh_2^{-1}g^{-1}\in gHg^{-1}$.
+\begin{align*}
+	gh_1g^{-1}\cdot gh_2^{-1}g^{-1} &= gh_1g^{-1}gh_2^{-1}g^{-1}\\
+	&=gh_1h_2^{-1}g^{-1}
+\end{align*}
+$h_1h_2^{-1}$ is an element of $H$, so $gh_1h_2^{-1}g^{-1}$ is an element of
+$gHg^{-1}$, and therefore $gHg^{-1}$ is a subgroup of $G$.
+
+
+\subsection{} % Section 1.b
+Let $g\in G$. We know that $gHg^{-1}\le G$. $|gHg^{-1}|=|H|$, and since $H$ is
+the only subgroup of $G$ with order $n$, it must be the case that $gHg^{-1}=H$,
+and so $H\trianglelefteq G$.
+
+
+\section{} % Section 2
+Let $H_1=\langle(r^2,e)\rangle=\{(e,e),(r^2,e)\}$, and
+$H_2=\langle(j,e)\rangle=\{(e,e),(j,e)\}$.
+\newline
+\newline
+Notice that $r^2$ commutes with every element in $D_4$, so $H_1\trianglelefteq G$.
+\newline
+\newline
+We have that $(r,e)H_2=\{(r,e),(rj,e)\}\neq\{(r,e),(r^3j,e)\}=H_2(r,e)$, so
+$H_2\not\trianglelefteq G$.
+\newline
+\newline
+Finally, both groups have order 2, and are therefore isomorphic since there only
+exists a single group (up to isomorphism) of order 2.
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+Let $g\in G$, and $z\in Z(G)$. We wish to show that $gzg^{-1}\in Z(G)$.
+\begin{align*}
+	gzg^{-1}&=gg^{-1}z\\
+	&=z\in Z(G)
+\end{align*}
+Thus $gZg^{-1}\subseteq Z(G)$, and so $Z(G)\trianglelefteq G$.
+
+
+\subsection{} % Section 3.b
+Let $A=\bigl(\begin{smallmatrix} a & b\\ c & d \end{smallmatrix}\bigr)\in GL_2(\mathbb{R})$
+and $Z=\bigl(\begin{smallmatrix} w & x\\ y & z \end{smallmatrix}\bigr)\in Z(GL_2(\mathbb{R}))$.
+We want $Z$ such that $AZ=ZA$ for any $A$, so we have the following equation:
+\begin{align*}
+	AZ&=ZA\\
+	\bigl(\begin{smallmatrix}aw+by & ax+bz\\ cw+dy & cx+dz \end{smallmatrix}\bigr)
+		&=\bigl(\begin{smallmatrix}wa+xc & wb+xd\\ ya+zc & yb+zd \end{smallmatrix}\bigr)
+\end{align*}
+Which gives us the following system of equations:
+\begin{align*}
+	aw+by=wa+xc\\
+	ax+bz=wb+xd\\
+	cw+dy=ya+zc\\
+	cx+dz=yb+zd
+\end{align*}
+Examine the equation $aw+by=wa+xc$. This gives us $by=cx$, but $b$ and $c$ are
+arbitrary (and in particular, it could be the case that $b\neq c$, where $b\neq0\neq c$),
+so it must be the case that $x=y=0$. Now substituting this back into
+the equation $ax+bz=wb+xd$, we get $bz=wb$, so we now have that $w=z$. Thus our
+general $Z$ is of the form $\bigl(\begin{smallmatrix}a & 0\\ 0 & a\end{smallmatrix}\bigr)$.
+More specifically,
+\begin{align*}
+Z(GL_2(\mathbb{R}))=\{\bigl(\begin{smallmatrix}a & 0\\ 0 & a\end{smallmatrix}\bigr)\mid a\in\mathbb{R}\setminus\{0\}\}.
+\end{align*}
+
+
+\subsection{} % Section 3.c
+$1331=11^3$, so by Lagrange's Theorem, the order of $Z(G)$ can be 1, 11, $11^2$,
+or $11^3$. $Z(G)$ has at least one element other than the identity, so it cannot
+have order 1. Since $G$ is nonabelian, there are at least two elements in $G$
+which do not commute with one another, and thus both cannot cannot be in $Z(G)$, so it
+also cannot have order $11^3$.
+\newline
+\newline
+Suppose for a contradiction that $|Z(G)|=11^2$. Then $|G/Z(G)|=11$. Since the
+order of $G/Z(G)$ is prime, then by Lagrange's Theorem, it has no nontrivial
+subgroups, meaning $G/Z(G)$ is cyclic. Let $\langle aZ(G)\rangle=G/Z(G)$. Then
+any $g\in G$ can be rewritten as $a^kz$ from some integer $k$ and some
+$z\in Z(G)$. $z$ is in the centre, so by definition $a^kz=za^k$. This means
+that
+\begin{align*}
+	gh&=a^mz_1a^nz_2\\
+	&=a^{m+n}z_1z_2\\
+	&=a^{n+m}z_2z_1\\
+	&=a^nz_2a^mz_1\\
+	&=gh,
+\end{align*}
+which implies that $G$ is abelian, a contradiction, and so $|Z(G)|=11$.
+
+
+\section{} % Section 4
+Let $re^{i\theta}\in H$ and $se^{i\phi}\in G$. Of course $r=1$ by definition of
+$H$, so $re^{i\theta}\cdot se^{i\phi}=se^{i(\theta+\phi)}$. Since any two
+elements of $H$ differ only by $\theta$, they form a circle centered on the origin.
+Any coset of $H$ will simply be all of these points rotated (if $\phi\neq0$) and/or
+lengthened (if $s\neq1$), and will remain a circle centered on the origin.  This
+mental image leads naturally to the following isomorphism:
+\begin{align*}
+	f: G/H&\longrightarrow\mathbb{R}^+\\
+	se^{i\phi}H&\longmapsto s
+\end{align*}
+
+
+\section{} % Section 5
+\subsection{} % Section 5.a
+Let $m=|gH|$, and $n=|g|$. Since $g^n=e$, we have that $(gH)^n=g^nH=eH=H$.
+Thus $m$ is no greater than $n$. This means that we can rewrite $n$ as $n=qm+r$,
+where $q$ and $r$ are integers and $0\le r<m$.
+\newline
+\newline
+We rewrite $H$ as $(gH)^n=(gH)^{qm+r}. $qm is a multiple of the order of $gH$,
+so $(gH)^{qm}=H$ and $(gH)^{qm+r}=(gH)^r$, and we're left with $H=(gH)^r$. It
+cannot be the case that $r\neq0$, since it would contradict the definition of
+$m$ as the smallest positive integer $m$ such that $(gH)^m=H$. Thus $r=0$, and
+we have $n=qm$ for some integer $q$.
+
+
+\subsection{} % Section 5.b
+We consider a single element of $\langle[6]_{42}\rangle$, $[0]_{42}$, and see
+how many times we must add $[4]_{42}$ to it until it is once again an element
+in $\langle[6]_{42}\rangle$.
+\begin{align*}
+	1\cdot[4]_{42}+[0]_{42}&=[4]_{42}\not\in\langle[6]_{42}\rangle\\
+	2\cdot[4]_{42}+[0]_{42}&=[8]_{42}\not\in\langle[6]_{42}\rangle\\
+	3\cdot[4]_{42}+[0]_{42}&=[12]_{42}\in\langle[6]_{42}\rangle
+\end{align*}
+Thus the coset $[4]_{42}+\langle[6]_{42}\rangle$ has order 3 in
+$\mathbb{Z}_{42}\langle[6]_{42}\rangle$.
+
+
+\subsection{} % Section 5.c
+Let $G=\mathbb{Z}_{12}$, $H=\langle[2]_{12}\rangle$, $g_1=[2]_{12}$, and
+$g_2=[6]_{12}$.
+\newline
+\newline
+$g_1H$ and $g_2H$ are clearly the same coset, and $|g_1|=6\neq2=|g_2|$.
+
+
+\end{document}

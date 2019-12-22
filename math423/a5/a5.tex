@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 423}
+\newcommand\hwnumber{5}
+\newcommand\duedate{December 2, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb,mathtools}
+
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\newcommand\Osq{\mathbin{\text{\scalebox{.84}{$\square$}}}}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\roman{subsection}}
+\section{} % Section 1
+Let $G=(X,Y)$. We construct $H$:
+
+WLOG let $\abs{X}\le\abs{Y}$. Add $\abs{Y}-\abs{X}$ vertices to $X$ so that
+$\abs{X}=\abs{Y}$. $G$ is bipartite, so we have that
+$\sum_{x\in X}deg(x)=\sum_{y\in Y}deg(y)$. So choose $x\in X$, $y\in Y$ with
+$deg(x),deg(y)<\Delta(G)$, and join them with an edge.
+
+After adding an edge, the equality $\sum_{x\in X}deg(x)=\sum_{y\in Y}deg(y)$
+still holds, so $H$ remains bipartite. So if we continue this process until no
+such $x$ and $y$ can any longer be chosen, then the resulting graph is
+$\Delta(G)$-regular, and was constructed from -- and therefore contains --
+$G$, as desired.
+
+
+\section{} % Section 2
+Let $H$ be an odd connected component in $G$. Assume for a contradiction that
+$H$ is bipartite, with bipartition $(X,Y)$. WLOG let $\abs{X}<\abs{Y}$ (we
+know that $\abs{X}\neq\abs{Y}$ since $H$ is odd). $H$ is $k$-regular, so since
+$\sum_{x\in X}deg(x)=\sum_{y\in Y}deg(y)$, we have $k\abs{X}=k\abs{Y}$, a
+contradiction since $\abs{X}\neq\abs{Y}$. Thus $H$ is not bipartite, and thus
+contains an odd cycle, and is class 2. Thus $G$ must be class 2, and
+$\chi'(G)=\Delta(G)+1$, as desired.
+
+
+\section{} % Section 3
+Let $G$, $H$ be Hamiltonian, and let $g_1\ldots g_lg_1$ and $h_1\ldots h_kh_1$
+be Hamilton cycles in $G$ and $H$, respectively. Then
+\[(g_1,h_1)(g_2,h_1)\ldots(g_l,h_1)(g_l,h_2)\ldots(g_l,h_k)(g_l,h_1)(g_1,h_1)\]
+is a Hamilton path in $G\Osq H$, so $G\Osq H$ is Hamiltonian, as desired.
+
+$Q_k=Q_{k-1}\Osq Q_{k-1}$, so $Q_k$ is Hamiltonian when $k\ge2$ ($Q_1$ is not
+Hamiltonian).
+
+
+\section{} % Section 4
+($\Longrightarrow$): Choose a vertex $v\in V(G)$, and let $u_1,\ldots,u_k$ be
+its neighbors. Suppose WLOG that $u_1\sim u_2,\ldots,u_{k-1}\sim u_k,u_k\sim
+u_1$. Then $vu_1u_2,\ldots,vu_{k-1}u_k,vu_ku_1$ are all triangles. If $v$ is
+coloured 1 and $u_i$ is coloured 2, then $u_{i-1}$ and $u_{i+1}$ must be
+coloured 4. This is clearly only the case when $v$ has an even number of
+neighbors, otherwise we would need a fourth colour. $G$ is 3-colourable, so it
+must be the case that for any choice of $v$, $v$ has even degree. $G$ is a
+plane triangulation, and thus connected, so it is therefore Eulerian.
+\newline
+\newline
+($\Longleftarrow$): Choose a face $F$, and 3-colour its vertices arbitrarily.
+We claim this determines the colour of each other vertex, and that it gives a
+3-colouring. Suppose for a contradiction that a vertex $v$ is the first to be
+assigned two different colours from two different faces. That is, there are
+two sequences of faces, not identical, which assign to $v$ two different
+colours. Let these sequences be $A_1,\ldots,A_k$ and $B_1,\ldots,B_l$. We know
+$A_k\neq B_l$, so let $C=A_i=B_i$ be the first face for which $A_{i+1}$ and
+$B_{i+1}$ differ. Consider the cycle bouding the region bounded by
+$C,A_{i+1},\ldots,A_k,B_l,\ldots,B_{i+1},C$. Let this bounded region be as
+small as possible. Let $x$ be a vertex in the bounded region, but not on the
+cycle, and which is contained in the faces $X_1$ and $X_m$. Create a new
+region $X_1,\ldots,X_m,B_j,\ldots,B_l,A_k,\ldots,A_j,X_1$, where
+$X_1,\ldots,X_m$ are the faces forming a sequence that all contain $x$. $x$
+was assigned only one colour, since $v$ was the first to be assigned two
+different colours, and so if we begin our sequential colouring as before but
+now starting at $x$, the rest of the graph will be coloured in the same way.
+But this means that the procedure will still assign two colours to $v$, but
+the new bounding region is smaller, contradiction the minimality of the
+original region. Thus no vertex is assigned two different colours, and so $G$
+is 3-colourable.
+
+
+\section{} % Section 5
+Suppose $G$ is a plane graph and $G\cong G^*$. The faces of $G$ correspond to
+the vertices of $G^*$, so $n(G)=f(G)$. Then by Euler's formula, we have
+$n(g)-m(G)+f(G)=2$, so $n(G)-m(g)+n(G)=2$, and so $m=2n-2$, as desired.
+
+Consider the Wheel graph, $W_n=W_{n-1}\lor K_1$. $W_n^*$ has a cycle of $n-1$
+vertices corresponding to the faces of each of the $n-1$ triangles, and each
+of these faces is adjacent to the face surrounding the graph, resulting in
+another copy of $W_n$, as desired.
+
+
+\end{document}

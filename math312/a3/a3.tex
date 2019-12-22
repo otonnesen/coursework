@@ -1,0 +1,271 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 312}
+\newcommand\hwnumber{3}
+\newcommand\duedate{October 24, 2019}
+
+\lhead{Firstname Lastname\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amsfonts}
+
+
+\DeclareMathOperator{\im}{Im}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+\subsection{} % Section 1.a
+We count the size $k$ of $\{(g,x)\in G\times X:g\cdot x=x\}$ in two ways:
+\newline
+\newline
+For each $g\in G$, we count the number of points in $X$ fixed by $g$ to get
+\[k=\sum_{g\in G}|X_g|,\]
+and we count the number of elements in $G$ fixing each $x\in X$ to get
+\[k=\sum_{x\in X}|G_x|,\]
+so
+\[\sum_{g\in G}|X_g|=\sum_{x\in X}|G_x|.\]
+Our action is transitive, so $|\mathcal O_x|=|X|$ for any $x\in X$. By the
+Orbit-Stabilizer theorem, $|\mathcal O_x|=[G:G_x]$, so $[G:G_x]=|X|$, and thus
+$|X|=\frac{|G|}{|G_x|}$. Then $|G_x|=\frac{|G|}{|X|}$ for any $x\in X$, so
+\begin{align*}
+	\sum_{x\in X}|G_x|&=\sum_{x\in X}\frac{|G|}{|X|}\\
+	&=\frac{|G|}{|X|}\sum_{x\in X}1\\
+	&=\frac{|G|}{|X|}\cdot|X|\\
+	&=|G|
+\end{align*}
+So $\sum_{g\in G}|X_g|=\sum_{x\in X}|G_x|=|G|$, thus $\sum_{g\in G}|X_g|=|G|$,
+and so $\frac{1}{|G|}\sum_{g\in G}|X_g|=1$ as desired.
+
+
+\subsection{} % Section 1.b
+Assume for a contradiction that all $g\in G$ have fixed points. Then
+$|X_g|\ge1$ for all $g\in G$. We know that $|X_{1_G}|=|X|>1$, so
+\begin{align*}
+	|G|&=\sum_{g\in G}|X_g|\\
+	&=|X_{1_G}|+\sum_{g\in G\setminus\{1_G\}}|X_g|\\
+	&\ge|X_{1_G}|+|G\setminus\{1_G\}|\qquad{\text{$G$ is non-trivial, so $G\setminus\{1_G\}\neq\emptyset$.}}\\
+	&\ge|X_{1_G}|+|G|-1\\
+	&\ge2+|G|-1\\
+	&=|G|+1
+\end{align*}
+So $|G|\ge|G|+1$, a contradiction. Thus there must exist some $g\in G$ with no
+fixed points, as desired.
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+Let $aHa^{-1}\in X$. We show that $\mathcal O_{aHa^{-1}}=X$:
+\newline
+\newline
+Let $hHh^{-1}\in X$.
+\begin{align*}
+	hHh^{-1}&=(ha^{-1}a)H(ha^{-1}a)^{-1}\\
+	&=(ha^{-1}a)H(a^{-1}ah^{-1})\\
+	&=(ha^{-1})aHa^{-1}(ah^{-1})\\
+	&=(ha^{-1})aHa^{-1}(ha^{-1})^{-1}\\
+	&=(ha^{-1})\cdot(aHa^{-1})
+\end{align*}
+Thus $hHh^{-1}\in\mathcal O_{aHa^{-1}}$, but $hHh^{-1}$ was arbitrary in $X$,
+so $\mathcal O_{aHa^{-1}}=X$. $aHa^{-1}$ was also arbitrary in $X$, so
+$\mathcal O_x=X$ for any $x\in X$, thus the action is transitive, as desired.
+
+
+\subsection{} % Section 2.b
+We know from class that if $H\le G$, then $N_G(H)\le G$. We also know from
+class that $H\trianglelefteq N_G(H)$.
+\newline
+\newline
+We show that $|X|=|G/N_G(H)|$:
+\newline
+Define $\varphi:G/N_G(H)\longrightarrow X$ by $gN_G(H)\longmapsto gHg^{-1}$. We
+show that $\varphi$ is a bijection.
+\newline
+\newline
+First, we show that $\varphi$ is \textbf{well-defined}:
+\newline
+Let $gN_G(H)=g'N_G(H)$. Then $g'=gn$ for some $n\in N_G(H)$. So
+\begin{align*}
+	\varphi(g'N_G(H))&=g'Hg'^{-1}\\
+	&=(gn)H(gn)^{-1}\\
+	&=gnHn^{-1}g^{-1}\\
+	&=gHg^{-1}\\
+	&=\varphi(gN_G(H))
+\end{align*}
+So $\varphi$ is well-defined.
+\newline
+\newline
+We now show that $\varphi$ is \textbf{injective}:
+\newline
+Let $\varphi(g_1N_G(H))=\varphi(g_2N_G(H))$. Then
+$g_1Hg_1^{-1}=g_2Hg_2^{-1}$, so $g_2^{-1}g_1Hg_1^{-1}g_2=H$. Thus
+$g_2^{-1}g_1\in N_G(H)$, and $g_1\in g_2N_G(H)$, meaning $g_1N_G(H)=g_2N_G(H)$,
+and so $\varphi$ is injective.
+\newline
+\newline
+Finally, we show that $\varphi$ is \textbf{surjective}:
+\newline
+Let $aHa^{-1}\in X$. Then $\varphi(aN_G(H))=aHa^{-1}$. Thus $\varphi$ is
+surjective. So $\varphi$ is a bijection, thus $|X|=|G/N_G(H)|$.
+\newline
+\newline
+$|X|=|G/N_G(H)|$, so $H$ has $|G/N_G(H)|$ conjugates in $G$. Thus
+\[\Bigl|\bigcup_{a\in G}aHa^{-1}\Bigr|\le|G/N_G(H)|\cdot|H|.\]
+But $aHa^{-1}\le G$ for all $a\in G$, so $1_g\in aHa^{-1}$ for all $a\in G$.
+Thus
+\[\bigcup_{a\in G}aHa^{-1}=\{1_g\}\cup\bigcup_{a\in G}aHa^{-1}\setminus\{1_G\}.\]
+So
+\begin{align*}
+	\Bigl|\bigcup_{a\in G}aHa^{-1}\Bigr|&=\Bigl|\{1_g\}\cup\bigcup_{a\in G}aHa^{-1}\setminus\{1_G\}\Bigr|\\
+	&=\Bigl|\{1_g\}\Bigr|+\Bigl|\bigcup_{a\in G}aHa^{-1}\setminus\{1_G\}\Bigr|\\
+	&=1+\Bigl|\bigcup_{a\in G}aHa^{-1}\setminus\{1_G\}\Bigr|\\
+	&\le1+|X|(|H|-1)
+\end{align*}
+Thus we have that $|G|\ge|X|\cdot|H|>1+|X|(|H|-1)=|X|\cdot|H|+1-|X|$. If
+$H\trianglelefteq G$, then since every conjugate of $H$ is just $H$, and since
+$H\neq G$, clearly $\bigcup_{a\in G}aHa^{-1}$ doesn't cover $G$. So assume
+$H\not\trianglelefteq G$. Then there exists some conjugate of $H$ that is not
+equal to $H$, so $|X|\ge2$. So $|X|\cdot|H|+1-|X|\le|X|\cdot|H|-1<|X|\cdot|H|$.
+So $|G|>|X|\cdot|H|-1\ge\Bigl|\bigcup_{a\in G}aHa^{-1}\Bigr|$, so
+$|G|\neq\Bigl|\bigcup_{a\in G}aHa^{-1}\Bigr|$, and therefore
+$G\neq\bigcup_{a\in G}aHa^{-1}$, as desired.
+
+
+\section{} % Section 3
+The orbits of the action partition $X$, so
+\[X=\bigcup_{i=0}^k\mathcal O_{x_i}=X^G\cup\bigcup_{i=0}^l\mathcal O_{x_i},\]
+where $x_0,\ldots,x_k$ are representatives for the distinct orbits of $X$, and
+$x_{l+1},\ldots,x_k$ have trivial orbits. Since $X^G$ and
+$\bigcup_{i=0}^l\mathcal O_{x_i}$ are clearly distinct, we have that
+\[|X|=|X^G|+\sum_{i=0}^l|\mathcal O_{x_i}|.\]
+We know that $G_{x_i}\le G$, so $|G_{x_i}|\big\vert|G|$. We also know that
+$|\mathcal O_{x_i}|=\frac{|G|}{|G_{x_i}|}$. Since $\mathcal O_{x_i}$ is
+non-trivial, $\frac{|G|}{|G_{x_i}|}\neq1$. Thus $|\mathcal O_{x_i}|=p^m$ for
+some $m\ge1$. Thus all $|\mathcal O_{x_i}|$ divide $p$, where $i\le l$. Then
+$|X^G|+\sum_{i=0}^l|\mathcal O_{x_i}|\equiv|X^G|\;(\text{mod }p)$, so
+$|X|\equiv|X^G|\;(\text{mod }p)$, as desired.
+
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+Let $k\in K$. $k\cdot aH=kaH=aH$, so $(ka)(a)^{-1}\in H$, thus $k\in H$, and
+so $K\subseteq H$.
+\newline
+\newline
+Note first that $K=G_{aH}$, the stabilizer of $aH$ in $G$, so $K\le G$. Let
+$g\in G$, $k\in K$. $(gkg^{-1})\cdot aH=gkg^{-1}aH$. By definition of $K$,
+since $g^{-1}a\in G$, $k\cdot (g^{-1}a)H=(g^{-1}a)H$. Since
+$k\cdot g^{-1}aH=kg^{-1}aH$, then $gkg^{-1}aH=gg^{-1}aH=aH$, so
+$gkg^{-1}\in K$, and thus $K\trianglelefteq G$, as desired.
+
+
+\subsection{} % Section 4.b
+Let $G/K$ act on $G/H$ by $g_1K\cdot g_2H\longmapsto g_1g_2H$. By definition
+of $K$, $kgH=gH$ if and only if $k\in K$, so the action is faithful. Thus there
+is a correspondence between this action and an injective homomorphism from
+$G/K$ to $S_{G/H}\cong S_{[G:H]}=S_p$. This homomorphism is injective, so
+$G/K\cong\im\varphi\le S_{G/H}\cong S_p$, and we're done.
+
+
+\subsection{} % Section 4.c
+We have $\frac{|H|}{|K|}=k$, $\frac{|G|}{|H|}=p$, $\frac{|G|}{|K|\cdot k}=p$,
+and $\frac{|G|}{|K|}=[G:K]=pk$. By Lagrange's theorem, $|G/K|\big\vert|S_p|$,
+thus $[G:K]\big\vert p!$, and so $pk|p!$, as desired.
+
+
+\subsection{} % Section 4.d
+$[G:K]=pk$, and $[G:K]=[G:H][H:K]=pk$, so
+$\frac{[G:K]}{[G:H]}=[H:K]=\frac{pk}{[G:K]}$. Then $k=[H:K]=\frac{pk}{pk}=1$.
+So $[G:K]=1$. Since $K\le H$, $K=H$. $K\trianglelefteq G$, so
+$H\trianglelefteq G$, as desired.
+
+
+\section{} % Section 5
+\subsection{} % Section 5.a
+:(
+
+
+\subsection{} % Section 5.b
+Let $g\in G$. Then $g=\begin{pmatrix}
+	1 & a & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix}$, $g^2=\begin{pmatrix}
+	1 & 2a & 2b+ac\\
+	0 & 1 & 2c\\
+	0 & 0 & 1
+\end{pmatrix}$, and $g^3=\begin{pmatrix}
+	1 & 3a & 3b+3ac\\
+	0 & 1 & 3c\\
+	0 & 0 & 1
+\end{pmatrix}=\begin{pmatrix}
+	1 & 0 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1
+\end{pmatrix}$
+So $|g|\big\vert3$. If $|g|=1$, then $g=1_G$, otherwise $|g|=3$.
+\newline
+\newline
+Let $h\in H$. Then $h=(a,b,c)$, $h^2=(2a,2b,2c)$, and $h^3=(3a,3b,3c)=(0,0,0)$.
+So $|h|\big\vert3$. If $|h|=1$, then $h=1_H$, otherwise $|h|=3$.
+\newline
+\newline
+There is clearly a bijective map from $G$ to $H$ in $f\Biggl(\begin{pmatrix}
+	1 & a & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix}\Biggr)=(a,b,c)$, so since $G\setminus\{1_G\}$ and $H\setminus\{1_H\}$
+contain only elements of order 3 and have the same size, $D_G(3)=D_H(3)$, and
+trivially $D_G(1)=D_H(1)$.
+\newline
+\newline
+Let $\begin{pmatrix}
+	1 & a & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix},\begin{pmatrix}
+	1 & 1 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1
+\end{pmatrix}\in G$.
+\begin{align*}
+\begin{pmatrix}
+	1 & a & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}
+	1 & 1 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1
+\end{pmatrix}&=\begin{pmatrix}
+	1 & a+1 & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix}\\
+	&\neq\begin{pmatrix}
+	1 & a+1 & b+c\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix}\\
+	&=\begin{pmatrix}
+	1 & 1 & 0\\
+	0 & 1 & 0\\
+	0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}
+	1 & a & b\\
+	0 & 1 & c\\
+	0 & 0 & 1
+\end{pmatrix},
+\end{align*}
+but $H$ is abelian, so $G\not\cong H$.
+
+
+\end{document}

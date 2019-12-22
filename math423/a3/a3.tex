@@ -1,0 +1,123 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 423}
+\newcommand\hwnumber{3}
+\newcommand\duedate{October 17, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath}
+
+\usepackage{xcolor}
+
+
+\begin{document}
+
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+\section{} % Section 1
+We construct a new graph as follows: let $d=\max_{S\subseteq X}\text{def}(S)$,
+and add $d$ vertices to $Y$. For each $S\subseteq X$ with $\text{def}(S)>0$,
+connect to $S$ $\text{def}(S)$ of the $d$ vertices we added. We now have that
+$\text{def}(S)\le0$ for all $S\subseteq X$, or $0\ge|S|-|N(S)|$, or
+$|N(S)|\ge|S|$ for all $S\subseteq X$. Thus by Hall's Theorem, there exists a
+perfex matching in this new graph. If we delete the $d$ vertices now, we remove
+exactly $d$ edges from that matching (since all $d$ vertices were in $Y$), so
+the maximum size matching in the original graph was the number in the new graph
+minus $d$, or $|X|-d=|X|-\max_{S\subseteq X}\text{def}(S)$.
+
+
+\section{} % Section 2
+$G$ is 3-regular, so $n(G)$ is even. Assume for a contradiction that $G$ has no
+perfect matching. Then any maximum matching misses at least two vertices, so by
+the Tutte-Berge theorem,
+$\frac{n(G)-2}{2}=\frac{1}{2}\bigl(n(G)-\max\{o(G\setminus S)-|S|:S\subseteq V(G)\}\bigr)$
+so there exists some $S\subseteq V(G)$ such that $o(G\setminus S)-|S|\ge2$.
+Every odd component connects to $S$ by an odd number of edges, and all but at
+most two of these must connect to $S$ by three or more edges. In other words,
+$3(o(G\setminus S)-2)+2$ edges enter $S$.  $3(o(G\setminus S)-2)+2\ge3|S|+2$,
+but due to the 3-regularity of $G$, only up to $3|S|$ edges can enter $S$, a
+contradiction, and so $G$ must have a perfect matching.
+
+
+\section{} % Section 3
+($\Longrightarrow$): By Tutte's theorem, $o(T\setminus S)\le|S|$ for all
+$S\subseteq V(T)$, so if $S=\{v\}$, $v\in V(T)$, then
+$o(T\setminus S)=o(T-v)\le|S|=1$. So $o(T-v)\le1$. $n(T)$ is even, so $n(T-v)$
+is odd. Thus $T-v$ must have an odd component, so $o(T-v)\ge1$, and thus
+$o(T-v)=1$.
+\newline
+\newline
+($\Longleftarrow$): [Induction on $n(T)$]: We see this holds for $n(T)=1$. Now
+assume it holds for all $n(T)\le n$. Let $n(T)=n+1$ such that $o(T-v)=1$ for
+all vertices $v$ of $T$. Remove an arbitrary vertex $v\in V(T)$.
+$T-v=T_1\cup T_2\cup\ldots\cup T_k\cup C$ where $T_1,T_2,\ldots,T_k,C$ are all
+disjoint, $C$ is an odd component and each $T_i$ is an even component. Clearly
+$v$'s neighbor $u$ in $C$ is the only one it would be matched with in a perfect
+matching, since by the hypothesis all the $T_i$'s and also $C-u$ have perfect
+matchings. Thus all of these perfect matchings along with the edge $vu$ would
+again form a perfect matching, so by induction the claim holds.
+\newline
+\newline
+Thus we've shown the forward and backward direction, and so the original claim
+holds.
+
+
+\section{} % Section 4
+Let $M$ be a maximum matching, and assume for a contradiction that we have a
+minimum vertex cover $C$ with $|C|>2\alpha'(G)$. $C$ covers up to two vertices
+for each edge in the matching, so we have at least one vertex in the cover not
+an endpoint of an edge in $M$. This vertex is in $C$, so it must be covering an
+edge, but this edge is not in $M$. $C$ covers every endpoint in $M$, so if this
+last vertex were adjacent to a vertex in $M$, then it would not be necessary to
+have it in $C$. Thus the vertex is adjaccent to a vertex not an endpoint of an
+edge in $M$. We could add this edge to $M$ to obtain a larger matching, a
+contradiction since $M$ is maximum. Thus $\beta(G)\le2\alpha'(G)$.
+\newline
+\newline
+Given $k\ge1$, the $kK_3$ is an example of a graph with $\alpha'(G)=k$ and
+$\beta(G)=2k$.
+
+
+\section{} % Section 5
+The positions of the transversal are printed in red below:
+\[
+\begin{bmatrix}
+	\color{red}4& 5 & 8 & 10 & 11\\
+	7 & 6 & \color{red}5 & 7 & 4\\
+	8 & \color{red}5 & 12 & 9 & 6\\
+	6 & 6 & 13 & 10 & \color{red}7\\
+	4 & 5 & 7 & \color{red}9 & 8
+\end{bmatrix}
+\]
+
+
+\section{Bonus} % Section 6
+Let $S\subseteq V(G)$ such that $o(G\setminus S)-|S|$ is maximized. Assume that
+$S\neq\emptyset$, and $s\in S$. Note that $G\setminus S$ and $G-s\setminus S-s$
+refer to the same graph, so $o(G-s\setminus S-s)-|S-s|$ is still maximal. But
+by the Tutte-Berge theorem,
+\begin{align*}
+	\alpha'(G)&=\frac{1}{2}\bigl(n(G)-\max\{o(G\setminus S)-|S|:S\subseteq V(G)\}\bigr)\\
+	&<\frac{1}{2}\bigl(n(G-s)-\max\{o(G-s\setminus S-s)-|S-s|:S\subseteq V(G)\}\bigr)\\
+	&=\alpha'(G-s)\qquad\text{(Since $o(G-s\setminus S-s)-|S-s|$ is maximal)}
+\end{align*}
+But $\alpha'(G)=\alpha'(G-s)$ for all $s\in V(G)$ a contradiction, so
+$S=\emptyset$. Then when $o(G\setminus S)-|S|$ is maximized, it is equal to 1.
+Thus
+\begin{align*}
+	\alpha'(G)&=\frac{1}{2}\bigl(n(G)-\max\{o(G\setminus S)-|S|:S\subseteq V(G)\}\bigr)\\
+	&=\frac{1}{2}\bigl(n(G)-1\bigr)\\
+	&=\frac{n(G)-1}{2}
+\end{align*}
+So $\alpha'(G-v)=\frac{n(G)-1}{2}$ for all $v\in V(G)$, so every such $G-v$ has
+a perfect matching.
+
+
+\end{document}

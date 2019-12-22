@@ -1,0 +1,125 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 349A}
+\newcommand\hwnumber{2}
+\newcommand\duedate{September 19, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath}
+
+
+\DeclareMathOperator{\fl}{fl}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+\subsection{} % Section 1.a
+$(+0.4003\times5^{+02})_5=40.03_5=20.12_{10}$
+
+
+\subsection{} % Section 1.b
+$(-0.1102\times5^{+03})_5=-110.2_5=30.4_{10}$
+
+
+\subsection{} % Section 1.c
+\begin{align*}
+	01000144&\rightarrow(0.1000\times5^{-44})_5\\
+	&=(1.000\times5^{-100})_5\\
+	&=(5^{-100})_5\\
+	&=(5^{-25})_{10}\\
+	&=0.0000000000000000033554432_{10}\\
+	&=(0.33554432\times10^{-17})_{10}
+\end{align*}
+
+
+\subsection{} % Section 1.d
+Our range is $[5^3,5^4]$, so two consecutive numbers are represented as
+$01000004$ and $01001004$. Thus the space between the two numbers is
+$00001004$, or $(0.0001\times5^4)_5=1_5=1_{10}$
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+\begin{align*}
+	\fl\biggl(\frac{-2c}{b-\sqrt{b^2-4ac}}\biggr)&=\fl\Biggl(\frac{\fl(-2.000\times0.5810)}{\fl\Bigl(-35.63-\fl\bigl(\sqrt{\fl(\fl(-35.63\times-35.63)-\fl(\fl(4.000\times1.000)\times0.5810))}\bigr)\Bigr)}\Biggr)\\
+	&=\fl\Biggl(\frac{-1.162}{\fl\Bigl(-35.63-\fl\bigl(\sqrt{\fl(1269-\fl(4\times0.5810))}\bigr)\Bigr)}\Biggr)\\
+	&=\fl\Biggl(\frac{-1.162}{\fl\Bigl(-35.63-\fl\bigl(\sqrt{\fl(1269-2.324)}\bigr)\Bigr)}\Biggr)\\
+	&=\fl\Biggl(\frac{-1.162}{\fl\Bigl(-35.63-\fl\bigl(\sqrt{1266}\bigr)\Bigr)}\Biggr)\\
+	&=\fl\Biggl(\frac{-1.162}{\fl\Bigl(-35.63-35.58\Bigr)}\Biggr)\\
+	&=\fl\Biggl(\frac{-1.162}{-71.21}\Biggr)\\
+	&=0.01631
+\end{align*}
+\begin{align*}
+	\fl\biggl(\frac{-b-\sqrt{b^2-4ac}}{2a}\biggr)&=\fl\biggl(\frac{\fl\Bigl(35.63-\fl\bigl(\sqrt{\fl(\fl(-35.63\times-35.63)-\fl(\fl(4.000\times1.000)\times0.5810))}\bigr)\Bigr)}{\fl(2.000\times1.000)}\biggr)\\
+	&=\fl\biggl(\frac{\fl\Bigl(35.63-\fl\bigl(\sqrt{\fl(1269-\fl(4.000\times0.5810))}\bigr)\Bigr)}{2.000}\biggr)\\
+	&=\fl\biggl(\frac{\fl\Bigl(35.63-\fl\bigl(\sqrt{\fl(1269-2.324)}\bigr)\Bigr)}{2.000}\biggr)\\
+	&=\fl\biggl(\frac{\fl(35.63-35.58)}{2.000}\biggr)\\
+	&=\fl\biggl(\frac{0.05000}{2.000}\biggr)\\
+	&=0.02500
+\end{align*}
+
+
+\subsection{} % Section 2.b
+$\big\vert1-\frac{0.01631}{0.01631395}\big\vert\approx0.00024$
+\newline
+\newline
+$\big\vert1-\frac{0.02500}{0.01631395}\big\vert\approx0.53$
+
+
+\subsection{} % Section 2.c
+\begin{tabular}{|c|c|c|}
+	\hline
+	polynomial & $(i)$ is more accurate & $(ii)$ is more accurate\\
+	\hline
+	$0.01x^2-125x+0.05$ & X &\\
+	\hline
+	$0.03x^2+125x+0.025$ && X\\
+	\hline
+\end{tabular}
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+\begin{align*}
+	f(x)=(x+1)^{\frac{1}{2}}, &\qquad f(3)=2\\
+	f'(x)=\frac{1}{2}(x+1)^{-\frac{1}{2}}, &\qquad f'(3)=\frac{1}{4}\\
+	f''(x)=-\frac{1}{4}(x+1)^{-\frac{3}{2}}, &\qquad f''(3)=-\frac{1}{32}\\
+	f'''(x)=\frac{3}{8}(x+1)^{-\frac{5}{2}}, &\qquad f'''(3)=\frac{3}{256}\\
+	R_2=\frac{f'''(\xi)}{3!}(x-3)^3&=\frac{3}{3!8}(\xi+1)^{-\frac{5}{2}}(x-3)^3,\xi\in[x,3]\\
+	\implies f(x)&\approx2+\frac{1}{4}(x-3)-\frac{1}{32}\frac{(x-3)^2}{2!}+\frac{3}{8}\frac{(\xi+1)^{-\frac{5}{2}}}{3!}(x-3)^3
+\end{align*}
+
+
+\subsection{} % Section 3.b
+\begin{align*}
+	f(3.12)&\approx2+\frac{1}{4}(3.12-3)-\frac{1}{32}\frac{(3.12-3)^2}{2!}\\
+	&=2.029775\\
+	&\approx\sqrt{4.11998655}
+\end{align*}
+
+
+\subsection{} % Section 3.c
+\begin{align*}
+	R_2=\frac{3}{3!8}(\xi+1)^{-\frac{5}{2}}(x-3)^3
+\end{align*}
+This error term is clearly maximal with large $x$ and small $\xi$, so if we let
+$x=3.2,\xi=3$, we have that
+\begin{align*}
+	R_2&\le\frac{3}{3!8}(3+1)^{-\frac{5}{2}}(3.2-3)^3\\
+	&=\frac{1}{16}(3+1)^{-\frac{5}{2}}(3.2-3)^3\\
+	&=\frac{4^{-\frac{5}{2}}}{16}(0.2)^3\\
+	&=0.15625\times10^{-4}
+\end{align*}
+
+
+\end{document}

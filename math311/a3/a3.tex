@@ -1,0 +1,135 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 311}
+\newcommand\hwnumber{3}
+\newcommand\duedate{November 8, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amssymb}
+
+
+\DeclareMathOperator{\nullity}{Nullity}
+\DeclareMathOperator{\rank}{Rank}
+\DeclareMathOperator{\ran}{ran}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+\underline{$T$ is linear}: Let $v=(v_1,v_2,v_3),w=(w_1,w_2,w_3)\in\mathbb{R}^3$.
+\begin{align*}
+	Tv+Tw&=T(v_1,v_2,v_3)+T(w_1,w_2,w_3)\\
+	&=(v_1+v_2+2v_3x+v_1x^2)+(w_1+w_2+2w_3x+w_1x^2)\\
+	&=(v_1+w_1)+(v_2+w_2)+2(v_3+w_3)x+(v_1+w_1)x^2\\
+	&=T(v+w)
+\end{align*}
+Let $v\in\mathbb{R}^3$, $\lambda\in\mathbb{R}$.
+\begin{align*}
+	T(\lambda v)&=T(\lambda v_1,\lambda v_2,\lambda v_3)\\
+	&=\lambda v_1+\lambda v_2+2\lambda v_3x+\lambda v_1x^2\\
+	&=\lambda(v_1+v_2+2v_3x+v_1x^2)\\
+	&=\lambda Tv
+\end{align*}
+So $T$ is linear.
+\newline
+\newline
+\underline{$\alpha$ is a basis for $\mathbb{R}^3$}: First we show that
+$\alpha$ is independent in $\mathbb{R}^3$, then we show that it spans
+$\mathbb{R}^3$. Let $a,b,c\in\mathbb{R}^3$, such that
+$a(1,1,0)+b(1,1,1)+c(0,1,1)=(0,0,0)$. Then $a+b=0$, $a+b+c=0$, and $b+c=0$. So
+$a=-b$, and $c=-b$. Then we have
+\begin{align*}
+	0&=a+b+c\\
+	&=-b+b-b\\
+	&=-b
+\end{align*}
+so $b=0$. Then since $a+b=0$ and $b+c=0$, $a=0$ and $c=0$, so $a=b=c=0$, thus
+$\alpha$ is independent in $\mathbb{R}^3$. Let
+$v=(v_1,v_2,v_3)\in\mathbb{R}^3$. A straightforward computation gives us
+$v=(v_2-v_3)(1,1,0)+(v_1-v_2+v_3)(1,1,1)+(v_2-v_1)(0,1,1)$, so $\alpha$ spans
+$\mathbb{R}^3$, and thus $\alpha$ is an ordered basis for $\mathbb{R}^3$.
+\newline
+\newline
+\underline{Compute $[T]_\alpha^\beta$ and $[T^{-1}]_\beta^\alpha$}:
+\begin{align*}
+	T(1,1,0)&=2+x^2\\
+	T(1,1,1)&=2+2x+x^2\\
+	T(0,1,1)&=1+2x\\\\
+\end{align*}
+\begin{align*}
+	[T(1,1,0)]_\beta&=(2,0,1)\\
+	[T(1,1,1)]_\beta&=(2,2,1)\\
+	[T(0,1,1)]_\beta&=(1,2,0)\\
+\end{align*}
+So $[T]_\alpha^\beta=\left(\begin{smallmatrix}2&2&1\\0&2&2\\1&1&0\end{smallmatrix}\right)$.
+	We know that $[T^{-1}]_\beta^\alpha=([T]_\alpha^\beta)^{-1}$, so $[T^{-1}]_\beta^\alpha=\left(\begin{smallmatrix}1&-\frac{1}{2}&-1\\-1&\frac{1}{2}&2\\1&0&-2\end{smallmatrix}\right)$
+
+
+\section{} % Section 2
+Let $\dim W=k$. $W\subset V$, so $k<n$. Let $\gamma=\{w_1,\ldots,w_k\}$ be an
+ordered basis for $W$, $\alpha=\{v_1,\ldots,v_n\}$ a basis for $V$. By the
+replacement theorem, there are $n-k$ vectors in $\alpha$ which, when added to
+$\gamma$, make it a basis for $V$. Suppose WLOG that these vectors are
+$v_{k+1},\ldots,v_n$, and let $\beta=\{w_1,\ldots,w_k,v_{k+1},\ldots,v_n\}$.
+$T(W)\subset W$, so we can write any vector $T(w)$, where $w\in W$, as a
+linear combination of vectors in $\gamma$. Specifically, we can write it
+\underline{without} any vectors we added from $\alpha$. Thus we construct
+$[T]_\beta^\beta$.
+
+The first $k$ columns are $[T(w_i)]_\beta$, $1\le i\le k$. As we mentioned,
+$T(w_i)$ can be written as a linear combination of vectors in $\gamma$ without
+any of the vectors we added from $\alpha$. So the bottom $n-k$ entries of each
+$[T(w_i)]_\beta$ are all 0. In other words, $[T]_\beta^\beta$ has a
+$n-k$-by-$n-k$ matrix of zeros in the bottom left. $[T]_\beta^\beta$ is
+$n$-by-$n$, so the rest of $A$, $B$, and $C$ are $k$-by-$k$, $k$-by-$n-k$, and
+$n-k$-by-$n-k$ matrices, as desired.
+
+
+\section{} % Section 3
+$V$ is finite dimensional, so we have that $\nullity T+\rank T=\dim V$.
+
+Note that $\ran(T^{k+1})\subseteq\ran(T^k)$, since $T^{k+1}(v)=T^k(T(v))$. If
+we take $k$ to be at least $n$, we see that $\ran(T^{k+1})=\ran(T^k)$ (note
+that this can be the case for smaller values of $k$). Let
+$v\in\ran(T^k)\cap\ker(T^k)$. Then $v=T^k(w)$ for some $w\in V$.
+$v\in\ran(T^k)\cap\ker(T^k)$, so $T^k(v)=0$. $T^k(v)=T^k(T^k(w))=T^{2k}(w)=0$.
+$k\ge n$, so $\ran(T^k)=\ran(T^{2k})$, and so $T^{2k}(w)\in\ran(T^k)$, and
+$T^{2k}(w)=0$, so $w\in\ker(T^{2k})$. $\ker(T^{2k})=\ker(T^k)$ by a similar
+argument, so $w\in\ker(T^k)$. Thus since $v=T^k(w)$, $v=0$. $v$ was
+arbitrarily chosen from $\ran(T^k)\cap\ker(T^k)$, and so
+$\ran(T^k)\cap\ker(T^k)=\{0\}$.
+
+By the dimension theorem, we have $\dim\ran(T^k)+\dim\ker(T^k)=\dim V$, and
+$\ran(T^k)\cap\ker(T^k)=\{0\}$, so since $\ran(T^k)+\ker(T^k)=V$, we have that
+$V=\ran(T^k)\oplus\ker(T^k)$, as desired.
+
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+$ST$ is invertible, so $ST$ is bijective, thus $S$ is surjective and $T$ is
+injective. Similarly, $TS$ is bijective, and so $T$ is surjective and $S$ is
+injective. Thus $S$ and $T$ are both bijective and hence invertible.
+
+
+\subsection{} % Section 4.b
+Let $V=P(\mathbb{R})$. Define $T,S:P(\mathbb{R})\longrightarrow P(\mathbb{R})$
+by $Tf(x)\longmapsto\int_0^xf(x)dx$, $Sf(x)\longmapsto\frac{d}{dx}f(x)$.
+
+$T$ is not surjective, since $1\in P(\mathbb{R})$ is not in the range of $T$.
+$S$ is not injective, since $0\neq1\in P(\mathbb{R})$ is in the kernel of $S$.
+Hence neither $S$ nor $T$ is invertible.
+
+Let $f(x)=\sum_ia_ix^i\in P(\mathbb{R})$.
+$T(\sum_ia_ix^i)=\sum_i\frac{a_ix^{i+1}}{i+1}$, and
+$S(\sum_i\frac{a_ix^{i+1}}{i+1})=\sum_i(i+1)\frac{a_ix^i}{i+1}=f(x)$, so
+$ST=1_{P(\mathbb{R})}$, and is thus invertible, as desired.
+
+
+\end{document}

@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 311}
+\newcommand\hwnumber{1}
+\newcommand\duedate{September 24, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath,amsfonts}
+
+
+\DeclareMathOperator{\Span}{Span}
+
+
+\begin{document}
+
+
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+
+
+\section{} % Section 1
+\subsection{} % Section 1.a
+\begin{align*}
+	F^3=\{(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,0,0),(1,0,1),(1,1,0),(1,1,1)\}
+\end{align*}
+In general, $F^n$ has $2^n$ elements.
+
+
+\subsection{} % Section 1.b
+If $(x,y,z)$ is a general vector in $\Span(S)$, then we have
+$a(1,1,0)+b(1,0,1)+c(0,1,1)=(x,y,z)$ for some $a,b,c\in F$, not all zero. So we
+have $x=a+b$, $y=a+c$, and $z=b+c$:
+\begin{align*}
+	&z=b+c\\
+	&b=x-a\\
+	&c=y-a\\
+	\implies &z=(x-a)+(y-a)\\
+	\implies &2a=x+y-z\\
+	\implies &0=x+y-z\qquad\qquad\text{Since $F=\mathbb{Z}_2$}
+\end{align*}
+So $S$ does not span $F^3$, and $x+y-z=0$ is a non-trivial condition
+for a vector $(x,y,z)\in F^3$ to be in $S$.
+
+
+\subsection{} % Section 1.c
+$\Span(S)=\{(0,0,0),(1,1,0),(1,0,1),(0,1,1)\}$
+
+
+\section{} % Section 2
+Consider the vector $1\in P_3(\mathbb{R})$. We show that there do not exist
+$a,b,c\in\mathbb{R}$ such that $a(x^3-2x^2+1)+b(4x^2-x+3)+c(3x-2)=1$. We
+have:
+\begin{align}
+	a&=0\\
+	-2a+4b&=0\\
+	-b+3c&=0\\
+	a+3b-2c&=1
+\end{align}
+If we take $(2)+2\cdot(1)$, we have $4b=0$, so $b=0$. Now we can plug in $b=0$
+to $-b+3c=0$, obtaining $3c=0$, or $c=0$. So $a=b=c=0$, but $a+3b-2c=1$, so
+$0=1$, thus there exist no such $a,b,c$, and 1 is not in the span of the three
+given vectors, and therefore they do not span $P_3(\mathbb{R})$.
+
+
+\section{} % Section 3
+We prove of $S$ that it satisfies the three conditions sufficient to show that
+it is a subspace: (1): $0\in S$, (2): $v,w\in S\implies(v+w)\in S$, and
+(3): $a\in F,v\in S\implies av\in S$. (For clarity, we denote $F$'s identity
+by 0, and $V$'s by $\vec0$ for the remainder of this proof.)
+\begin{align*}
+	&\text{(1): } \lambda f(v)=f(\lambda v)\implies 0f(v)=f(0v)=f(\vec 0)=0\text{, so $\vec0\in S$.}\\
+	&\text{(2): let $v,w\in S$. } f(v+w)=f(v)+f(w)=0+0=0\text{, so $v+w\in S$.}\\
+	&\text{(3): let $v\in S,a\in F$. } f(av)=af(v)=a0=0\text{, so $av\in S$.}
+\end{align*}
+Thus $S$ is a subspace of $V$.
+
+
+\section{} % Section 4
+$(\Longrightarrow)$: Suppose for a contradiction that $\{u+v,u+w,v+w\}$ is
+linearly dependent. Then $u+v=a(u+w)+b(v+w)$ for some $a,b\in F$ not both zero.
+Then we have $(1-a)u+(1-b)v=(a+b)w$.
+\newline
+\newline
+\underline{Case 1 ($a+b=0$)}: $a+b=0$, so $a=-b$. $F$ is not of characteristic
+2, so if $a=1$, then $b\neq1$. Thus $(1-a)u+(1-b)v\neq0$. If
+$(1-a)\neq0\neq(1-b)$, then we have $v=\frac{1-a}{1-b}u$, a contradiction since
+$\{u,v,w\}$ is linearly independent. If one of $a$ or $b$ is 1, say WLOG a=1,
+then we have $(1-b)u=0$, but $1-b\neq0$, so $u=0$, a contradiction since
+$\{u,v,w\}$ is linearly independent.
+\newline
+\newline
+\underline{Case 2 ($a+b\neq0$)}: $a+b\neq0$, so
+$w=\frac{1-a}{a+b}u+\frac{1-b}{a+b}$. Again, not both of $1-a$ and $1-b$ can be
+0, so we have a nontrivial linear combination, a contradiction since
+$\{u,v,w\}$ is linearly independent.
+\newline
+\newline
+$(\Longleftarrow)$: Suppose for a contradiction that $\{u,v,w\}$ is linearly
+dependent. Then $u=av+bw$ for some $a,b\in F$ not both 0. So
+$\{u+v,u+w,v+w\}=\{av+bw+v,av+bw+w,v+w\}=\{(a+1)v+bw,av+(b+1)w,v+w\}$. Each
+vector in the set is a linear combination of $v$ and $w$, so it is clearly
+linearly dependent, a contradiction since $\{u+v,u+w,v+w\}$ is linearly
+dependent.
+\newline
+\newline
+Thus we've shown both the forward and backward direction, and so $\{u,v,w\}$
+is linearly independent if and only if $\{u+v,u+w,v+w\}$ is, as desired.
+
+
+\end{document}

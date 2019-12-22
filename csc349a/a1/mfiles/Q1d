@@ -1,0 +1,19 @@
+v_approx=47.6034
+
+v_approx =
+
+   47.6034
+
+v_true=(9.81*72.7/12.5)*(1-exp(-1*12.5*10/72.7))
+
+v_true =
+
+   46.8322
+
+err_relative=abs(1-(v_approx/v_true))
+
+err_relative =
+
+    0.0165
+
+diary off

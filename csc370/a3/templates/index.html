@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+	<title>CSC 370 Assignment 3</title>
+	<script src='/static/index.js'></script>
+</head>
+<body>
+	<form role='form' onsubmit='create_user(); return false'>
+		<legend>Create an account:</legend>
+		<input type='text' placeholder='First Name', id='first_name' />
+		<input type='text' placeholder='Last Name', id='last_name' />
+		<input type='email' placeholder='Email', id='email' required />
+		<input type='text' placeholder='Username', id='username' required />
+		<input type='password' placeholder='Password', id='password' required />
+		<input type='password' placeholder='Re-enter Password', id='confirm' required />
+		<input type='text' placeholder='Skype Address', id='skype' />
+		<select id='user_type'>
+			<option value='student'>Student</option>
+			<option value='teacher'>Teacher</option>
+		</select>
+		<select id='grade_level'>
+			<option value='k'>Kindergartan</option>
+			<option value='1'>First Grade</option>
+			<option value='2'>Second Grade</option>
+			<option value='3'>Third Grade</option>
+			<option value='4'>Fourth Grade</option>
+			<option value='5'>Fifth Grade</option>
+			<option value='6'>Sixth Grade</option>
+			<option value='7'>Seventh Grade</option>
+			<option value='8'>Eight Grade</option>
+			<option value='9'>Ninth Grade</option>
+			<option value='10'>Tenth Grade</option>
+			<option value='11'>Eleventh Grade</option>
+			<option value='12'>Twelfth Grade</option>
+			<option value='u'>Post-Secondary</option>
+		</select>
+		<button type='submit' id='submit'>Create Account</button>
+	</form>
+	<br \>
+	<form role='form' onsubmit='create_worksheet(); return false'>
+		<legend>Create Worksheet</legend>
+		<input type='number' placeholder='User ID (temp)' id='creator_id' />
+		<select id='grade_level'>
+			<option value='k'>Kindergartan</option>
+			<option value='1'>First Grade</option>
+			<option value='2'>Second Grade</option>
+			<option value='3'>Third Grade</option>
+			<option value='4'>Fourth Grade</option>
+			<option value='5'>Fifth Grade</option>
+			<option value='6'>Sixth Grade</option>
+			<option value='7'>Seventh Grade</option>
+			<option value='8'>Eight Grade</option>
+			<option value='9'>Ninth Grade</option>
+			<option value='10'>Tenth Grade</option>
+			<option value='11'>Eleventh Grade</option>
+			<option value='12'>Twelfth Grade</option>
+			<option value='u'>Post-Secondary</option>
+		</select>
+		<input type='text' placeholder='Category' id='category' />
+		<input type='text' placeholder='Content URL' id='content' />
+		<button type='submit' id='submit'>Create Worksheet</button>
+	</form>
+</body>

@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}
+\usepackage{listings}
+\lstset{language=Matlab,
+breaklines=true,
+keywordstyle=\color{blue},
+identifierstyle=\color{black},
+stringstyle=\color{mylilas},
+commentstyle=\color{mygreen},
+showstringspaces=false,
+numbers=left,
+numberstyle={\small \color{black}},
+numbersep=9pt,
+emph=[1]{for,end,break},
+emphstyle=[1]\color{red}
+}
+
+\usepackage{color}
+\definecolor{mygreen}{RGB}{28,172,0}
+\definecolor{mylilas}{RGB}{170,55,241}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 349A}
+\newcommand\hwnumber{4}
+\newcommand\duedate{November 5, 2019}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage{graphicx}
+
+\usepackage{algpseudocode}
+
+\usepackage{mathtools}
+\usepackage{amsmath}
+\DeclareMathOperator{\fl}{fl}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+The fourth column of $A^{-1}$ is $x$ such that
+$Ax=\left(\begin{smallmatrix}0\\0\\0\\1\end{smallmatrix}\right)$, so we solve:\\
+$\begin{amatrix}{4}
+	0 & -1 & -2 & -4 & 0\\
+	-2 & -1 & 1 & 0 & 0\\
+	-1 & 2 & -2 & 0 & 0\\
+	1 & 3 & -1 & 0.5 & 1
+\end{amatrix}$
+\newline
+\newline
+Partial pivoting swap rows 1 and 2:
+$\begin{amatrix}{4}
+	-2 & -1 & 1 & 0 & 0\\
+	0 & -1 & -2 & -4 & 0\\
+	-1 & 2 & -2 & 0 & 0\\
+	1 & 3 & -1 & 0.5 & 1
+\end{amatrix}$
+\newline
+\newline
+Forward elminiation:
+$\begin{amatrix}{4}
+	-2 & -1 & 1 & 0 & 0\\
+	0 & -1 & -2 & -4 & 0\\
+	0 & 2.5 & -2.5 & 0 & 0\\
+	0 & 2.5 & -0.5 & 0.5 & 1
+\end{amatrix}$
+\newline
+\newline
+Partial pivoting: swap rows 2 and 3:
+$\begin{amatrix}{4}
+	-2 & -1 & 1 & 0 & 0\\
+	0 & 2.5 & -2.5 & 0 & 0\\
+	0 & -1 & -2 & -4 & 0\\
+	0 & 2.5 & -0.5 & 0.5 & 1
+\end{amatrix}$
+\newline
+\newline
+Forward elimination:
+$\begin{amatrix}{4}
+	-2 & -1 & 1 & 0 & 0\\
+	0 & 2.5 & -2.5 & 0 & 0\\
+	0 & 0 & -3 & -4 & 0\\
+	0 & 0 & 2 & 0.5 & 1
+\end{amatrix}$
+\newline
+\newline
+Partial pivoting: no swap. Forward elimination:
+$\begin{amatrix}{4}
+	-2 & -1 & 1 & 0 & 0\\
+	0 & 2.5 & -2.5 & 0 & 0\\
+	0 & 0 & -3 & -4 & 0\\
+	0 & 0 & 0 & -\frac{13}{6} & 1
+\end{amatrix}$
+\newline
+\newline
+Back substitution:
+\newline
+\newline
+\begin{align*}
+	x_4&=\frac{b_4}{a_{44}}=\frac{1}{-\frac{13}{6}}&=-\frac{6}{13}\\
+	x_3&=\frac{b_3-a_{34}x_4}{a_{33}}=\frac{0-(-4)(-\frac{6}{13})}{-3}&=\frac{8}{13}\\
+	x_2&=\frac{b_2-a_{23}x_3-a_{24}x_4}{a_{22}}=\frac{0-(-2.5)(\frac{8}{13})-(0)(-\frac{6}{13})}{2.5}&=\frac{8}{21}\\
+	x_1&=\frac{b_1-a_{12}x_2-a_{13}x_3-a_{14}x_4}{a_{33}}=\frac{0-(-1)(\frac{8}{21})-(1)(\frac{8}{13})-(0)(-\frac{6}{13})}{-2}&=0
+\end{align*}
+So we get $x=\left(\begin{smallmatrix}0\\\frac{8}{13}\\\frac{8}{13}\\-\frac{6}{13}\end{smallmatrix}\right)$.
+
+
+\subsection{} % Section 1.b
+We performed an even number of row swaps, so we need not flip the sing of our
+number at the end, so we have
+\[\det A=(-2)(2.5)(-3)(-\frac{13}{6})=-32.5,\]
+the product of the diagonal entries in the upper triangular matrix we obtained
+from the Gaussian elimination.  
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+\begin{algorithmic}[1]
+	\Function{SLEDiag}{A, b}
+	\State $n \gets \text{rank}\;A$
+	\State $x_1 \gets \frac{b_1}{a_{11}}$
+	\State $x_2 \gets \frac{b_2-a_{21}x_1}{a_{22}}$
+	\For{$i \gets 3,\ldots, n$}
+	\State $x_i \gets \frac{b_i-a_{i,i-2}x_{i-2}-a_{i,i-1}x_{i-1}}{a_{ii}}$
+	\EndFor
+	\State \Return $(x_1,\ldots,x_n)$
+	\EndFunction
+\end{algorithmic}
+
+
+\subsection{} % Section 2.b
+Computing $x_1$ takes one division, for a total of one flop, and computing
+$x_2$ takes one multiplication, one subtraction, and one division, for a total
+of three flops. For each $i$ from 3 to $n$, computing $x_i$ takes two
+multiplications, two subtractions, and one division, for a total of five
+flops. Thus the total flop count of our algorithm is
+\[1+3+5(n-2)=5n-6\in\Theta(n),\]
+so our algorithm solves such systems in linear time.
+
+
+\subsection{} % Section 2.c
+\lstinputlisting{mfiles/SLEDiag.m}
+The MATLAB statements used to call SLEDiag, along with its output:
+\lstinputlisting[numbers=none]{mfiles/q2c}
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+We solve:
+$\begin{amatrix}{2}
+	3.102 & -0.155 & -2.012\\
+	-2.534 & 0.1234 & 1.007\\
+\end{amatrix}$
+\newline
+\newline
+Our factor is
+$\fl\left(\frac{a_{21}}{a_{11}}\right)=\fl\left(\frac{-2.534}{3.102}\right)
+=-0.8169$. After forward elimination, we have
+$\begin{amatrix}{2}
+	3.102 & -0.155 & -2.012\\
+	0 & 0.2500 & 1.644\\
+\end{amatrix}$
+\newline
+\newline
+Now, performing back substitution, we get
+$x_2=\fl\left(\frac{b_2}{a_{22}}\right)=\fl\left(\frac{1.644}{0.2500}\right)=6.576$
+\begin{align*}
+	x_1&=\fl\left(\frac{\fl\left(b_1-\fl\left(a_{12}x_2\right)\right)}{a_{11}}\right)\\
+	&=\fl\left(\frac{\fl\left(-2.012-\fl\left((-0.155)(6.576)\right)\right)}{3.102}\right)\\
+	&=\fl\left(\frac{\fl\left(-2.012-\left(-1.102\right)\right)}{3.102}\right)\\
+	&=\fl\left(\frac{-0.9100}{3.102}\right)\\
+	&=-0.2934\\
+\end{align*}
+So we get $a_{22}=0.2500$, $b_2=1.644$, $x_1=-0.2934$, and $x_2=6.576$.
+
+
+\subsection{} % Section 3.a
+\lstinputlisting[numbers=none]{mfiles/q3b}
+
+
+\end{document}
