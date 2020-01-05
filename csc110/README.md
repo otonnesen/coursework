@@ -1,6 +1,7 @@
 # CSC 110 - Fundamentals of Programming I
 
 Introductory Java programming.
+https://heat.csc.uvic.ca/coview/course/2017091/CSC110
 
 ## Topics
 - Looping
