@@ -27,11 +27,14 @@
 
 \begin{document}
 \section{Introduction}
+
 \subsection{Definition of split graphs}
+
 A split graph is one that can be partitioned into a clique and an independent set.
 
 
 \subsection{Examples}
+
 $K_n\lor\overline{K_m}$:
 \newline
 \newline
@@ -113,6 +116,7 @@ $K_{1,n}$:
 
 
 \subsection{Basic properties}
+
 \begin{itemize}
 	\item If $G$ is a split graph, then $\overline{G}$ is a split graph.
 	\item If $G$ is a split graph with partition $(S,K)$, $S$ an independent set and $K$
@@ -124,51 +128,50 @@ $K_{1,n}$:
 			\item $|S|=\alpha(G)-1$ and $|K|=\omega(G)$, and there exists a vertex
 				$y\in K$ such that $S+y$ is independent.
 		\end{enumerate}
-	\item $G$ is a split graph if and only if both $G$ and $\overline{G}$ are chordal.\cite{Golumbic}
+	\item $G$ is a split graph if and only if both $G$ and $\overline{G}$ are chordal. \cite{Golumbic}
 \end{itemize}
 
 
 \section{Characterizations}
+
 \subsection{Vertex ordering}
-Let $G$ be a graph with degree sequence $d_1\le\cdots\le d_n$, and let $m$ be
-the largest $i$ with $d_i\ge i-1$. Then $G$ is a split graph if and only if
-\[\sum_{i=1}^md_i=m(m-1)+\sum_{i=m+1}^nd_i.\]
-Furthermore, if the above equality holds, then $\omega(G)=m$.\cite{Hammer}
+
+Let $G$ be a graph with degree sequence $d_1\le\cdots\le d_n$, and let $m$ be the largest $i$ with $d_i\ge i-1$.
+Then $G$ is a split graph if and only if \[\sum_{i=1}^md_i=m(m-1)+\sum_{i=m+1}^nd_i.\]
+Furthermore, if the above equality holds, then $\omega(G)=m$. \cite{Hammer}
 
 
 \subsection{Forbidden subgraphs}
-$G$ is a split graph if and only if $G$ contains no induced subgraph
-isomorphic to any of $C_4$, $\overline{C_4}$, or $C_5$.\cite{Hammer}
+
+$G$ is a split graph if and only if $G$ contains no induced subgraph isomorphic to any of $C_4$, $\overline{C_4}$, or $C_5$. \cite{Hammer}
 
 
 \section{Optimization problems}
+
 \subsection{Colouring}
-Split graphs are in particular chordal graphs. \cite{Golumbic} gives an
-algorithm to colour chordal graphs in linear time, so split graphs can also be
-coloured in linear time. This is a very hard problem in general, and colouring
-an arbitrary graph takes exponential time.
+
+Split graphs are in particular chordal graphs.
+\cite{Golumbic} gives an algorithm to colour chordal graphs in linear time, so split graphs can also be coloured in linear time.
+This is a very hard problem in general, and colouring an arbitrary graph takes exponential time.
 
 
 \subsection{Maximum clique}
-$m$ as defined in the vertex ordering characterization of split graphs allows
-us to find a maximum clique: the $m$ vertices of largest degree form a maximum
-clique on $G$. This process can be done in linear time.
+
+$m$ as defined in the vertex ordering characterization of split graphs allows us to find a maximum clique: the $m$ vertices of largest degree form a maximum clique on $G$.
+This process can be done in linear time.
 
 
 \subsection{Maximum independent set}
+
 Let $K$ be the maximum clique obtained using the above method.
-$V(G)\setminus K$ is an independent set, so we know from the basic properties
-that exactly one of the three cases is possible, and $\alpha(G)$ is either
-$|V(G)\setminus K|$ or $|V(G)\setminus K|+1$. If it is $|V(G)\setminus K|+1$,
-then there exists a vertex $y\in K$ such that $V(G)\setminus K + y$ is still
-independent. We can search $K$ for such a vertex in linear time, and we're
-done.
+$V(G)\setminus K$ is an independent set, so we know from the basic properties that exactly one of the three cases is possible, and $\alpha(G)$ is either $|V(G)\setminus K|$ or $|V(G)\setminus K|+1$.
+If it is $|V(G)\setminus K|+1$, then there exists a vertex $y\in K$ such that $V(G)\setminus K + y$ is still independent.
+We can search $K$ for such a vertex in linear time, and we're done.
 
 
 \subsection{Minimum clique covering}
-We know that $\overline{G}$ is a split graph, so we can colour $\overline{G}$
-using the algorithm given in \cite{Golumbic} to get a set of colour classes,
-all of which are independent sets in $\overline{G}$, hence cliques in $G$.
+
+We know that $\overline{G}$ is a split graph, so we can colour $\overline{G}$ using the algorithm given in \cite{Golumbic} to get a set of colour classes, all of which are independent sets in $\overline{G}$, hence cliques in $G$.
 Since the colouring is optimal, the corresponding clique cover is minimal.
 
 
