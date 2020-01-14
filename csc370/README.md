@@ -3,7 +3,7 @@
 The use and principals of database management systems.
 https://heat.csc.uvic.ca/coview/course/2019091/CSC370
 
-##Topics
+## Topics
 - Entity-Relationship diagrams
 - Relational algebra
 - SQL

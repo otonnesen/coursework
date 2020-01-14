@@ -3,7 +3,7 @@
 Advanced techniques for the design, analysis, and implementation of data structures and algorithms.
 https://heat.csc.uvic.ca/coview/course/2018091/CSC226
 
-##Topics
+## Topics
 - Amortized analysis
 - Discrete probability
 - Recurrence relations

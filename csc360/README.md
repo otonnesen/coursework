@@ -3,7 +3,7 @@
 The major concepts of operating systems and study of the relationships between computer architecture and the operating system.
 https://heat.csc.uvic.ca/coview/course/2019011/CSC360
 
-##Topics
+## Topics
 - CPU scheduling
 - Concurrency, paralellism, and deadlocks
 - Memory management
