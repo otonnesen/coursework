@@ -1,0 +1,13 @@
+env/
+__pycache__/
+assignment[1-7].pdf
+data/
+logs/
+save/
+cifar-10-batches-py/
+cifar-100-python/
+*.pyc
+*.swp
+TAGS
+tags
+project/

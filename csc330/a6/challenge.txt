@@ -1,0 +1,7 @@
+My challenge feature is the ability to hold a piece like in real Tetris.
+The keybind to swap your current piece with the held piece is `s`.
+
+I wasn't sure how to change the size of the window without using the Tk library, so the interface doesn't actually fit.
+Without increasing the window width, the hold feature will still work fine, you just won't be able to see what piece is actually held.
+
+If you do want to see this feature in all its glory, I've attached a .diff to patch hw6graphics.rb yourself, since I'm not allowed to use Tk.

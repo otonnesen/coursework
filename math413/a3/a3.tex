@@ -1,0 +1,162 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 413}
+\newcommand\hwnumber{3}
+\newcommand\duedate{March 6, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclareMathOperator{\Span}{Span}
+\def\F{\mathbb{F}}
+\def\a{\alpha}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\subsection{} % Section 1.a
+Recall the Hamming bound:
+\[\frac{q^k}{\abs{B_{\frac{d-1}{2}}}}\]
+and the Singleton bound:
+\[\frac{q^k}{q^{d-1}}.\]
+To show that 
+\[\frac{q^k}{\abs{B_{\frac{d-1}{2}}}}\le\frac{q^k}{q^{d-1}},\]
+we need only show that
+\[\abs{B_{\frac{d-1}{2}}}\ge q^{d-1}.\]
+
+We know that
+\[\abs{B_{\frac{d-1}{2}}}=
+\sum_{i=0}^{\left\lfloor\frac{d-1}{2}\right\rfloor}\binom{n}{i}\left(q-1\right)^i,\]
+so since $q$ is fixed, we can just pick $n$ to be large enough that the inequality holds.
+
+
+\subsection{} % Section 1.b
+As we saw in part 1.a, we need only find the smallest $n$ such that
+\[\sum_{i=0}^{\left\lfloor\frac{d-1}{2}\right\rfloor}\binom{n}{i}(q-1)^i\ge q^{d-1}.\]
+Plugging in $q=3$ and $d=6$, we have
+\begin{align*}
+	&\sum_{i=0}^2\binom{n}{i}2^i\ge243\\
+	\Longleftrightarrow\quad&1+2n+4\frac{n^2-n}{2}\ge243\\
+	\Longleftrightarrow\quad&2n^2+1\ge243.
+\end{align*}
+So we see $n=11$ is the value after which the Hamming bound begins to beat the Singleton bound.
+
+
+\section{} % Section 2
+We first restrict our attention to the subset of words in $\F_2^n$ with weight $w$: $W=\left\{v\in\F_2^n\mid wt(v)=w\right\}$.
+\newline
+\newline
+We find the number words in $W$ contained in a ball with radius $d-1$.
+First, fix $c\in W$, and without loss of generality, let $w\le\frac{n}{2}$.
+There are $\binom{w}{1}\binom{n-w}{1}$ weight $w$ words at distance 2 from $c$.
+In general, for any $2k\le w$, there are $\binom{w}{k}\binom{n-w}{k}$ words of weight $w$ at distance $2k$ from $c$.
+So the ball with radius $d-1$ centred at $c$ contains
+\[\sum_{i=0}^{\left\lfloor\frac{d-1}{2}\right\rfloor}\binom{w}{i}\binom{n-w}{i}\]
+words of weight $w$.
+\newline
+\newline
+We first define $B_{d-1}(u)$ to be the ball centred at $u$, restricted to $W$.
+Using the same notation we saw in the proof of the Gilbert-Varshamov bound in class, let $U_1:=W$.
+For $i\ge1$, choose $u_i\in U_i$ to include in $C$, and let $U_{i+1}:=U_i\setminus B_{d-1}(u_i)$.
+Then $\abs{U_{i+1}}\ge\binom{n}{w}-i\abs{B_{d-1}}$.
+We can continue this until the right hand size is less than or equal to zero.
+In other words, when
+\begin{align*}
+	i&\ge\frac{\binom{n}{w}}{\abs{B_{d-1}}}\\
+	 &=\frac{\binom{n}{w}}{\sum_{j=1}^{\left\lfloor\frac{d-1}{2}\right\rfloor}
+	 \binom{w}{j}\binom{n-w}{j}}
+\end{align*}
+
+
+\section{} % Section 3
+
+
+\section{} % Section 4
+
+
+\section{} % Section 5
+($\Longrightarrow$):
+Suppose $C$ is linear.
+Then $C$ is a subspace of $\F_q^n$.
+Assume for a contradiction that $n\neq1$ and $q\neq2$.
+Then $n\ge2$ and $q\ge3$.
+Consider the two words $u=11\cdots0$ and $v=1(q-1)0\cdots0$.
+These words have even weight, so certainly they are elements of $C$, but notice that $u+v=20\cdots0$, a word of odd weight, therefore not in $C$.
+This contradicts $C$'s linearity, so it must not be the case that $n\neq1$ and $q\neq2$, so $n=1$ or $q=2$.
+\newline
+\newline
+($\Longleftarrow$):
+Suppose $n=1$ or $q=2$.
+If $n=1$, the only even weight code word is 0, and $C=\left\{0\right\}$ is certainly a linear code.
+If $q=2$, then let $u,v\in C$.
+$u$ and $v$ must differ in an even number of places, since if they did not, then one of them would have odd weight.
+Given this and the fact that when $q=2$, the weight of $u+v$ is the same as their distance, it is clear to see that $u+v$ must also have even weight, and hence be in $C$.
+Closure under multiplication is obvious, so $C$ is indeed linear.
+\newline
+\newline
+Thus we've shown both directions, and so equivalence holds.
+
+
+\section{} % Section 6
+\subsection{} % Section 6.a
+We place each of the words in $S$ as the rows of a matrix:
+\newline
+\newline
+$\begin{pmatrix}
+	1 & 2 & 0 & 1 & 2 \\
+	2 & 0 & 1 & 2 & 0 \\
+	0 & 1 & 2 & 0 & 1
+\end{pmatrix}$
+\newline
+\newline
+In reduced row echelon form, this is 
+\newline
+\newline
+$\begin{pmatrix}
+	1 & 2 & 0 & 1 & 2 \\
+	0 & 0 & 0 & 0 & 0 \\
+	0 & 1 & 2 & 0 & 1
+\end{pmatrix}$.
+Thus a generator matrix for $C$ is
+$\begin{pmatrix}
+	1 & 0 & 2 & 1 & 0 \\
+	0 & 1 & 2 & 0 & 1
+\end{pmatrix}$.
+From here, we see the parity check matrix for $C$ is
+\newline
+\newline
+$\begin{pmatrix}
+	-2 & -2 & 1 & 0 & 0 \\
+	-1 & 0 & 0 & 1 & 0 \\
+	0 & -1 & 0 & 0 & 1
+\end{pmatrix}=
+\begin{pmatrix}
+	1 & 1 & 1 & 0 & 0 \\
+	2 & 0 & 0 & 1 & 0 \\
+	0 & 2 & 0 & 0 & 1
+\end{pmatrix}$.
+
+
+\subsection{} % Section 6.b
+$C$ has dimension 2 over a 5-dimensional space, so $C^\perp$ has dimension 3.
+
+
+\subsection{} % Section 6.c
+$C$ is linear, so its minimum distance is the same as its minimum weight nonzero code word.
+Looking at the equations given by multiplying $C$'s parity-check matrix with an arbitrary word in $\F_3^5$, it is clear to see that allowing no more than two symbols to be nonzero violates at least one of the three equations, so the minimum weight nonzero code word must be at least three.
+At this point we can simply observe that 01201 is a codeword, so the minimum distance is 3.
+
+
+\section{} % Section 7
+
+
+\end{document}

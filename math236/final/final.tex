@@ -1,0 +1,139 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 236}
+\newcommand\hwnumber{5}
+\newcommand\duedate{April 6, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Take Home Final}}
+\rhead{\course\\\duedate}
+
+\usepackage[left=1.5in,right=1.5in]{geometry}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\ep\varepsilon
+\DeclarePairedDelimiter\set{\left\{}{\right\}}%
+\DeclareMathOperator{\im}{im}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Yes, $f$ is uniformly continuous on $(1,2)$.
+\newline
+\newline
+Let $\ep > 0$, and let $\delta = \ep$.
+Then if $\abs{x-y} < \delta$,
+\begin{align*}
+	\abs{\frac{1}{x}-\frac{1}{y}} &= \abs{\frac{x-y}{xy}}\\
+								  &< \abs{x-y}\qquad\text{(Since $x,y>1$)}\\
+								  &< \delta = \ep.
+\end{align*}
+So $\abs{\frac{1}{x}-\frac{1}{y}} < \ep$, as desired.
+
+
+\section{} % Section 2
+Let $\delta = 100 - \sqrt[3]{100^3-10^{-10}}$.
+Then let $\abs{x-y} < \delta$.
+Note that $\abs{x^3-y^3}$ is maximized when one of $x$ or $y$ is equal to 100.
+In other words, if $\abs{x-y} < \delta$, and $\abs{100-z} < \delta$, then $\abs{x^3-y^3} \le \abs{100^3-z^3}$.
+$z \le 100$, so $\abs{100^3-z^3} = 100^3 - z^3$.
+Then, since $100 - z < \delta = 100 - \sqrt[3]{100^3-10^{-10}}$, we have
+\begin{align*}
+	&100 - z < 100 - \sqrt[3]{100^3-10^{-10}}\\
+	\implies &-z < - \sqrt[3]{100^3-10^{-10}}\\
+	\implies &z > \sqrt[3]{100^3-10^{-10}}\\
+	\implies &z^3 > 100^3-10^{-10}\\
+	\implies &100^3-z^3 < 10^{-10}\\
+	\implies &\abs{100^3-z^3} < 10^{-10} = \ep\\
+\end{align*}
+Since, as we saw, $\abs{x^3-y^3} \le \abs{100^3-z^3}$, the above holds for any $x,y\in I$, $\abs{x-y} < \delta$, as desired.
+
+
+\section{} % Section 3
+$\sum_{n=1}^\infty a_n$ converges to a real number, so $a_n\rightarrow0$.
+This means that there exists some $N$ such taht $a_n\le1$ for all $n>N$.
+We know that $a_n^2\le a_n$ whenever $a_n\le1$, so
+\[\sum_{n=N}^\infty a_n^2 \le \sum_{n=N}^\infty a_n.\]
+$\sum_{n=1}^{N-1} a_n^2$ is a finite sum, and thus is a real number.
+Also, since $\sum_{n=N}^\infty a_n^2$ is bounded above by $\sum_{n=N}^\infty a_n$, a real number, it must be a real number as well.
+Thus we have
+\[\sum_{n=1}^\infty a_n^2 = \sum_{n=1}^{N-1} a_n^2 + \sum_{n=N}^\infty a_n^2\]
+is a sum of two real numbers, and so $\sum_{n=1}^\infty a_n^2$ must itself converge to a real number, as desired.
+
+
+\section{} % Section 4
+Let $\ep > 0$.
+$g$ is uniformly continuous, so for any $\ep_1 > 0$, there exists some $\delta_1 > 0$ such that if $x,y \in B$, $\abs{x-y} < \delta_1$, then $\abs{g(x)-g(y)} < \ep_1$.
+Similarly, $f$ is uniformly continuous, so for any $\ep_2 > 0$, there exists some $\delta_2 > 0$ such that if $w,z \in A$, $\abs{w-z} < \delta_2$, then $\abs{f(w)-f(z)} < \ep_2$.
+\newline
+\newline
+Choose $\ep_2$ to be $\ep$, and let $\delta_2$ be chosen as above.
+Also choose $\ep_1$ to be $\delta_2$, and let $\delta_1$ be chosen as above.
+Let $x,y \in B$, $\abs{x-y} < \delta_1$.
+Then $\abs{g(x)-g(y)} < \ep_1 = \delta_2$.
+$g(x),g(y) \in \im{g} \subseteq A$, so since $\abs{g(x)-g(y)} < \delta_2$, $\abs{f(g(x))-f(g(y))} < \ep_2 = \ep$, and so $f \circ g$ is indeed uniformly continuous on $B$, as desired.
+
+
+\section{} % Section 5
+We claim $\overline{S} = \left[0,\infty\right)$.
+Let $x \in \left[0,infty\right)$, and let $\ep > 0$.
+We know that for any real number $x$ and positive integer $k$, there exists an integer $a$ such that $kx \in \left[a,a+1\right)$ and $\abs{x-\frac{a}{k}} < \frac{1}{k}$.
+Take $k$ to be the larger of the two following numbers:
+$\frac{1}{\ep}$, and the smallest integer of the form $2^n$ such that $a+1 \le 4^n$.
+Although $a$ is dependent on the choice of $k$, $4^n$ grows much faster than $2^n$, so this choice of $k$ is always possible given a large enough $n$.
+Given this, $k = \frac{a}{2^n} \in S$.
+We now have
+\begin{align*}
+	\abs{x-\frac{a}{k}} &= \abs{x-\frac{a}{2^n}}\\
+						&< \frac{1}{k}\\
+						&< \ep
+\end{align*}
+So indeed, $\overline{S} = \left[0,\infty\right)$, as desired.
+
+\section{} % Section 6
+Let $\ep = \abs{\alpha-\beta} \neq 0$.
+Assume for a contradiction that the sequence $(a_n)$ is convergent.
+Then $(a_n)$ is Caucy.\\
+Choose $N_1$ such that $m,n > N_1 \implies \abs{a_m-a_n} < \frac{\ep}{3}$.\\
+Choose $N_2$ such that $p_i > N_2 \implies \abs{a_{p_i}-\alpha} < \frac{\ep}{3}$.\\
+Choose $N_3$ such that $q_i > N_3 \implies \abs{a_{q_i}-\beta} < \frac{\ep}{3}$.\\
+Finally, let $N=\max\left\{N_1,N_2,N_3\right\}$.
+Then by the triangle inequality,
+\[\abs{\alpha-a_{p_i}} + \abs{a_{p_i}-a_{q_i}} + \abs{a_{q_i}-\beta} \ge \abs{\alpha-\beta},\]
+but we also have
+\begin{align*}
+	\abs{\alpha-a_{p_i}} + \abs{a_{p_i}-a_{q_i}} + \abs{a_{q_i}-\beta} &< \frac{\ep}{3} + \frac{\ep}{3} + \frac{\ep}{3}\\
+																	   &= \ep.
+\end{align*}
+So we end up with
+\[\ep > \abs{\alpha-a_{p_i}} + \abs{a_{p_i}-a_{q_i}} + \abs{a_{q_i}-\beta} \ge \abs{\alpha-\beta},\]
+or $\ep > \abs{\alpha-\beta}$, but $\ep = \abs{\alpha-\beta}$, a contradiction, and so $(a_n)$ is not a convergent sequence, as desired.
+
+
+\section{} % Section 7
+Let $S' = \left\{\abs{s} \mid s\in{S}\right\}$.
+Then $\sup{S'} = \max\left\{\abs{\sup{S}},\abs{\inf{S}}\right\}$.
+We know $\abs{\sup{S}}^2 = \left(\sup{S}\right)^2$ and $\abs{\inf{S}}^2 = \left(\inf{S}\right)^2$, so we need only show that $\sup{T} = \left(\sup{S'}\right)^2$.
+\newline
+\newline
+Assume for a contradiction that $\sup{T} \neq \left(\sup{S'}\right)^2$.
+Then there is some $s \in S'$ such that $s \neq \sup{S'}$, but $\sup{T} = s^2$.
+$s < \sup{S'}$, so there exists some $s' \in S'$ such that $s < s' < \sup{S'}$.
+Then $\left(s'\right)^2 > s^2 = \sup{T} \ge \left(s'\right)^2$, a contradiction, and so $\sup{T} = \left(\sup{S'}\right)^2 = \left(\max\left\{\abs{\sup{S}},\abs{\inf{S}}\right\}\right)^2 = \max\left\{\left(\sup{S}\right)^2,\left(\inf{S}\right)^2\right\}$, as desired.
+\newline
+\newline
+$\inf{T}$ need not be equal to $\min\left\{\left(\sup{S}\right)^2,\left(\inf{S}\right)^2\right\}$.
+Consider for example $S=\left(-1,1\right)$.
+$\min\left\{\left(\sup{S}\right)^2,\left(\inf{S}\right)^2\right\} = 1$, but $\inf{T} = 0$.
+
+
+\section{} % Section 8
+
+
+\end{document}

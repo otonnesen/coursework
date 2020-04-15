@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 413}
+\newcommand\hwnumber{4}
+\newcommand\duedate{March 20, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclareMathOperator{\Span}{Span}
+\def\F{\mathbb{F}}
+\def\a{\alpha}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+\begin{align*}
+	C&=\left\{u_1u_2u_3u_4\in\F_3^4\mid u_1+u_2=u_3+u_4=0\right\}\\
+	 &=\left\{0000,0012,0021,1200,1212,1221,2100,2112,2121\right\}
+\end{align*}
+The coset containing 1000 also contains 0100.
+The same is true of 0010 and 0001, 2000 and 0200, and 0020 and 0002, so each of the four remaining cosets' least weight representatives have weight at least 2.
+It's easy to see that 1010, 2020, 2001, and 1002 all represent different cosets, so the least weight representatives for each coset are the following:
+0000, 1000, 0010, 2000, 0020, 1010, 2020, 2001, 1002.
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+$q^n=243>233=\sum_{i=0}^{d-2}\binom{n-1}{i}\left(q-1\right)^i$, so we can use the construction given in the proof of proposition 5.13 in the course notes to get
+\[H=\begin{pmatrix}
+	1 & 0 & 0 & 0 & 0 & 1 & 2\\
+	0 & 1 & 0 & 0 & 0 & 1 & 2\\
+	0 & 0 & 1 & 0 & 0 & 1 & 1\\
+	0 & 0 & 0 & 1 & 0 & 1 & 1\\
+	0 & 0 & 0 & 0 & 1 & 0 & 1\\
+\end{pmatrix}.\]
+
+\subsection{} % Section 2.b
+We know if $H$ is the parity check matrix for $C$ such that $H^\top=\begin{pmatrix}-X\\\hline I_{n-k}\end{pmatrix}$, then $G=\begin{pmatrix}I_k\mid X\end{pmatrix}$ is its generator matrix.
+Permuting $H$, we get
+\[H'=\begin{pmatrix}
+	1 & 2 & 1 & 0 & 0 & 0 & 0\\
+	1 & 2 & 0 & 1 & 0 & 0 & 0\\
+	1 & 1 & 0 & 0 & 1 & 0 & 0\\
+	1 & 1 & 0 & 0 & 0 & 1 & 0\\
+	0 & 1 & 0 & 0 & 0 & 0 & 1\\
+\end{pmatrix}.\]
+Then 
+\[H'^\top=\begin{pmatrix}
+	1 & 1 & 1 & 1 & 0\\
+	2 & 2 & 1 & 1 & 1\\
+	1 & 0 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0 & 0\\
+	0 & 0 & 1 & 0 & 0\\
+	0 & 0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 0 & 1\\
+\end{pmatrix}\]
+is in the desired form, so we get
+\[-X=\begin{pmatrix}
+	1 & 1 & 1 & 1 & 0\\
+	2 & 2 & 1 & 1 & 1\\
+\end{pmatrix},\]
+and so
+\[G=\begin{pmatrix}
+	1 & 0 & 2 & 2 & 2 & 2 & 0\\
+	0 & 1 & 1 & 1 & 2 & 2 & 2\\
+\end{pmatrix},\]
+$G\in\F_3^{2\times7}$, so the code it generates, $C$, has dimension 2 over $\F_3^7$.
+This means $\abs{C}=3^2$.
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+For $C$, $w_0=1$, $w_1=0$, $w_2=0$, $w_3=0$, and $w_4=1$.
+$\left\{1111\right\}$ is a basis for $C$, so $G=\begin{pmatrix}1&1&1&1\end{pmatrix}$ is a generator matrix for $C$.
+This gives us a parity check matrix,
+\[H=\begin{pmatrix}
+	1 & 1 & 0 & 0\\
+	1 & 0 & 1 & 0\\
+	1 & 0 & 0 & 1
+\end{pmatrix}.\]
+So $C^\perp=\left\{0000,1001,1010,0011,1100,0101,0110,1111\right\}$.
+This means for $C^\perp$, $w_0=1$, $w_1=0$, $w_2=6$, $w_3=0$, and $w_4=1$.
+So using the above coefficients, we get
+\newline
+\newline
+$A(x,y)=y^4+x^4$
+\newline
+\newline
+and
+\newline
+\newline
+$A^\perp(x,y)=y^4+6x^2y^2+x^4$.
+
+
+\subsection{} % Section 3.b
+\begin{align*}
+	A(y-x,x+y)&=(x+y)^4+(y-x)^4\\
+			  &=x^4+4x^3y+6x^2y^2+4xy^3+y^4\\
+			  &+y^4-4y^3x+6y^2x^2-4yx^3+y^4\\
+			  &=2x^4+12x^2y^2+2y^4
+\end{align*}
+We saw that $k=\dim C=1$, so in this case, $\frac{1}{2^k}A(y-x,x+y)=\frac{1}{2}A(y-x,x+y)=x^4+6x^2y^2+y^4=A^\perp(x,y)$, as desired.
+
+
+\section{} % Section 4
+$C_{23}$ is perfect, so it attains equality in the Hamming bound -- that is, the balls of radius $\left\lfloor\frac{d-1}{2}\right\rfloor$ partition $\F_2^{23}$.
+In this case, $d=d_\text{min}(C_{23})=7$, so $\left\lfloor\frac{d-1}{2}\right\rfloor=3$.
+This means each word of weight 4 in $\F_2^{23}$ is contained in exactly one ball around a codeword of weight 7.
+There are $\binom{7}{3}$ words of weight 4 at distance 3 from any given codeword of weight 7, so we can count the number of code words of weight 7 by counting the number of balls needed to contain all of the weight 4 words in $\F_2^{23}$: $\frac{\binom{23}{4}}{\binom{7}{3}}=253$.
+
+
+\section{} % Section 5
+When $t=1$, we know that the only nontrivial $t$-error-correcting perfect codes are the Golay codes, which certainly fail to exist for sufficiently large primes.
+\newline
+\newline
+When $t>1$, the only perfect codes are the Hamming codes.
+These codes have $n=\frac{q^r-1}{q-1}$, so if $n$ is fixed, then $\frac{q^r-1}{q-1}$ is increasing in $q$, so for larger $q$, no Hamming codes of length $n$ can exist.
+
+
+\section{} % Section 6
+Consider the $k$-th term of $L_t(x)$, $(-1)^k(q-1)^{t-k}\binom{n-x}{t-k}\binom{x-1}{k}$.
+When $x=0$,
+\begin{align*}
+	\binom{n-x}{t-k}&=\frac{(n-x)!}{(t-k)!((n-x)-(t-k))!}\\
+					&=\frac{n!}{(t-k)!(n-(t-k))!}\\
+					&=\binom{n}{t-k}
+\end{align*}
+and
+\begin{align*}
+	\binom{x-1}{k}&=\frac{(x-1)!}{k!(x-1-k)!}\\
+				  &=\frac{(x-1)(x-2)\cdots(x-k)}{k!}\\
+				  &=\frac{(-1)^kk!}{k!}\\
+				  &=(-1)^k.
+\end{align*}
+So
+\begin{align*}
+	L_t(0)&=(-1)^k(q-1)^{t-k}\binom{n}{t-k}(-1)^k\\
+		  &=(-1)^{2k}(q-1)^{t-k}\binom{n}{t-k}\\
+		  &=(q-1)^{t-k}\binom{n}{t-k}.
+\end{align*}
+If we now compare $L_t(0)$ and $\abs{B_t}=\sum_{i=0}^t\binom{n}{i}(q-1)^i$, we can see that the $k$-th term of $L_t(0)$ is the same as the $(t-k)$-th term of $\abs{B_t}$.
+So the constant term in the Lloyd polynomial equals the size of the ball of radius $t$, as desired.
+
+
+\section{} % Section 7
+\subsection{} % Section 7.a
+\[2A_1+3A_3\]
+
+
+\subsection{} % Section 7.b
+\[3A_0+2A_2\]
+
+
+\end{document}

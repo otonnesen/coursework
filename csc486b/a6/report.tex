@@ -1,0 +1,56 @@
+\documentclass[11pt]{article}
+\usepackage{listings}
+\lstset{
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 486B}
+\newcommand\hwnumber{6}
+\newcommand\duedate{March 29, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{mathtools}
+\usepackage{amsmath}
+
+
+\begin{document}
+\section*{Hyperparameters}
+Bob set the learning rate too high.
+The bug can be fixed by adjusting the learning rate to a lower value, as below:
+\begin{lstlisting}
+python solution.py --learning-rate=0.01 --mode=train --rep_intv=1
+	--conv2d=torch
+\end{lstlisting}
+
+
+\section*{model.py/MyNetwork/forward}
+Bob incorrectly normalized his data.
+On line 211 in model.py, Bob wrote
+\begin{lstlisting}
+x = x / 127.5 - 127.5.
+\end{lstlisting}
+This results in x being between $-127.5$ and $-125.5$, instead of $-1.0$ and $1.0$.
+Instead, he should have written
+\begin{lstlisting}
+x = (x - 127.5) / 127.5,
+\end{lstlisting}
+resulting in x being in the desired range of $-1.0$ and $1.0$.
+
+
+\section*{solution.py/test}
+Bob forgot to set the model for evaluation before testing it.
+After line 301 in solution.py, Bob should have written
+\begin{lstlisting}
+model.eval()
+\end{lstlisting}
+to prevent the model from training to attain the desired $\sim67\%$ accuracy.
+
+
+\end{document}

@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 236}
+\newcommand\hwnumber{2}
+\newcommand\duedate{February 7, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage[left=1.5in,right=1.5in]{geometry}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\ep\varepsilon
+\DeclarePairedDelimiter\set{\left\{}{\right\}}%
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Let $\ep>0$, and let $N=\frac{1/\ep+3}{2}$.
+Then for any $n>N$,
+\begin{align*}
+	\abs{\frac{1}{2n-3}}&<\abs{\frac{1}{2N-3}}\\
+						&=\abs{\frac{1}{2\left(\frac{1/\ep+3}{2}\right)-3}}\\
+						&=\abs{\ep}\\
+						&=\ep
+\end{align*}
+and so, indeed, $a_n\rightarrow0$, as desired.
+
+
+\section{} % Section 2
+We claim the limit is $b=\frac{3}{2}$.
+Note first that $\abs{\frac{3n^2+4n+5}{2n^2+6n+7}-\frac{3}{2}}=\abs{\frac{5+11/2n}{2n+6+7/n}}$.
+Let $\ep>0$, and let $N=\max\left\{7,\frac{3}{\ep}\right\}$.
+If $n>7$, then $5+\frac{11}{2n}<6$ and $2n+6+\frac{7}{n}<2n+7$.
+Then for any $n>N$,
+\begin{align*}
+	\abs{\frac{5+11/2n}{2n+6+7/n}}&<\abs{\frac{6}{2n+6+7/n}}\\
+								  &<\abs{\frac{6}{2n+7}}\\
+								  &<\abs{\frac{3}{n}}\\
+								  &<\abs{\frac{3}{N}}\\
+								  &=\abs{\frac{3}{3/\ep}}\\
+								  &=\ep
+\end{align*}
+and so $b_n\rightarrow\frac{3}{2}$, as desired.
+
+
+\section{} % Section 3
+Let $M>0$.
+$y_n\rightarrow\infty$, so we know there is some $N$ such that $y_n>\frac{M}{\inf\left\{a_n\right\}}$ for any $n>N$.
+Then $\inf\left\{a_n\right\}y_n>M$, so $a_ny_n>M$, and thus $a_ny_n\rightarrow\infty$, as desired.
+
+
+\section{} % Section 4
+We claim the limit is $0$.
+Let $\ep>0$, and let $N=\max\left\{\frac{5}{\ep},\frac{1}{\sqrt[5]{\ep}}\right\}$.
+Then for any $n>N$:
+\newline
+if $n$ is even, then $\abs{s_n}=\abs{\frac{5}{n}}<\abs{\frac{5}{N}}\le\abs{\frac{5}{5/\ep}}=\ep$, and
+\newline
+if $n$ is odd, then $\abs{s_n}=\abs{\frac{1}{n^5}}<\abs{\frac{1}{N^5}}\le\abs{\frac{1}{1/\sqrt[5]{\ep}}}=\ep$.
+\newline
+Thus $s_n\rightarrow0$, as desired.
+
+
+\section{} % Section 5
+We claim the limit is $0$.
+Let $\ep>0$, and let $N=\frac{1}{2\ep}$.
+Then
+\begin{align*}
+	\abs{\sqrt{n}-\sqrt{n-1}}&=\abs{\frac{1}{\sqrt{n}+\sqrt{n-1}}}\\
+							 &<\abs{\frac{1}{2\sqrt{n}}}\\
+							 &<\abs{\frac{1}{2n}}\\
+							 &<\abs{\frac{1}{2N}}\\
+							 &=\abs{\frac{1}{2/2\ep}}\\
+							 &=\ep
+\end{align*}
+and so $u_n\rightarrow\infty$, as desired.
+
+
+\section{} % Section 6
+We claim the sequence converges to $\infty$.
+Let $M>0$, and let $N=\max\left\{3,M^2\sqrt{32}\right\}$.
+If $n>3$, then $3+\frac{3}{n}+\frac{1}{n^2}<4$.
+\begin{align*}
+	\abs{(n+1)^{3/2}-n^{3/2}}&=\abs{\frac{(n+1)^3-n^3}{(n+1)^{3/2}+n^{3/2}}}\\
+							 &=\abs{\frac{n^3+3n^2+3n+1-n^3}{(n+1)^{3/2}+n^{3/2}}}\\
+							 &=\abs{\frac{3n^2+3n+1}{(n+1)^{3/2}+n^{3/2}}}\\
+\end{align*}
+\begin{align*}
+							 &>\abs{\frac{3n^2+3n+1}{2(n+1)^{3/2}}}\\
+							 &=\abs{\frac{3n^2+3n+1}{2\sqrt{n^3+3n^2+3n+1}}}\\
+							 &>\abs{\frac{3n^2+3n+1}{2\sqrt{8n^3}}}\\
+							 &=\abs{\frac{3n^2+3n+1}{\sqrt{32}n^{3/2}}}\\
+							 &=\abs{\frac{3\sqrt{n}+3/\sqrt{n}+1/n^{3/2}}{\sqrt{32}}}\\
+							 &>\abs{\frac{3\sqrt{n}}{\sqrt{32}}}\\
+							 &>\abs{\frac{3\sqrt{N}}{\sqrt{32}}}\\
+							 &=3M\\
+							 &>M
+\end{align*}
+and so $v_n\rightarrow\infty$, as desired.
+
+
+\section{} % Section 7
+We know that $x_n\rightarrow\infty$, so for any $\ep>0$, there is some $N$ such that $\abs{x_n-15}<\ep$ for all $n>N$.
+If we take $\ep$ to be less than $5$, then all $\abs{x_n}$, $n>N$, will lie between $10$ and $20$.
+This means that all $x_n$ lying outside this range occur before $N$.
+All $x_n$ with $\abs{x_n}>20$ will clearly be a subset of these.
+More formally, $\left\{n\mid\abs{x_n}>20\right\}\subseteq\left\{n\mid n\le N\right\}$, and thus is finite, as desired.
+
+
+\section{} % Section 8
+\subsection{} % Section 8.a
+Suppose it did, and let $N$ be such a number that the condition holds.
+Let $\ep=\frac{1}{N+2}$.
+It is clearly not the case that $\abs{s_n}<\ep$ for all $n>N$, since $N+1>N$, but $s_{N+1}=\frac{1}{N+1}\ge\ep$.
+Thus forms a contradiction, and so it is not the case that $s\rightsquigarrow0$.
+
+
+\subsection{} % Section 8.b
+Let $N$ be a number satisfying the conditions for $s_n\rightsquigarrow s$, and let $\ep>0$.
+By the definition of $s_n\rightsquigarrow s$, if $n>N$, then $\abs{s_n-s}<\ep$, so indeed $s_n\rightarrow s$, as desired.
+
+
+\subsection{} % Section 8.c
+Let $a_n=\begin{cases}
+	1 & \text{if there is a solution to }x^n+y^n=z^n\\
+	0 & \text{otherwise}
+\end{cases}$
+\newline
+\newline
+It is the case that $a_n\rightsquigarrow0$.
+I have a truly marvelous proof this, which this homework is too narrow to contain.
+
+
+\subsection{} % Section 8.d
+The condition $s_n\rightsquigarrow s$ holds when $s_n$ eventually becomes constant.
+That is, there is some $N$ such that $s_N=s_{N+1}=\cdots=s$
+
+
+\end{document}

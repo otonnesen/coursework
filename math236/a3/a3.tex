@@ -1,0 +1,168 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 236}
+\newcommand\hwnumber{3}
+\newcommand\duedate{February 28, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage[left=1.5in,right=1.5in]{geometry}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\ep\varepsilon
+\DeclarePairedDelimiter\set{\left\{}{\right\}}%
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Let $N_1$ be the first natural number such that for any $n>N_1$, $\binom{n}{4}>n^3$.
+Let $\ep>0$, let $a=1+c$, and let $N=\max\left\{N_1, \frac{1}{\ep c^4}\right\}$.
+Then $b_n=\frac{n^2}{(1+c)^n}$, so for any $n>N$,
+\begin{align*}
+	\frac{n^2}{(1+c)^n}&=\frac{n^2}{\binom{n}{0}c^0+\cdots+\binom{n}{n}c^n}\\
+					   &<\frac{n^2}{\binom{n}{4}c^4}\\
+					   &<\frac{n^2}{n^3c^4}\qquad\text{(since $n>N_1$)}\\
+					   &=\frac{1}{nc^4}\\
+					   &<\frac{1}{Nc^4}\qquad\text{(since $n>N$)}\\
+					   &\le\ep\qquad\text{(since $N\ge\frac{1}{\ep c^4}$)}
+\end{align*}
+
+
+\section{} % Section 2
+Consider the $k$th term in the binomial expansion of $a_n$, $\frac{\binom{n}{k}}{n^k}$:
+\begin{align*}
+	\frac{\binom{n}{k}}{n^k}&=\frac{n!}{k!(n-k)!}\frac{1}{n^k}\\
+							&=\frac{(n-1)!}{k!(n-k)!}\frac{n}{n^k}\\
+							&=\frac{(n-1)!}{k!(n-k)!}\frac{n}{n^{k-1}}\\
+							&=\frac{(n-1)\cdots(n-k+1)}{k!n^{k-1}}\\
+							&=\frac{1}{k!}\frac{(n-1)}{n}\cdots\frac{(n-k+1)}{n}\\
+							&=\frac{1}{k!}\left(1-\frac{1}{n}\right)\cdots\left(1-\frac{k-1}{n}\right)
+\end{align*}
+From here, it is clear to see that each factor of the $k$th term involving $n$ increases as $n$ grows.
+Thus we can conclude that $(a_n)$ is indeed increasing, as desired.
+
+
+\section{} % Section 3
+We claim $a_n>a_{n+1}$. When $n=3$, we see that $\frac{3^2}{2^3}=\frac{9}{8}>\frac{16}{16}=\frac{4^2}{2^4}$.
+Suppose there exists some $N$ such that the claim holds for any $n$ less than $N$.
+Consider $a_{N+2}$:
+\begin{align*}
+	a_{N+2}&=\frac{(N+2)^2}{2^{N+2}}\\
+		   &=\frac{N^2+4N+4}{2\cdot2^{N+1}}\\
+		   &=\frac{N^2/2+2N+2}{2^{N+1}}\\
+		   &<\frac{N^2+2N+1}{2^{N+1}}\qquad\text{since $N\ge3$}\\
+		   &=\frac{(N+1)^2}{2^{N+1}}
+\end{align*}
+So by induction, the claim holds.
+
+
+\section{} % Section 4
+\subsection*{4.i}
+If $0<a<1$, then $x_2=\frac{2+x_1+x_1^2}{4}\in\left(\frac{1}{2},1\right)$.
+Then $x_3\in\left(\frac{2+x_2+x_2^2}{4},1\right)$, and so on.
+The sequence of lower bounds for $x_n$ is increasing and bounded above, and approaches 1 as $n\rightarrow1$, so $x_n\rightarrow1$ as well.
+
+
+\subsection*{4.ii}
+If $x_1\in(1,2)$, say $x_1=a$. Then $x_2\in\left(1,\frac{2+a+a^2}{4}\right)$.
+Note that this is a strict subset of $(1,2)$. It is clear to see that this time, the upper bound for the range in which $x$ might fall approaches 1, so $x_n\rightarrow1$.
+
+
+\subsection*{4.iii}
+If $x_1\in(2,\infty)$, say $x_1=a$, then $\frac{2+a+a^2}{4}>2$.
+Thus the lower bound is strictly larger than 2.
+This increasing lower bound continues and so $x_n\rightarrow\infty$.
+
+
+\subsection*{4.iv}
+If $x_1\in(-\infty,0)$, say $\abs{x_1}=a$, then there are two cases:
+if $x_1\in(-3,0)$, then $x_2=\frac{2-a+a^2}{4}\in\left(\frac{1.75}{4}\right)$, so $x_n\rightarrow\infty$.
+if $x_1\in(-\infty,-3)$, $x_2=\frac{2-x+x^2}{4}>2$, so $x_n\rightarrow\infty$.
+
+
+\section{} % Section 5
+Suppose for a contradiction that both $a_n\rightarrow a\in\mathbb{R}$ and $a_n\rightarrow\infty$.
+$a_n\rightarrow a\in\mathbb{R}$, so for any $\ep>0$ there exists some $N_1$ such that for any $n>N_1$, $\abs{a_n-1}<\ep$.
+We also have that $a_n\rightarrow\infty$, so for any $M>0$, there exists some $N_2$ such that for any $n>N_2$, $a_n>M$.
+
+Let $M=a+\ep$. Then there exists some $N$ such that for any $n>N$, $a_n>a+\ep$.
+WLOG let $a_n>a$, then $a_n-a=\abs{a_n-a}>\ep$, a contradiction, and so $a_n$ cannot converge both to $a\in\mathbb{R}$ and to $\infty$.
+
+
+\section{} % Section 6
+We know $\sum_{i=1}^\infty\frac{1}{2^i}=1$, so $A_n\in(-1,1)$ for any $n$.
+(Note that $A_n\rightarrow\pm1$ only when the an always moves in the same direction).
+\newline
+\newline
+Note that $\sum_{i=k+1}^\infty\frac{1}{2^i}=1-\sum_{i=1}^k\frac{1}{2^i}=\frac{1}{2^k}$, so if $\ep>0$, we can simply choose $N=-\log_2\frac{\ep}{2}$, since after $N$ steps, the ant can travel no further than $\frac{1}{2^N}=2^{\log_2\frac{\ep}{2}}=\frac{\ep}{2}$ away from its position at time $N$.
+That is, for any $n>N$, $A_n\in\left(A_N-\frac{\ep}{2},A_N+\frac{\ep}{2}\right)$, and so for any $n,m>N$,
+\begin{align*}
+	\abs{A_n-A_m}&\le\abs{A_n-A_N}+\abs{A_N-A_m}\\
+				 &<\frac{\ep}{2} + \frac{\ep}{2}\\
+				 &=\ep
+\end{align*}
+so $(A_n)$ is Cauchy and thus converges to a real number.
+
+
+\section{} % Section 7
+If the ant moves in the same (say positive) direction at each step, it will end up distance $\sum_{k=1}^\infty\frac{1}{k}$ from 0.
+We know that $\sum_{k=1}^\infty\frac{1}{k}=\infty$, so $A_n$ must not necessarily converge to a real number.
+
+
+\section{} % Section 8
+$a_n\rightarrow a$, so there exists some $N_1$ such that for any $n>N_1$, $\abs{a_n-a}<\frac{\ep}{2}$.
+Similarly, $b_n\rightarrow b$, so there exists some $N_2$ such that for any $n>N_2$, $\abs{b_n-b}<\frac{\ep}{2}$.
+Let $\ep>0$, and let $N=\max\{N_1,N_2\}$.
+Then consider $\abs{(a_n-b_n)-(a-b)}$:
+\begin{align*}
+	\abs{(a_n-b_n)-(a-b)}&=\abs{(a_n-a)-(b_n-b)}\\
+						 &=\abs{(a_n-a)+(b-b_n)}\\
+						 &\le\abs{a_n-a}+\abs{b-b_n}\\
+						 &=\abs{a_n-a}+\abs{b_n-b}\\
+						 &<\frac{\ep}{2}+\frac{\ep}{2}\\
+						 &=\ep
+\end{align*}
+
+
+\section{} % Section 9
+\subsection*{9.i}
+We know by the denseness of $\mathbb{Q}$ in $\mathbb{R}$ that for any $a<b\in\mathbb{R}$, there exists $r_1\in\mathbb{Q}\subseteq\mathbb{R}$ such that $a<r_1<b$.
+For any $i\in\mathbb{N}$, let $r_{i+1}\in(r_i,b)$.
+Since each $r_i$ is a real number less than $b$, we can always find $r_{i+1}$, and so there are infinitely many such rational numbers.
+
+
+\subsection*{9.ii}
+Define $A_i=\left(\alpha-\frac{1}{i},\alpha\right)$.
+As we saw in part $i)$, there lie infinitely many rational numbers in $A_i$ for any $i$.
+Choose $q_{n_1}\in A_1$.
+For any $i>1$, if we let $q_{n_i}\in A_i$, then given any $\ep>0$, $q_{n_i}<\ep$ for all $n_i>n_\frac{1}{\ep}$.
+
+
+\subsection*{9.iii}
+Define $A_i=(i,i+1)$.
+Again, $A_i$ contains infinitely many rational numbers for any $i$.
+If we let $q_{n_i}\in A_i$, then given any $M>0$, $q_{n_i}>M$ for all $n_i>n_M$.
+
+
+\section{} % Section 10
+Let $b_n=\frac{1}{\sqrt{\abs{a_n}}}$.
+If $M>0$, then we can pick $N$ such that $\abs{a_N}<\frac{1}{M^2}$, meaning $b_n=\frac{1}{\sqrt{\abs{a_n}}}>M$, and so $b_n\rightarrow\infty$.
+\newline
+\newline
+Then
+$a_nb_n=\frac{a_n}{\sqrt{\abs{a_n}}}=\begin{cases}
+	\sqrt{a_n} & \text{if $a_n\ge0$}\\
+	-\sqrt{a_n} & \text{otherwise}
+\end{cases}$,
+which clearly converges to 0.
+
+
+\end{document}

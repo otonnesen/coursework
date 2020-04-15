@@ -1,0 +1,4 @@
+9c9
+<     @root = TkRoot.new('height' => 615, 'width' => 205, 
+---
+>     @root = TkRoot.new('height' => 615, 'width' => 260, 

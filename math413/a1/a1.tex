@@ -1,0 +1,152 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 413}
+\newcommand\hwnumber{1}
+\newcommand\duedate{January 24, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath, amssymb}
+
+\DeclareMathOperator{\Span}{Span}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+We see that $n+16=62773929=7923^2$ is a square integer.
+This gives us $n + 4^2 = 7923^2$, so
+\begin{align*}
+	n &= 7923^2 -4^2\\
+	&= (7923+4)(7923-4)\\
+	&= 7919 \cdot 7927
+\end{align*}
+
+This insecurity might be avoided by ensuring $p$ and $q$ do not differ by a square.
+If they do, then it is straightforward to try the above technique with all numbers around $\sqrt{n}$, eventually finding the correct factorization.
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+It's clear to see that $\gcd(22,5)=1$, so 5 is a primitive 22nd root of unity, and thus generates $\mathbb{F}_{23}^\times$.
+
+$\left|\langle5\rangle\right|=22$, so we know $5^{22}=1$.
+Thus $(5^2)^{11}=1$, so $\left|\langle5^2\rangle\right|=\left|\langle2\rangle\right|\le11$, so 2 is not a generator of $\mathbb{F}_{23}^\times$.
+
+
+\subsection{} % Section 2.b
+We know the polynomial $x^{23}-x$ in $\mathbb{F}_{23}\left[x\right]$ contains all the elements of $\mathbb{F}_{23}$ as roots, so if $x^2+x+1=0$ has a root in $\mathbb{F}_{23}$, then $\gcd(x^{23}-x, x^2+x+1)\neq1$.
+Some straightforward calculations give us $\gcd(x^{23}-x, x^2+x+1)=18$.
+The gcd in a field is only defined up to multiplication by a constant, so this means 1 is also a gcd.
+Thus it must be the case that $x^2+x+1$ has no roots in $\mathbb{F}_{23}$.
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+If $q=2$, then $\sum_{a\in\mathbb{F}_q^+}=1$.
+If $q=2^k$, $k>1$, then $\mathbb{F}_q^+\cong\bigoplus_{i=1}^k\mathbb{Z}_2$.
+
+Thus if we label the elements of $\mathbb{F}_q^+$ as $(r_1,\ldots,r_k)$, then for any $r_i$, there are exactly $2^{k-1}$ elements in which it is 0, and $2^{k-1}$ in which it is 1.
+So adding together all elements leaves us with $(0,\ldots,0)$, since each spot in the tuple is the sum of an even number of 1s (and an even number of 0s).
+
+Otherwise, if $q=p^k$, $p\neq2$ a prime, $k\ge1$, then $\mathbb{F}_q^+\cong\bigoplus_{i+1}^k\mathbb{Z}_p$.
+Then the sum in each slot is
+\begin{align*}
+	1+\cdots+p-1&=(1+p-1)+(2+p-2)+\cdots+\left(\left\lfloor\frac{p}{2}\right\rfloor+\left\lceil\frac{p}{2}\right\rceil\right)\\
+	&=0+0+\cdots+0\\
+	&=0
+\end{align*}
+since $p$ is odd, and so we end up with $(0,\ldots,0)$.
+
+
+\subsection{} % Section 3.b
+We know that $\mathbb{F}_q^\times$ is cyclic is order $q-1$, so let $\langle g\rangle=\mathbb{F}_q^\times$.
+Then $\prod_{a\in\mathbb{F}_q^\times}=g^1\cdot g^2\cdot\ldots\cdot g^{q-1}=g^\frac{(q-1)(q-1+1)}{2}=g^\frac{q^2-q}{2}$.
+If $q\neq2$, then $q-1$ is even. This means $\frac{q^2-q}{2}=q\frac{q-1}{2}=qk$ for $k=\frac{q-1}{2}$.
+Notice that $k$ is an integer.
+So $g^1\cdot g^2\cdot\ldots\cdot g^{q-1}=g^{qk}=(g^q)^k=g^k$.
+Thus
+\[\prod_{a\in\mathbb{F}_q^\times}=g^k=g^\frac{q-1}{2}=g^\frac{\left|\mathbb{F}_q\right|}{2}=-1=q-1.\]
+
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+Suppose not.
+Then there are some non-units $g(x),h(x)\in\mathbb{F}_2\left[x\right]$, with $g(x)h(x)=x^5+x^3+1$.
+$x^5+x^3+1$ clearly has no degree one factors, so WLOG $g(x)$ and $h(x)$ must have degree two and three, respectively.
+That is, $g(x)=ax^2+bx+c$, and $h(x)=qx^3+rx^2+sx+t$.
+Then
+\[g(x)h(x)=aqx^5+(ar+bq)x^4+(as+br+cq)x^3+(at+bs+cr)x^2+(bt+cs)x+ct.\]
+So we have:
+\begin{align}
+	aq&=1\\
+	ar+bq&=0\\
+	as+br+cq&=1\\
+	at+bs+cr&=0\\
+	bt+cs&=0\\
+	ct&=1
+\end{align}
+By (1), $a=q=1$.
+Then (2) gives $ar+bq=r+b=0$, so $b=r$.
+(3) gives us $as+br+cq=s+br+c=0$.
+By (6), $t=1$, so (4) gives us $at+bs+cr=at+bs+cb=at+b(s+c)=0$.
+$a=t=1$, so $at=1$. Thus $b(s+c)=1$.
+Then $s+c=1$.
+$b=r$, so $r=1$, but this means $s+br+c=br+(s+c)=0$, a contradiction, since by (3), $as+br+cq=s+br+c=1$.
+So no such $g(x),h(x)$ exist, and thus $x^5+x^3+1$ is irreducible in $\mathbb{F}_2\left[x\right]$.
+
+
+\subsection{} % Section 4.b
+No.
+It would always have a root at $x=1$, and would thus factor into the monomial (x+1) and some other polynomial.
+
+
+\section{} % Section 5
+\subsection{} % Section 5.a
+Let $\alpha^2+\alpha+7=0$. Then $\langle\alpha\rangle=\mathbb{F}_{121}^\times$.
+So $\left|\alpha\right|=120$.
+Consider $\alpha^k$. $\langle\alpha\rangle=\{1,\alpha^k,\ldots,\alpha^\frac{120}{\gcd(120,k)}\}$, so $\left|\alpha^k\right|=120$ when $\gcd(120,k)=1$.
+Thus our generators are all $a^k$ with $\gcd(120,k)=1$, so $\mathbb{F}_{121}$ has $\varphi(120)$ generators.
+
+
+\subsection{} % Section 5.b
+$\alpha^{30}$
+
+
+\subsection{} % Section 5.b
+$\alpha^{24}$
+
+
+\section{} % Section 6
+In order for $\mathbb{F}_{p^m}$ to be a subfield of $\mathbb{F}_{p^n}$, it must be the case that $m\mid n$.
+So the subfields of $\mathbb{F}_{p^{p^2}}$ are all the $\mathbb{F}_{p^m}$ such that $m\mid p^2$.
+Thus $m=1,p$.
+So all the subfields of $\mathbb{F}_{p^{p^2}}$ are $\mathbb{F}_p$ and $\mathbb{F}_{p^p}$.
+The containment is as follows: $\mathbb{F}_p\subsetneq\mathbb{F}_{p^p}\subsetneq\mathbb{F}_{p^{p^2}}$
+
+
+\section{} % Section 7
+\subsection{} % Section 7.a
+Let $l\in\mathbb{L}$.
+We know that $\{a_1,\ldots,a_m\}$ is a basis of $\mathbb{L}$ over $\mathbb{K}$, so
+\[l=a_1k_1+\ldots+a_mk_m\]
+where $k_i\in\mathbb{K}$.
+Similarly, $\{b_1,\ldots,b_n\}$ is a basis of $\mathbb{K}$ over $\mathbb{F}$, so for each $k_i$,
+\[k_i=b_1f_{i1}+\ldots+b_nf_{in}\]
+where $f_{ij}\in\mathbb{F}$.
+This means our arbitrarily chosen $l$ can be rewritten as
+\begin{align*}
+	l&=a_1(b_1f_{11}+\ldots+b_nf_{1n})+\ldots+a_m(b_1f_{m1}+\ldots+b_nf_{mn})\\
+	&=a_1b_1f_{11}+a_1b_2f_{12}+\ldots+a_mb_nf_{mn}\in\Span\{a_ib_j\mid1\le i\le m,1\le j\le n\},
+\end{align*}
+so the above is indeed a basis of $\mathbb{L}$ over $\mathbb{F}$, as desired.
+
+
+\subsection{} % Section 7.b
+$\{1,\sqrt[3]{2},i\}$
+
+
+\end{document}

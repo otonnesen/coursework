@@ -1,0 +1,181 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 236}
+\newcommand\hwnumber{1}
+\newcommand\duedate{January 24, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+We know $0<a<b$.
+$a$ and $b$ are nonzero, so $ab$ is nonzero, and thus has an inverse with respect to multiplication, $b^{-1}a^{-1}$.
+$b^{-1}a^{-1}>0$ since $ab>0$, so since if $a<b$ and $c>0$, $ac<bc$, we can conclude that since $0<a<b$, $0\cdot b^{-1}a^{-1}<a\cdot b^{-1}a^{-1}<b\cdot b^{-1}a^{-1}$.
+Multiplication is commutative over $\mathbb{R}$, so this means $0<b^{-1}<a^{-1}$, or $0<\frac{1}{b}<\frac{1}{a}$, as desired.
+
+
+\section{} % Section 2
+[Induction on $n$]: When $n=2$, this is simply the triangle inequality.
+Suppose the claim holds for all $n\le N$ for some $N$.
+Let $a_1,\ldots,a_{N+1}\in\mathbb{Q}$. Consider $\abs{a_1+\ldots+a_{N+1}}$, and denote $b=a_1+\ldots+a_N$. Then $b\in\mathbb{Q}$, and $\abs{a_1+\ldots+a_{N+1}}=\abs{b+a_{N+1}}$.
+By the hypothesis, $\abs{b+a_{N+1}}\le\abs{b}+\abs{a_{N+1}}$.
+We know $\abs{b}=\abs{a_1+\ldots+a_N}\le\abs{a_1}+\ldots+\abs{a_N}$, so
+\begin{align*}
+	\abs{a_1+\ldots+a_{N+1}}&=\abs{b+a_{N+1}}\\
+	&\le\abs{b}+\abs{a_{N+1}}\\
+	&=\abs{a_1+\ldots+a_N}+\abs{a_{N+1}}\\
+	&\le\abs{a_1}+\ldots+\abs{a_N}+\abs{a_{N+1}}
+\end{align*}
+So by induction, the claim holds.
+
+
+\section{} % Section 3
+\subsection{} % Section 3.a
+(i). No.
+(ii). Yes, 7.
+
+
+\subsection{} % Section 3.b
+(i). Yes.
+(ii). Yes, 2.
+
+
+\subsection{} % Section 3.c
+(i). No.
+(ii). Yes, 90.
+
+
+\subsection{} % Section 3.d
+(i). No.
+(ii). Yes, 10.
+
+
+\subsection{} % Section 3.e
+(i). No.
+(ii). Yes, 1.
+
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+(i). No.
+(ii). Yes, -1.
+
+
+\subsection{} % Section 4.b
+(i). Yes.
+(ii). Yes, 1.
+
+
+\subsection{} % Section 4.c
+(i). No.
+(ii). No.
+
+
+\subsection{} % Section 4.d
+(i). No.
+(ii). No.
+
+
+\subsection{} % Section 4.e
+(i). No.
+(ii). Yes, 1.
+
+
+\section{} % Section 5
+Suppose not.
+Then there is some $x\in S\cap T$.
+$x\in S$, so $x\ge\inf S$.
+Similarly, $s\in T$, so $x\le\sup T$.
+Thus we have $x\le\sup T<\inf S\le x$, so $x<x$, a contradiction, and so $S\cap T=\emptyset$, as desired.
+
+
+\section{} % Section 6
+Yes: $S=\left(0,1\right)$, $T=\{0,1\}$.
+
+
+\section{} % Section 7
+We know that if $a,b\in\mathbb{R}$ such that $a<b$, then there exists $q\in\mathbb{Q}$ with $a<q<b$.
+
+Suppose $S$ did have a maximum element, say $s$.
+$s\in\mathbb{Q}\subseteq\mathbb{R}$, so by the denseness of $\mathbb{Q}$ in $\mathbb{R}$, there exists $r\in\mathbb{Q}$ such that $q<r<\sqrt{2}$.
+We see by the definition of $s$ that it contains $r$, so $q$ is not the maximum element of $S$, a contradiction, and so $S$ has no maximum element.
+
+
+\section{} % Section 8
+We consider two cases: $a<1$, and $a\ge1$.
+
+\noindent
+\underline{Case $a<1$}: $a\neq0$, so there must be some $n\in\mathbb{N}$ such that $an>1$.
+Then $a>\frac{1}{n}$.
+$n\ge1$, and $a<1$, so we also have $n>a$.
+Thus $\frac{1}{n}<a<n$, as desired.
+
+\noindent
+\underline{Case $a\ge1$}: Simply choose $n=\lceil(a)\rceil+1$.
+$n\ge2$, and $a\ge1$, so $\frac{1}{n}\le\frac{1}{2}<a$, so we have $\frac{1}{n}<a<n$, as desired.
+
+
+\section{} % Section 9
+\underline{$\left[\frac{1}{2}\left(a+\frac{2}{a}\right)\right]^2>2$}:
+\begin{align*}
+	\left[\frac{1}{2}\left(a+\frac{2}{a}\right)\right]^2
+	&=\left[\frac{1}{2a}\left(a^2+2\right)\right]^2\\
+	&=\frac{1}{4a^2}\left(a^2+2\right)^2\\
+	&=\frac{1}{4a^2}\left(a^4+4a^2+4\right)\\
+	&=\frac{a^2}{4}+1+\frac{1}{a^2}\\
+	&>2+\frac{1}{a^2}\\
+	&>2
+\end{align*}
+
+\noindent
+\underline{$\frac{1}{2}\left(a+\frac{2}{a}\right)<a$}:
+\begin{align*}
+	\frac{1}{2}\left(a+\frac{2}{a}\right)
+	&=\frac{a}{2}+\frac{1}{a}\\
+	&=\frac{a}{2}+\frac{a}{a^2}\\
+	&<\frac{a}{2}+\frac{a}{2}\\
+	&=a
+\end{align*}
+
+\noindent
+\underline{$\left[4/\left(a+\frac{2}{a}\right)\right]^2<2$}:
+\begin{align*}
+	\left[4/\left(a+\frac{2}{a}\right)\right]^2
+	&=\left(\frac{4a}{a^2+2}\right)^2\\
+	&=\frac{16a^2}{a^4+4a^2+4}\\
+	&<\frac{32}{4+8+4}\\
+	&=2
+\end{align*}
+
+\noindent
+\underline{$a<4/\left(a+\frac{2}{a}\right)$}:
+\begin{align*}
+	\frac{4}{a+\frac{2}{a}}
+	&=\frac{4}{a+\frac{2}{a}}\\
+	&=\frac{4a}{a^2+2}\\
+	&>\frac{4a}{2+2}\\
+	&=a
+\end{align*}
+
+\noindent
+If $a^2>2$, then $\left[\frac{1}{2}\left(a+\frac{2}{a}\right)\right]^2>2$, so it is not in $S$, a contradiction, since $0\le\frac{1}{2}\left(a+\frac{2}{a}\right)<a=\sup S$.
+
+\noindent
+If $a^2<2$, then $0\le\left[4/\left(a+\frac{2}{a}\right)\right]^2<2$, so it is in $S$, a contradiction, since $\sup S=a<4/\left(a+\frac{2}{a}\right)$
+
+\noindent
+So it must be the case that $a^2=2$, as desired.
+
+
+\end{document}

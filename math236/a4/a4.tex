@@ -1,0 +1,189 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 236}
+\newcommand\hwnumber{4}
+\newcommand\duedate{March 13, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+\usepackage[left=1.5in,right=1.5in]{geometry}
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\ep\varepsilon
+\DeclarePairedDelimiter\set{\left\{}{\right\}}%
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Let $\ep>0$.
+We show that $\abs{b_n}<\ep$.
+\newline
+Since $a_n\rightarrow0$, there exists $N$ such that for any $n>N$, $\abs{a_n}<\ep$.
+\newline
+If we let $n>N$, then $\abs{b_n}\le a_n=\abs{a_n}<\abs{a_N}<\ep$, and so $b_n\rightarrow0$.
+
+
+\section{} % Section 2
+Let $A_n=a_1+\cdots+a_n$, $B_n=b_1+\cdots+b_n$.
+Then $A_n\rightarrow\alpha$ and $B_n\rightarrow\beta$.
+We know that the limit of the sum of two convergent sequences is the sum of their limits, so $A_n+B_n\rightarrow\alpha+\beta$.
+\newline
+\newline
+Similarly, we know that the limit of the product of two convergent sequences is the product of their limits, so also $A_nB_n\rightarrow\alpha\beta$.
+
+
+\section{} % Section 3
+($\Longrightarrow$): We prove the contrapositive.
+Let $a=1$, and let $s_n=1+\cdots+\frac{1}{n}$ be the partial sums of the series.
+\begin{align*}
+	s_n&=1+\cdots+\frac{1}{n}\\
+	   &\ge1+\frac{1}{2}+\frac{1}{4}+\frac{1}{4}+\cdots+\frac{1}{2^k}
+	   \qquad\text{Where the terms are grouped by powers of 2}\\
+	   &\ge\frac{1}{2}+\frac{1}{2}+\cdots+\frac{1}{2}
+	   \qquad\text{the constant sequence of $\frac{1}{2}$}
+\end{align*}
+As $n\rightarrow\infty$, the above sequence of $\frac{1}{2}$ converges to $\infty$, so by the comparison test, $s_n\rightarrow\infty$.
+Clearly if $a<1$, then $\frac{1}{n^a}\le\frac{1}{n}$, so again by the comparison test $s_n=1+\cdots+\frac{1}{n^a}\rightarrow\infty$.
+\newline
+\newline
+($\Longleftarrow$): Let $\ep>0$, and let $s_n$ be the sequence of partial sums for the series.
+Pick $N$ such that $\frac{2}{2^N}<\ep$, and let $2^N<m<n<2^L$.
+\begin{align*}
+	\abs{s_n-s_m}&=\abs{\frac{1}{(m+1)^a}+\cdots+\frac{1}{n^a}}\\
+				 &<\abs{\frac{1}{(2^N)^a}+\frac{1}{(2^N+1)^a}+\cdots+\frac{1}{(2^L)^a}}\\
+				 &=\abs{\left(\frac{1}{(2^N)^a}+\cdots+
+					 \frac{1}{(2^{N+1}-1)^a}\right)+\cdots+
+					 \left(\frac{1}{(2^{L-1})^a}+\cdots+
+				 \frac{1}{(2^L-1)^a}\right)}\\
+				 &<\abs{\frac{1}{2^N}+\frac{1}{2^{N+1}}+\cdots+\frac{1}{2^{L-1}}}\\
+				 &=\frac{2}{2^N}-\frac{1}{2^L}\\
+				 &<\frac{2}{2^N}\\
+				 &<\ep
+\end{align*}
+So by the Cauchy criterion for convergence, $s_n$ converges to a real number, as desired.
+
+
+\section{} % Section 4
+($\Longrightarrow$): We prove the contrapositive.
+Let $a=1$.
+For $n\ge3$, $\log n>1$, so it's clear to see that $\frac{1}{n\log n}\ge\frac{1}{n}$.
+$\sum_{n=3}^\infty\frac{1}{n}=\infty$, so by the comparison test, $\sum_{n=3}^\infty\frac{1}{n\log n}=\infty$.
+When $a<1$, $\sum_{n=3}^\infty\frac{1}{n(\log n)^a}\ge\sum_{n=3}^\infty\frac{1}{n\log n}$, so again by the comparison test, $\sum_{n=3}^\infty\frac{1}{n(\log n)^a}=\infty$.
+\newline
+\newline
+($\Longleftarrow$): Let $a>1$, and $s_n$ be the sequence of partial sums for $\sum_{n=2}^\infty\frac{1}{n(\log n)^a}$.
+Let $2^N<m<n<2^L$.
+Then there exists some $c$ such that $cN\le\log m<\log n\le cL$.
+So
+\begin{align*}
+	\abs{s_n-s_m}&=\abs{\frac{1}{(m+1)(\log(m+1))^a}+\cdots+
+				 \frac{1}{n(\log n)^a}}\\
+				 %
+				 &<\Bigg\lvert\left(\frac{1}{2^N(\log 2^N)^a}+\cdots+
+				 \frac{1}{(2^{N+1}-1)(\log(2^{N+1}-1))^a}\right)+\cdots\\
+				 &+\left(\frac{1}{2^{L-1}(\log 2^{L-1})^a}+\cdots+
+				 \frac{1}{(2^L-1)(\log(2^L-1))^a}\right)\Bigg\rvert\\
+				 %
+				 &<k\Bigg\lvert\left(\frac{1}{2^N(2^{N+1})^a}+\cdots
+				 +\frac{1}{(2^{N+1}-1)(2^{N+1})^a}\right)+\cdots\\
+				 &+\left(\frac{1}{2^{L-1}(2^L)^a}+\cdots+
+				 \frac{1}{(2^L-1)(2^L)^a}\right)\Bigg\rvert
+				 \qquad\text{where $k$ is a constant depending on $\ep$}\\
+				 %
+				 &<k\abs{\frac{1}{(2^{N+1})^a}+\cdots+\frac{1}{(2^{L-1})^a}}\\
+				 %
+				 &<k\abs{\frac{1}{2^{N+1}}+\cdots+\frac{1}{2^{L-1}}}\\
+				 %
+				 &=k\left(\frac{2}{2^{N+1}}-\frac{1}{2^L}\right)\\
+				 %
+				 &<\frac{k}{2^N}\\
+				 %
+				 &=\frac{k}{2^{\log_2\frac{k}{\ep}}}\\
+				 %
+				 &=\ep
+\end{align*}
+So $s_n$ is Cauchy and thus convergent to a real, so $\sum_{n=2}\frac{1}{n(\log n)^a}$ converges to a real.
+
+
+\section{} % Section 5
+($\Longrightarrow$): Let $a=1$.
+When $n>321$, $\log n\log\log n\ge1$, so by the same argument as above, $\sum_{n=3}\frac{1}{n\log n\log\log n}$ converges, and so does $\sum_{n=3}\frac{1}{n\log n(\log\log n)^a}$ when $a<1$.
+\newline
+\newline
+($\Longleftarrow$): 
+
+
+\section{} % Section 6
+Let $s_n$ be the sequence of partial sums of $\sum_{n=1}^\infty a_n$.
+We $s_n$ converges, say $\lim_{n\rightarrow\infty}s_n=\alpha$.
+Then
+\begin{align*}
+	\sum_{n=k}^\infty a_n&=\left(\lim_{n\rightarrow\infty}s_n\right)-s_{k-1}\\
+						 &=\alpha-s_{k-1}
+\end{align*}
+and so
+\begin{align*}
+	b_k&=\lim_{k\rightarrow\infty}\sum_{n=k}^\infty a_n\\
+	&=\lim_{k\rightarrow\infty}\left(\alpha-s_{k-1}\right)\\
+	&=\alpha-\alpha\\
+	&=0
+\end{align*}
+
+
+\section{} % Section 7
+Let $x_0\in\mathbb{R}$.
+Let $\ep>0$, and let $\delta=\ep$.
+Then if $\abs{x-x_0}<\delta$, $\abs{x-x_0}<\ep$.
+It's clear to see from the definition of $g(x)$ that $\abs{g(x)-g(x_0)}$ can be no greater than $\abs{x-x_0}$, so we have
+\[\abs{g(x)-g(x_0)}\le\abs{x-x_0}<\ep\],
+and so $g(x)$ is continuous.
+
+
+\section{} % Section 8
+\subsection{} % Section 8.a
+We first show by induction that $\prod_{i=1}^m(1-a_i)\ge1-\sum_{i=1}^m a_i$:
+\newline
+When $m=1$, equality holds.
+Assume the inequality holds for some $N$.
+\begin{align*}
+	\prod_{i=1}^{N+1}(1-a_i)&=(1-a_{N+1})\prod_{i=1}^N(1-a_i)\\
+							&\ge(1-a_{N+1})\left(1-\sum_{i=1}^N a_i\right)\qquad\text{By the hypothesis}\\
+							&=1-a_{N+1}-\sum_{i=1}^N a_i+a_{N+1}\sum_{i=1}^N a_i\\
+							&\ge1-\sum_{i=1}^{N+1}a_i
+\end{align*}
+So by induction, the inequality holds.
+\newline
+\newline
+Now,
+\begin{align*}
+	\lim_{n\rightarrow\infty}\prod_{i=1}^n(1-a_i)&\ge\lim_{n\rightarrow\infty}\left(1-\sum_{i=1}^n a_i\right)\\
+												 &=1-\lim_{n\rightarrow\infty}\sum_{i=1}^n a_i,
+\end{align*}
+so $\prod_{i=1}^\infty(1-a_i)\ge1-\sum_{i=1}^\infty a_i$, as desired.
+
+
+\subsection{} % Section 8.b
+Let $a_i$ be non-negative.
+Then $1-a_i^2\le1$.
+Dividing both sides by $1-a_i$, we get $1+a_i\le\frac{1}{1-a_i}$.
+We know, since $\sum_{i=1}^\infty a_i<\infty$, that $\sum_{i=k}^\infty a_i\rightarrow0$.
+Consider $\prod_{i=k}^\infty(1+a_i)\le\prod_{i=k}^\infty\frac{1}{1-a_i}$.
+$a_n\le a_k$ for all $n>k$, so $\prod_{i=k}^\infty\frac{1}{1-a_i}\le\left(\frac{1}{1-a_k}\right)\left(\frac{1}{1-a_k}\right)\cdots$.
+As $k\rightarrow\infty$, $1-a_k\rightarrow1$, so $\left(\frac{1}{1-a_k}\right)\left(\frac{1}{1-a_k}\right)\cdots\rightarrow1$.
+$\prod_{i=1}^k$ is finite, so $\prod_{i=1}^\infty\frac{1}{1-a_i}$ is too, and so $\prod_{i=1}^\infty(1+a_i)$ exists and is finite.
+
+
+\subsection{} % Section 8.c
+Each of $a_1,a_2,\ldots$ appears as a term in the expansion of $(1+a_1)(1+a_2)\cdots$, so $\sum_{i=1}^\infty a_i\le\prod_{i=1}^\infty(1+a_i)$.
+Thus by the comparison test, since $\prod_{i=1}^\infty(1+a_i)$ converges, so does  $\sum_{i=1}^\infty a_i$.
+
+
+\end{document}

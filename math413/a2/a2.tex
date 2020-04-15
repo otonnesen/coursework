@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{MATH 413}
+\newcommand\hwnumber{2}
+\newcommand\duedate{February 12, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{amsmath, amssymb}
+
+\DeclareMathOperator{\Span}{Span}
+\def\F{\mathbb{F}}
+\def\a{\alpha}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+$(\Rightarrow)$: We prove the contrapositive.
+Let $f(x)$ be a quintic polynomial in $\F_p[x]$ with a zero in $\F_{p^2}$.
+If this zero is also in $\F_p$, then $f(x)$ is reducible in $\F_p[x]$, so suppose that $f(x)$ has no roots in $\F_p$.
+Then it has a root $\a\in\F_{p^2}\setminus\F_p$.
+We know that $\a$ is the root of an irreducible quadratic $g(x)\in\F_p[x]$, and that $\F_{p^2}\cong\F_p[x]/\langle g(x)\rangle$.
+This means that $g(x)\mid f(x)$, and so $f(x)$ is reducible in $\F_p[x]$.
+Thus we can conclude that if $f(x)$ is irreducible in $\F_p[x]$, then it has no roots in $\F_{p^2}$.
+\newline
+\newline
+$(\Leftarrow)$: Again, we prove the contrapositive.
+Let $f(x)$ be a reducible quintic polynomial in $\F_p[x]$.
+If it has a root in $\F_p$, then it would also have a root in $\F_{p^2}$, so suppose it does not have any such roots.
+Then $f(x)=g(x)h(x)$ where WLOG $g(x)$ and $h(x)$ have degrees 3 and 2, respectively.
+This means $\F_p[x]/\langle h(x)\rangle\cong\F_{p^2}$, so $h(x)$ (and in turn $f(x)$) has a root in $\F_{p^2}$.
+Thus we can conclude that if $f(x)$ has no roots in $\F_{p^2}$, then it is irreducible in $\F_p[x]$.
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+$f(x) = x^6+2x^4+x+2$, and $f'(x)=2x^3+1$.
+The gcd calculation is fairly straightforward, and in fact $f'(x)\mid f(x)$.
+In characteristic 3, $f'(x)=2x^3+1=(2x)^3+1^3=(2x+1)^3$, so $(2x+1)^3\mid f(x)$, and $f(x)$ is thus not separable.
+
+
+\subsection{} % Section 2.b
+As we saw, $f'(x)\mid f(x)$, and $\frac{f(x)}{f'(x)}=2x^3+x+2=x^3+2+1$.
+Thus $f(x)=f'(x)(x^3+2x+1)=(2x+1)^3(x^3+2x+1)$, and so we need only find a field in which $x^3+2x+1$ splits.
+\newline
+\newline
+It is straightforward to check that $x^3+2x+1$ has no roots in $\F_9$, so we skip straight to $\F_{27}$.
+\newline
+\newline
+Note that $x^3+2x+1$ has no roots in $\F_3$, so since its degree is 3, it is irreducible, and so $\F_3[x]/\langle x^3+2x+1\rangle$ is a field of order $3^3$.
+Let $\a^3+2\a+1=0$, and consider $\F_3(\a)$:
+\newline
+\newline
+In $\F_3(\a)[x]$, $x^3+2x+1$ has a root at $x=\a$, so $x-a\mid x^3+2x+1$, and $\frac{x^3+2x+1}{x-a}=x^2+\a x+2+\a^2$.
+We see that $x^2+\a x+2+\a^2$ further factors over $\F_3(\a)$ into $(x+2\a+2)(x+2\a+1)$, so in the end, we have that in $\F_3(\a)[x]$, $f(x)=(2x+1)^3(x+2\a)(x+2\a+2)(x+2\a+1)$, so $f$ splits in $\F_3(\a)$.
+
+
+\section{} % Section 3
+Note that $g(x)=\frac{x^p-1}{x-1}$.
+We know that the number of irreducible factors of $x^n-1$ in $\F_2[x]$ is the number of orbits of the doubling map in $\mathbb{Z}/n\mathbb{Z}$.
+\newline
+\newline
+$(\Rightarrow)$: We prove the contrapositive.
+Suppose 2 is not a primitive root mod $p$.
+Then its orbit in the doubling map has size less than $p-1$.
+The orbit of $0$ always has size 1, and so there must be a third orbit.
+This means that $x^p-1$ has at least three irreducible factors.
+We know that $x-1$ is irreducible, and that $x^p-1=g(x)(x-1)$, so it must be the case that $g(x)$ is reducible.
+Thus we can conclude that if 2 is a primitive root mod $p$ that $g(x)$ is irreducible.
+\newline
+\newline
+$(\Leftarrow)$: 2 is a primitive root mod $p$, so its orbit has size $p-1$, with $0$ generating the $\{0\}$ orbit.
+Thus $x^p-1$ has two irreducible factors.
+$x^p-1=g(x)(x-1)$, and $x-1$ is irreducible, so $g(x)$ is irreducible.
+\newline
+\newline
+This proof should work as long as 2 is a primitive root mod $n$, since the proof relies on 2's orbit in the doubling map being full, and has nothing to do with $n$'s primality.
+
+
+\section{} % Section 4
+\subsection{} % Section 4.a
+The $N$th cyclotomic polynomial is $\Phi_N(x)=(x-\zeta_1)\cdots(x-\zeta_{\varphi(N)})$.
+Evaluated at 0, this is simply the product of the primitive roots of unity:
+$\Phi_N(0)=(-\zeta_1)\cdots(-\zeta_{\varphi(N)})$.
+If $\zeta_k$ is a primitive root of unity, then so is $\frac{1}{\zeta_k}$, so since $\varphi(N)$ is even whenever $N>3$, we can simply pair off the primitive roots of unity in our product to get
+$\Phi_N(0)=(-\zeta_1)(\frac{1}{-\zeta_1})\cdots(-\zeta_{\varphi(N)})(\frac{1}{-\zeta_{\varphi(N)}})=1$.
+Otherwise we see $\Phi_2(0)=(0)+1$ and $\Phi_3(0)=(0)^2+(0)+1$, and so $\Phi_N(0)=1$ for any $N\ge2$.
+
+
+\subsection{} % Section 4.b
+We know that $x^N-1=\prod_{d\mid N}\Phi_d(x)$, so
+\begin{align*}
+	x^{pq}-1&=\prod_{d\mid pq}\Phi_d(x)\\
+			&=\Phi_{pq}(x)\Phi_p(x)\Phi_q(x)\Phi_1(x)\\
+			&=\Phi_{pq}(x)\Phi_p(x)\Phi_q(x)(x-1).
+\end{align*}
+Dividing by $x-1$, we get
+\begin{align*}
+	x^{pq-1}+\cdots+1&=\Phi_{pq}(x)\Phi_p(x)\Phi_q(x).\\
+\end{align*}
+We also know that for $p$ a prime, $\Phi_p(x)=1+\cdots+x^{p-1}$, so we get
+\[\Phi_{pq}(x)=\frac{x^{pq-1}+\cdots+1}{(1+\cdots+x^{p-1})(1+\cdots+x^{q-1})}.\]
+Finally, plugging in $x=1$, we get $\Phi_{pq}(1)=\frac{1^{pq-1}+\cdots+1}{(1+\cdots+1^{p-1})(1+\cdots+1^{q-1})}\frac{pq}{(p)(q)}=1$, as desired.
+
+
+\section{} % Section 5
+The generating function has the form $G(x)=\frac{1}{1-2x+x^3}$, so the characteristic polynomial of its coefficient sequence is $x^3-2x+1$.
+This means the sequence is $s_{n+3}=2s_{n+2}-s_n$.
+Now we simply need to find the initial conditions $s_0$, $s_1$, and $s_2$.
+Rewriting $G(x)$ as a formal power series, we get $\sum_{n=0}^\infty s_nx^n=\frac{1}{1-2x+x^3}$, and rearranging, we get $(\sum_{n=0}^\infty s_nx^n)(1-2x+x^3)=1$.
+Now we can simply match coefficients to obtain
+\begin{align*}
+	s_0x^0=1\\
+	-2s_0x+s_1x=0\\
+	-2s_1x^2+s_2x^2=0
+\end{align*}
+Plugging $x=-1$ into the last two equations, we get $s_1=2$ and $s_2=4$.
+In the end, we end up with the recurrence $s_{n+3}=2s_{n+2}-s_n$ with initial conditions $s_0=1$, $s_1=2$, and $s_2=4$.
+
+
+
+\section{} % Section 6
+\subsection{} % Section 6.a
+$\F_p^\times$ is cyclic of order $p-1$, so for any $x\in\F_p^\times$, $x^{p-1}=1$.
+If $x$ is square -- that is, $x=y^2$ for some $y$ -- then since $y^{p-1}=1$, $(y^2)^\frac{p-1}{2}=x^\frac{p-1}{2}=1$.
+If $x^\frac{p-1}{2}\neq1$, then $(x^\frac{1}{2})^{p-1}\neq1$, so $x^\frac{1}{2}\not\in\F_p^\times$, so $x$ is not square.
+So if $x$ is not square, then $x^\frac{p-1}{2}\neq1$, but we know that $x^{p-1}=1$, so $x^\frac{p-1}{2}$ must be $-1$.
+Thus we take $f(x)$ to be $x^\frac{p-1}{2}$, and the condition is satisfied.
+
+
+\subsection{} % Section 6.b
+We construct the Vandermonde matrix:
+\begin{align*}
+	\begin{pmatrix}
+		1 & 0 & 0 & 0 & 0\\
+		1 & 1 & 1 & 1 & 1\\
+		1 & 2 & 4 & 3 & 1\\
+		1 & 3 & 4 & 2 & 1\\
+		1 & 4 & 1 & 4 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		c_0\\
+		c_1\\
+		c_2\\
+		c_3\\
+		c_4\\
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		1\\
+		2\\
+		1\\
+		2\\
+		0\\
+	\end{pmatrix}
+\end{align*}
+After row reduction, we get:
+\begin{align*}
+	\begin{pmatrix}
+		1 & 0 & 0 & 0 & 0\\
+		0 & 1 & 1 & 1 & 1\\
+		0 & 0 & 1 & 3 & 2\\
+		0 & 0 & 0 & 1 & 1\\
+		0 & 0 & 0 & 0 & 1
+	\end{pmatrix}
+	\begin{pmatrix}
+		c_0\\
+		c_1\\
+		c_2\\
+		c_3\\
+		c_4\\
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		1\\
+		1\\
+		4\\
+		4\\
+		4\\
+	\end{pmatrix}
+\end{align*}
+Finally, substituting back in, we get $c_4=4$, $c_3=0$, $c_2=4$, $c_1=1$, and $c_0=1$, giving us $f(x)=4x^4+x^2+x+1$.
+
+
+\section{} % Section 7
+\subsection{} % Section 7.a
+\begin{align*}
+	\begin{bmatrix}
+		0 & 0 & 0\\
+		1 & 1 & 1\\
+		2 & 2 & 2\\
+		0 & 1 & 2\\
+		1 & 2 & 0\\
+		2 & 0 & 1\\
+		0 & 2 & 1\\
+		1 & 0 & 2\\
+		2 & 1 & 0
+	\end{bmatrix}
+\end{align*}
+
+
+\subsection{} % Section 7.b
+\begin{align*}
+	\begin{bmatrix}
+		0 & 0 & 0 & 1\\
+		0 & 0 & 1 & 0\\
+		0 & 1 & 0 & 0\\
+		0 & 1 & 1 & 1\\
+		1 & 0 & 0 & 0\\
+		1 & 0 & 1 & 1\\
+		1 & 1 & 0 & 1\\
+		1 & 1 & 1 & 0\\
+	\end{bmatrix}
+\end{align*}
+
+
+\end{document}
