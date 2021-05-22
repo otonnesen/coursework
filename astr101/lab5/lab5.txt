@@ -1,0 +1,41 @@
+Objective
+
+Introduction
+
+Observations, Tables & Graphs
+
+Calculations
+
+Answers
+1. Since this lab exercise relates to Kepler's laws, use any reference and write the three laws (remember to cite the reference).
+
+\cite{UniPhys} gives the following formulations of Kepler's three laws of planetary motion:
+
+	1. Each planet moves in an elliptical orbit, with the sun at one focus of the ellipse.
+	2. A line from the sun to a given planet sweeps out equal areas in equal times.
+	3. The periods of the planets are proportional to the $\frac{3}{2}$ powers of the major axis lengths of their orbits.
+
+2. In the geometrical construction, we used the radius of the circle to represent the average distance between Earth and the Sun. This is a scale of 5cm = 1 AU. Using this scale, calculate the average distance (in AU) from the Sun to Mars. Calculate the distances to all six positions, then take the average.
+
+3. The _eccentricity_ of Mars's orbit is defined as the ratio of the focal length of the semi-major axis. Calculate this based on your measurements.
+
+4. What are the perihelion and aphelion distances of Mars in AU?
+
+5. Based on the orbital periods of Earth and Mars, how often are the two planets closer than usual to each other? Discuss the reasons.
+
+6. Based on the given dates of the observations, estimate in which month Earth and Mars would be at closest approach? (not just close). Also _farthest_ from each other?
+
+7. Kepler's third law relates the orbital period (in days) to the semi-major axis distance (in AU) of all planets. Since you now know these quantities for Earth and Mars, calculate the ratio for each planet using Kepler's third law (remember to use the correct exponents for the period and semi-major axis). Discuss how well the values of the ratios for Earth and Mars match each other, thus justifying the prediction of Kepler's law.
+
+Discussion
+
+Discussion points:
+	* Using some reliable source, find what the accepted values are for the various distances you calculated in the questions. Discuss each of them in turn, highlighting how well they match and possible reasons for any discrepancies.
+	* Earth's orbit is slightly elliptical with a very small eccentricity of 0.0167. However, we assumed it to be circular. Discuss if and how your results may be affected by the assumption.
+	* Using online search, look up when Earth and Mars were last at _closest_ approach. Discuss how well the month in which this occurred matches with the prediction you maded in Question (6). When will the closest approach occur next? Discuss the implications.
+
+Conclusion
+
+References
+
+

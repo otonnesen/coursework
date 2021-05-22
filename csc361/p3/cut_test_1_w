@@ -1,0 +1,73 @@
+import socket
+import datetime
+
+
+MAX_WIN_SIZE = 5 * 1024
+
+ACK = 'Acknowledgment'
+LEN = 'Length'
+SEQ = 'Sequence'
+WIN = 'Window'
+
+
+class Packet:
+    def __init__(self, commands, headers, payload=''):
+        if isinstance(commands, list):
+            self.commands = commands
+        else:
+            self.commands = [commands]
+        self.headers = headers
+        self.payload = payload
+
+    def __str__(self):
+        '''
+        Turns packet object into a string of the form
+        ```
+        (COMMAND )*
+        Header: Value
+        ...
+        Header: Value
+
+        PAYLOAD
+        ```
+        '''
+        s = f'{self.commands[0]}'
+        for c in self.commands[1:]:
+            s += f' {c}'
+        s += '\r\n'
+        for h in self.headers:
+            s += f'{h}: {self.headers[h]}'
+            s += '\r\n'
+
+        if self.payload:
+            s += '\r\n'
+            s += self.payload
+
+        return s
+
+    def __repr__(self):
+        return f'Packet<{self.commands}, {self.headers}>'
+
+    def from_str(packets):
+        '''
+        Please look away.
+        '''
+        p = []
+        command, packets = packets.split('\r\n', 1)
+        commands = command.split(' ')
+
+        while commands[0] != '':
+            if packets == '':
+                break
+            headers = {}
+            payload = ''
+            if 'DAT' in commands:  # Packet has a payload
+                h, packets = packets.split('\r\n\r\n', 1)
+                for header in h.split('\r\n'):
+                    header = header.split(': ')
+                    headers[header[0]] = int(header[1])
+                assert LEN in headers
+                payload = packets[:headers[LEN]]
+                packets = packets[headers[LEN]:]
+                p.append(Packet(commands, headers, payload))
+                if len(packets.split('\r\n', 1)) == 1:

@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{ASTR 102}
+\newcommand\hwnumber{4}
+\newcommand\duedate{November 3, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Lab \hwnumber{} Report}}
+\rhead{\course\\\duedate}
+
+\usepackage[
+	backend=biber,
+	url=true
+]{biblatex}
+\addbibresource{lab4.bib}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{pgfplots}
+\usepgfplotslibrary{units}
+\pgfplotsset{width=10cm,compat=1.9}
+
+\usepackage{float}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\DeclareMathOperator{\ly}{ly}
+\DeclareMathOperator{\pc}{pc}
+\DeclareMathOperator{\yr}{yr}
+
+\usepackage{listings}
+\lstset{language=Python,
+breaklines=true,
+keywordstyle=\color{blue},
+identifierstyle=\color{black},
+stringstyle=\color{mylilas},
+commentstyle=\color{mygreen},
+showstringspaces=false,
+numbers=left,
+numberstyle={\small \color{black}},
+numbersep=9pt,
+emph=[1]{for,end,break},
+emphstyle=[1]\color{red}
+}
+
+
+\begin{document}
+\section{Objective}
+In this lab we explore some modern techniques astronomers use to make precise estimations about astronomical objects without observing them directly.
+
+
+\section{Introduction}
+In this lab, we use images of RR Lyrae stars in the M3 cluster first calculate their light curves, and then use these light curves to estimate the cluster's distance to Earth.
+Next, we use several images of globular clusters in the Milky Way to estimate the distance from Earth to the galaxy's centre.
+We learn how to correct for volume bias in our observations, and use our estimated distances to calculate various properties about the Solar System and the Milky Way.
+
+
+
+\section{Procedure}
+\subsection*{Part I}
+We first load all the Python modules and star data we'll use for the rest of Part I.
+We then load the first image in the dataset to manually find the position of the four RR Lyrae stars as shown in the lab manual.
+We see they're within $x = 500$ and $x = 800$ in the image, so we carry out the remainder of our analysis only on this sub-region.
+
+For demonstration purposes, we manually input the positions of the four RR Lyrae stars at (89.9, 168.7), (728.6, 171.2), (940.9, 54.1), and (909.8, 82.8), and plot the apertures with which we'll measure their flux.
+We then measure their flux to be $47\;227.155\;\textrm{ADU}$, $128\;668.417\;\textrm{ADU}$, $55\;795.440\;\textrm{ADU}$, and $50\;256.449\;\textrm{ADU}$, respectively.
+Apparently the Zero Point of the image we chose is 27.93, so we convert the flux in ADU to apparent magnitude with Apparent Magnitude = $-2.5 \log_{10}\textrm{aperture sum} + 27.93$.
+This gives us apparent magnitudes of 16.245, 15.156, 16.064, and 16.177.
+
+Now that the demonstration using the four RR Lyrae stars is done, we repeat the above steps for the rest of the stars in the image -- this time detecting them using the Dominion Astrophysical Observatory's DAOPHOT package.
+We repeat this set of calculations for each of the 53 images in our dataset, and save the resulting light curves to disk.
+
+Next, we plot the light curve for the fourth RR Lyrae star (the one located at (909.8, 82.8) in our selected sub-region in the first image in our dataset), as seen in Figure~\ref{fig:light-curve-3}.
+After this, we calculate the mean apparent magnitude of each RR Lyrae star, seen in the second column of Table~\ref{table:rr-lyrae}.
+Using these mean apparent magnitudes and assuming an absolute magnitude of $0.7 \pm 0.1\;\textrm{mag}$, we estimated the distance to each of the RR Lyrae stars by $D = 10 ^ \frac{m - M + 5}{5}$ parsecs, seen in the third column of Table~\ref{table:rr-lyrae}.
+The mean of these estimated distances is $9\;021.1 \pm 415.1\;\pc$, an estimate of the distance to the globular cluster M3.
+
+\subsection*{Part II}
+In Part II, we estimate the distance to the centre of the Milky Way by finding the average distance to each of twelve globular clusters found within a $15^\circ \times 15^\circ$ region of the sky.
+
+
+We start by loading the Python modules and cluster data that we'll use for the rest of Part II.
+As we did in Part I, we first do example calculations on a single cluster (M3) before applying those same calculations to the rest of the dataset.
+We estimate the angular size of the cluster by the full width at half maximum of a Gaussian filter fitted to the image.
+The standard deviation of the fitted Gaussian filter is 127.2 px, so given that FWHM = $2 \sqrt{2 \ln{2}} \sigma$, we calculate the full width at half maximum to be 299.7 px.
+
+Now, using the distance estimate to M3 we calculated in Part I, we estimate the distance to each of the twelve clusters using $d_{GC} = \frac{\theta_{M3}}{\theta_{GC}} \cdot d_{M3}\;\pc$.
+We use $\theta_{M3} = 299.7\;\textrm{px}$, and $d_{M3} = 9\;021.1\;\pc$.
+The results of this calculation for each of the twelve clusters can be seen in Table~\ref{table:cluster-dists}.
+From these twelve distance estimates, we can now estimate the distance to the centre of the Milky Way in two different ways: naively, simply taking the mean of the distances; and using volumetric correction taking instead the weighted mean of the distances (weighted by the inverse square of the distance), where we divide the sum of the inverse of the distances by the sum of the square of the inverse of the distances:
+\[D = \frac{\sum_{i=1}^N \frac{1}{d_i}}{\sum_{i=1}^N \frac{1}{d_i^2}}.\]
+We avoided using numpy for our calculations, since numpy was used in the sample code on Syzygy and we would essentially be reusing the exact code that was given.
+Luckily the dataset is very small, so the significant performance penalty of doing the calculations using pure Python code is not noticeable.
+We used the following code for our calculations:
+\lstinputlisting{src/CoG.py}
+These calculations give approximately $8\;490\;\pc$ and $7\;979\;pc$, respectively. Indeed, these values are equal (with rounding) to those obtained using the numpy code given in Syzygy.
+
+
+\section{Observations, Tables, and Graphs}
+\begin{table}[H]
+\caption{Mean magnitudes and calculated distances of the four RR Lyrae stars.}
+\begin{center}
+\begin{tabular}{| c | c | c |}
+	\hline
+	Star & Mean Magnitude (mag) & Distance (pc) \\ \hline
+	1 & 15.631 & $9\;698.4 \pm 446.3$ \\ \hline
+	2 & 15.047 & $7\;409.2 \pm 341.0$ \\ \hline
+	3 & 15.570 & $9\;428.9 \pm 433.9$ \\ \hline
+	4 & 15.597 & $9\;547.8 \pm 439.4$ \\ \hline
+	\multicolumn{2}{| c |}{Mean Distance} & $9\;021.1 \pm 415.1$\\
+	\hline
+\end{tabular}
+\end{center}
+\label{table:rr-lyrae}
+\end{table}
+
+\begin{table}[H]
+\caption{Calculated cluster distances.}
+\begin{center}
+\begin{tabular}{| c | c | c |}
+	\hline
+	Cluster & FWHM (ADU) & Distance (pc) \\ \hline
+	NGC6723 & 277.1 & 9757.6 \\ \hline
+	NGC6638 & 336.4 & 8036.5 \\ \hline
+	M15 & 283.8 & 9528.2 \\ \hline
+	NGC6624 & 334.3 & 8086.3 \\ \hline
+	NGC6652 & 521.4 & 5185.2 \\ \hline
+	NGC6656 & 275.7 & 9807.2 \\ \hline
+	M3 & 299.7 & 9022.1 \\ \hline
+	NGC6715 & 324.7 & 8326.8 \\ \hline
+	NGC6626 & 316.0 & 8555.9 \\ \hline
+	NGC6809 & 296.3 & 9123.8 \\ \hline
+	NGC6637 & 324.0 & 8343.3 \\ \hline
+	NGC6681 & 333.6 & 8103.9 \\
+	\hline
+\end{tabular}
+\end{center}
+\label{table:cluster-dists}
+\end{table}
+
+\begin{figure}[H]
+\caption{Light curve corresponding to the second RR Lyrae star.}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+	scatter/classes={a={mark=o,draw=red}},
+	x unit={h},
+	y unit={mag},
+	xlabel=Time,
+	ylabel=Magnitude]
+\addplot[scatter,only marks]%
+table[meta=label]{data/RRLyr_1_mags.dat};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\label{fig:light-curve-1}
+\end{figure}
+
+\begin{figure}[H]
+\caption{Light curve corresponding to the fourth RR Lyrae star.}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+	scatter/classes={a={mark=o,draw=red}},
+	x unit={h},
+	y unit={mag},
+	xlabel=Time,
+	ylabel=Magnitude]
+\addplot[scatter,only marks]%
+table[meta=label]{data/RRLyr_3_mags.dat};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\label{fig:light-curve-3}
+\end{figure}
+
+
+\section{Calculations}
+\subsection*{Time for light to travel to us from the centre of the galaxy}
+\[7\;979\;\pc \cdot \frac{3.26\;\ly}{1\;\pc} \cdot \frac{1\;\yr}{1\;\ly} \approx 2.6 \times 10^{4}\;\yr\]
+
+
+\subsection*{Circumference of the Sun's orbit}
+\[2 \pi \cdot 7\;979\;\pc \approx 5.013 \times 10^{4}\;\pc\]
+
+
+\subsection*{Period of the Sun's orbit}
+\[5.013 \times 10^{4}\;\pc \cdot \frac{1\;\yr}{0.00\;021\;\pc} \approx 2.4 \times 10^{8}\;\yr\]
+
+
+\subsection*{Mass of the galaxy}
+\[8.8 \times 10^{15} \times \frac{(7\;979\;\pc)^3}{(2.4 \times 10^{8}\;yr)^2} \approx 7.8 \times 10^{10}\;M_\odot\]
+
+
+\subsection*{Time to observe the galaxy}
+\[7.8 \times 10^{10}\;\textrm{stars} \cdot \frac{1\;\textrm{sec}}{1\;\textrm{stars}} \cdot \frac{1\;\yr}{3 \times 10^{7}\;\textrm{sec}} = 2\;600\;\yr\]
+
+
+\section{Answers}
+\begin{enumerate}[label={\textbf{\emph{(\arabic*)}}}]
+	\item % 1
+Three of the main assumptions we used in our estimation of the distance to the centre of the Milky Way are:
+\begin{enumerate}[label={\arabic*.}]
+	\item All globular clusters are approximately the same size.
+	\item The $15^\circ \times 15^\circ$ region of sky we analysed is representative of the entire galaxy.
+	\item All RR Lyrae stars have an absolute magnitude of approximately 0.7 mag.
+\end{enumerate}
+
+	\item % 2
+The light curve of the anomalous star is plotted in Figure~\ref{fig:light-curve-1}.
+It could be the case that the period of this star is longer than that of the other three, and the dataset we used did not capture its full period.
+It could also simply be that this star has a lesser amplitude than the other three.
+RR Lyrae stars are said to have fairly similar periods and amplitudes, however, so neither of these reasons seems likely.
+Perhaps this star is more distant than the other three and is obstructed in some way, causing its pulses to appear less extreme.
+
+	\item % 3
+M3 is generally accepted to be around $33\;900\;\ly$, or about $10\;300\;\pc$ from Earth~\cite{m3-dist}.
+This reasonably close, although not within the range of our calculated uncertainty.
+If we consider star 2 in Table~\ref{table:rr-lyrae} an outlier and omit it, our distance estimate for M3 becomes $9558.4 \pm 439.9\;\pc$, which is even closer to the accepted distance of $10\;300\;\pc$.
+
+	\item % 4
+As we saw in the procedure section, our biased and volume-corrected mean distances are $8\;490\;\pc$ and $7\;979\;\pc$, respectively.
+The reason for the difference between the biased and the volume-corrected average distances is that our observations capture far more clusters that are far from us than clusters that are close to us.
+This is due to the fact that the further away we look, the larger an area of space we're seeing.
+In fact, the area we see increases with the square of the distance, so we should (assuming uniform distribution of clusters) expect to see the number of clusters we observe to also increase with the square of their distance.
+
+	\item % 5
+The centre of the Milky Way is generally accepted to be between $7\;000\;\pc$ and $9\;000\;\pc$ from Earth~\cite{milky-way-dist}.
+Our distance estimate of $7\;979\;\pc$ is right in the middle of these two values, so it seems to be a very good estimate.
+
+	\item % 6
+It would take light around $26\;000\;\textrm{years}$ to travel from the centre of the Milky Way to the Sun.
+
+	\item % 7
+The Sun travels around $50\;130\;\pc$ in one orbit around the centre of the galaxy.
+
+	\item % 8
+The period of the Sun's orbit is around 240 million years.
+
+	\item % 9
+The mass of the entire Milky Way is around $7.8 \times 10^{10}\;M_\odot$.
+
+	\item % 10
+If the Milky Way has mass $7.8 \times 10^{10}\;M_\odot$, then assuming each star has a mass the same as the Sun, there are $7.8 \times 10^{10}$ stars in the Milky Way.
+
+	\item % 11
+It would take around 2 600 years to check out each star in the Milky Way by observing one star per second.
+
+\end{enumerate}
+
+
+\section{Discussion}
+This lab exercise demonstrated how to use several astronomy Python packages to make precise estimations about astronomical objects based on indirect observations.
+
+A potential source of error in this lab is the dataset; we did not examine each image of the clusters or RR Lyrae stars individually, they may have had errors we did not account for.
+Otherwise, most of the calculations for this lab were done by a computer, so the main sources of error would be in, for example, the star detection program misidentifying a star, not properly fitting a Gaussian filter, or something similar.
+
+Our calculated mass of the Milky Way galaxy -- $7.8 \times 10^{10}\;M_\odot$ -- is an order of magnitude smaller than some claimed masses of $0.8$ to $1.5 \times 10^{12}\;M_\odot$ we found online.
+This doesn't appear to be a calculation error (assuming all the calculations up to this point were correct).
+Some possible explanations are:
+\begin{enumerate}[label={\arabic*.}]
+	\item The Sun's orbit isn't as close to perfectly circular as we assumed.
+	\item The distance to the centre of the galaxy is significantly different than we estimated.
+	\item We misinterpreted the estimated masses that were claimed online, and they're actually specifying the mass of a different object!
+\end{enumerate}
+If our calculations are indeed incorrect, then any further calculations using this mass can no longer be taken to be accurate.
+
+
+\section{Conclusion}
+In this lab exercise, we learned how to use direct and indirect observations to estimate properties of astronomical objects.
+We saw how to use various astronomy software packages to analyse and interpret large datasets.
+
+
+\printbibliography
+
+\end{document}

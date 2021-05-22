@@ -1,0 +1,31 @@
+1.(a) By increasing the number of symbols able to be sent per baud, and by increasing the baud rate.
+
+1.(b) 33.6Kbps is fairly close to the Shannon Limit of the phone lines being used to transmit the data, and so no further major improvements were possible.
+
+1.(c) 56Kbps was achieved by using digital networks at the telephone companies.
+Digital networks have a much higher signal-to-noise ratio than analog networks, and so the theoretical Shannon Limit was much higher.
+Note that the lines from user's homes to the telephone company were still analog, and were converted to digital at the telephone company, meaning 56Kbps was only achieved downstream.
+
+1.(d) DSLs used the same infrastructure as telephone lines, but did not pass through the telephone exchange.
+This meant that the lines were not subject to the same bandwidth constraints as a regular voice call, and were allowed to use the higher frequencies, greatly increasing their theoretical Shannon Limit.
+
+2.(a) 8 RTTs, two to get index.html, and six more to get small.gif, big.gif and huge.gif in sequence.
+
+2.(b) 6 RTTs, two for index.html, two to get small.gif and huge.gif (in parallel) from a.b.com, sent in parallel, and finally two more to get big.gif from x.y.com.
+
+2.(c) 6 RTTs, one to establish the connection to a.b.com, then three more (in sequence) to get index.html, small.gif, and huge.gif from a.b.com, followed by two RTTs to get big.gif from x.y.com.
+
+2.(d) 4 RTTs, one to establish the connection to a.b.com, then one to retrieve index.html, small.gif, and huge.gif from a.b.com (pipelined), followed by two RTTs to connect to and retrieve big.gif from x.y.com.
+
+3.(a) Shaw Communications
+
+3.(b) Latency: 15ms
+Upload: 71Mbps
+Download: 7Mbps
+(Note: this is using an $8 USB WiFi card, so wired speeds are likely higher.)
+
+3.(c)
+Pros: Global coverage, fewer hops to reach a major data centre, more consistent service
+Cons: Service interruptions from poor weather, bandwidth shared throughout locations could cause slower speeds in populated areas
+
+4. I hope so!

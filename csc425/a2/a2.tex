@@ -1,0 +1,294 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.5in]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 425}
+\newcommand\hwnumber{2}
+\newcommand\duedate{October 16, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Assignment \hwnumber}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{tikz}
+
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\newcommand{\ngets}{
+	\ifmmode
+	\gets
+	\else
+	$\gets$
+	\fi
+}
+
+\begin{document}
+\section{} % Section 1
+Given two sorted arrays, \emph{left} and \emph{right}, we can count the number of significant inversions between the two as follows:
+
+\begin{algorithm}
+\begin{algorithmic}
+
+\newcommand{\varleft}{\emph{left}}
+\newcommand{\varright}{\emph{right}}
+
+
+\Function{Count-Sig-Invs}{\varleft, \varright}
+\State $i,j,s \ngets 0,0,0$
+\While{$i < \abs{\varleft}$ and $j < \abs{\varright}$}
+	\If{$\varleft[i] > 2 \cdot \varright[j]$}
+		\State $s \ngets s + \abs{left} - i$
+		\State $j \ngets j + 1$
+	\Else
+		\State $i \ngets i + 1$
+	\EndIf
+\EndWhile
+\State \Return $s$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+Since the lists are sorted, if $a_i$ in the left list and $a_j$ in the right list form a significant inversion (that is, $a_i > 2a_j$), then since each of $a_{i+1}, \ldots, a_{\abs{\emph{left}}}$ are larger than $a_i$, each of them also forms a significant inversion with $a_j$.
+If $(a_i, a_j)$ is a significant inversion, then we count all of $(a_i, a_j), \ldots, (a_{\abs{\emph{left}}}, a_j)$ at once, the nchoose a larger $j$, and thus a larger $a_j$ to see if it is still forms a significant inversion with $a_i$.
+If $(a_i, a_j)$ is not a significant inversion, then we choose a larger $i$, and thus a larger $a_i$ to see if it forms a significant inversion with $a_j$.
+
+We can plug the above function into a the merge step of a regular implementation of merge sort, roughly as follows:
+
+\begin{algorithm}
+\begin{algorithmic}
+
+\newcommand{\varlist}{\emph{list}}
+\newcommand{\varleft}{\emph{left}}
+\newcommand{\varright}{\emph{right}}
+
+
+\Function{Merge-Sort-Count-Invs}{\varlist}
+\If{$\abs{\varlist} = 0$}
+	\State \Return 0
+\EndIf
+\State Split list into \varleft{} and \varright{}.
+\State invs$_\varleft$ \ngets \textproc{Merge-Sort-Count-Invs}(\varleft)
+\State invs$_\varright$ \ngets \textproc{Merge-Sort-Count-Invs}(\varright)
+\State invs$_\emph{cross}$ \ngets \textproc{Merge}(\varleft, \varright, \varlist)
+\State \Return invs$_\varleft$ + invs$_\varright$ + invs$_\emph{cross}$
+\EndFunction
+\Function{Merge}{\varleft, \varright, \varlist}
+\State invs \ngets \textproc{Count-Sig-Invs}(\varleft, \varright)
+\State Continue merge sort as normal, merging \varleft{} and \varright{} into \varlist{} in place.
+\State \Return invs
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{} % Section 2
+The only vertices connected to a given vertex $v$ are its parent and its two children.
+Our goal is simply to find a vertex whose value is lower than those of its parent and its children.
+Consider the following algorithm:
+\begin{algorithm}
+\begin{algorithmic}
+
+\newcommand{\varroot}{\emph{root}}
+
+
+\Function{Find-Local-Min}{\varroot}
+\State $v \ngets \varroot$
+\While{$v$ not a leaf}
+	\State $l,r \ngets v_\textrm{left}$, $v_\textrm{right}$
+	\If{$x_l < x_v$}
+		\State $v \ngets l$
+	\ElsIf{$x_r < x_v$}
+		\State $v \ngets r$
+	\Else
+		\State \Return $v$
+	\EndIf
+\EndWhile
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+We claim the above algorithm returns a local minimum, and give the following proof:
+
+Let $v_1, \ldots, v_k$ be the sequence of vertices taken on by the variable $v$ throughout the algorithm.
+Note that $x_{v_1}, \ldots, x_{v_k}$ is necessarily a decreasing sequence by the nature of how the algorithm selects $v_{i+1}$ given $v_i$.
+The loop in the algorithm only exits when $v$ is either a local minimum or a leaf.
+If $v$ is a local minimum, then we're already done, so suppose $v_k$ is a leaf.
+The only vertex joined to a leaf is that vertex's parent, in this case $v_{k-1}$.
+Recall that $x_{v_1}, \ldots, x_{v_k}$ is a strictly decreasing sequence, so $x_{v_{k-1}} > x_{v_k}$.
+In other words, $v_k$ is a local minimum, as desired.
+
+\section{} % Section 3
+Our goal is to find $i < j$ such that $p(j) - p(i)$ is maximized.
+
+We can solve this problem using divide and conquer.
+If the list has length 2, then we either return $i=0$ and $j=1$ if the price is lower on day $i$ than it is on day $j$, and $i=-1$ and $j=-1$ otherwise.
+If the list has length greater than 2, then we begin by dividing the list into a left and right sublist.
+We recursively find the two days giving the largest profit in either list, then we find the two days giving the largest profit when buying on a day in the left list and selling on a day in the right list.
+For the latter step, we can simply perform a linear search on the left and right sublists to find the lowest and highest prices, respectively.
+The difference in price between these two days is the largest profit between the two lists.
+
+The following pseudocode corresponds to the above:
+
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+
+\newcommand{\varlist}{\emph{list}}
+\newcommand{\varleft}{\emph{left}}
+\newcommand{\varright}{\emph{right}}
+\newcommand{\varmid}{\emph{mid}}
+\newcommand{\varoffset}{\emph{offset}}
+
+
+\Function{Find-Delta}{\varlist[, \varoffset$=0$]}
+\If{$j - i = 1$}
+	\If{$\varlist[i] < \varlist[j]$}
+		\State \Return $i, j$
+	\Else
+		\State \Return $-1, -1$
+	\EndIf
+\EndIf
+\State $\varleft, \varright \ngets \varlist$
+\State $\varmid \ngets \abs{\varlist} / 2$
+\State $\delta_\varleft, i_\varleft, j_\varleft \ngets \textproc{Find-Delta}(\varleft, \varoffset)$
+\State $\delta_\varright, i_\varright, j_\varright \ngets \textproc{Find-Delta}(\varright, \varoffset + \varmid)$
+\State $\delta_\emph{cross}, i_\emph{cross}, j_\emph{cross} \ngets \textproc{Merge}(\varleft, \varright, \varoffset, \varmid)$
+\State \Return $\delta_x, i_x, j_x$ corresponding to $\max\{\delta_\varleft, \delta_\varright, \delta_\emph{cross}\}$
+\EndFunction
+
+\Function{Merge}{\varleft, \varright, \varoffset, \varmid}
+\State $i$ \ngets index of smallest element in \varleft + \varoffset
+\State $j$ \ngets index of largest element in \varright + \varoffset + \varmid
+\State \Return $\varlist[j] - \varlist[i], i, j$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+The \textproc{Merge} step runs in $O(n)$ time, and is called $O(\log n)$ times, so the above algorithm runs in $O(n \log n)$ time, as desired.
+
+
+\section{} % Section 4
+We give a solution using dynamic programming.
+Given an index $i$, our sub-problem is to find the maximum weight independent set only using vertices from $v_1, \ldots, v_i$.
+
+At index $i$, we have two options for $OPT(i)$, either:
+\begin{enumerate}
+	\item $v_i$ is part of the independent set, in which case $OPT(i) = w_i + OPT(i-2)$, or
+	\item $v_i$ is not part of the independent set, in which case $OPT(i) = OPT(i-1)$.
+\end{enumerate}
+
+\noindent
+More concisely,
+\[OPT(i) = \begin{cases}
+	0 & \textrm{if } i = 0\\
+	\max \begin{cases}
+		w_i + OPT(i-2)\\
+		OPT(i-1)
+	\end{cases} & \textrm{otherwise}
+\end{cases}\]
+
+Our goal is to find $OPT(n)$, and use it to reconstruct the set of vertices used to get it.
+We give an algorithm to demonstrate this:
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\Function{Max-Wt-Indep-Set}{$v_1, \ldots, v_n, w_1, \ldots, w_n$}
+\State $M[0] = 0$
+\State $\textproc{OPT}(n, M)$
+\State \Return $\textproc{Reconstruct}(M)$
+\EndFunction
+\Function{OPT}{$n, M$}
+\If{$M[i]$ uninitialized}
+	\State $M[i] \ngets \max\{\textproc{OPT}(i-1,M), w_i + \textproc{OPT}(i-2,M)\}$
+\EndIf
+\State \Return $M[i]$
+\EndFunction
+\Function{Reconstruct}{$M$}
+\State $U \ngets \emptyset$
+\State $i \ngets n$
+\While{$i > 0$}
+	\If{$M[i] = M[i-1]$}
+		\State $i \ngets i-1$
+	\Else
+		\State $U \ngets U \cup \{i\}$
+		\State $i \ngets i-2$
+	\EndIf
+\EndWhile
+\Return $U$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{} % Section 5
+We view the sub-problems as follows:
+
+Find the maximum possible profit when starting on day $i$ with the machine rebooted $j$ days ago.
+
+The base case is when $i = n$, since we never want to reboot on the last day.
+When $i = n$, the maximum possible profit is simply the minimum of $x_i$ and $s_j$.
+
+In the case where $i \neq n$, the decision we must make when finding $OPT(i, j)$ is whether or not to reboot the machine.
+If we do reboot it, then our profit will be $OPT(i+1, 1)$.
+If we do not reboot it, then our profit will be $\min\{x_i, s_j\} + OPT(i+1, j+1)$
+
+This gives us the following Bellman equation:
+\[OPT(i, j) = \begin{cases}
+	\min\{x_i, s_j\} & \textrm{if } i = n\\
+	\max \begin{cases}
+		OPT(i+1, 1)\\
+		\min\{x_i, s_j\} + OPT(i+1, j+1)
+	\end{cases} & \textrm{otherwise}
+\end{cases}\]
+
+Given this, we can easily construct a dynamic programming algorithm solving the problem:
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\Function{Max-Profit}{$x_1, \ldots, x_n, s_1, \ldots, s_n$}
+\For{$j = 1, \ldots, n$}
+	\State $M[n][j] \ngets \min\{x_n, s_j\}$
+\EndFor
+\State $\textproc{OPT}(1, 1, M)$
+\State \Return $\textproc{Reconstruct}(M)$
+\EndFunction
+\Function{OPT}{$i, j, M$}
+\If{$M[i][j]$ uninitialized}
+	\State $M[i][j] \ngets \max\{\textproc{OPT}(i+1, 1, M), \textproc{OPT}(i+1, j+1, M)\}$
+\EndIf
+\State \Return $M[i][j]$
+\EndFunction
+\Function{Reconstruct}{$M$}
+\State $U \ngets \emptyset$
+\State $i \ngets 1$
+\State $j \ngets 1$
+\While{$i \neq n$}
+	\If{$M[i][j] = M[i+1][1]$}
+		\State $i \ngets i + 1$
+		\State $j \ngets 1$
+		\State $U \ngets U \cup \{i\}$
+	\Else
+		\State $i \ngets i + 1$
+		\State $j \ngets j + 1$
+	\EndIf
+\EndWhile
+\State \Return $U$
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
+
+\end{document}

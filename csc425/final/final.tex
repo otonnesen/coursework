@@ -1,0 +1,75 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.5in]{geometry}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\newcommand\course{CSC 425}
+\newcommand\duedate{October 22, 2020}
+
+\lhead{Oliver Tonnesen\\V00885732}
+\chead{\textbf{\Large Final}}
+\rhead{\course\\\duedate}
+
+
+\usepackage{tikz}
+
+
+\usepackage{amsmath, amssymb, mathtools}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\begin{document}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\section{} % Section 1
+Suppose not.
+Then there is some pair $m_1 - w_1$ of a good man and a bad woman, and since there are an equal number of good men and women, there must also be a pair $m_2 - w_2$ of a bad man and a good woman.
+
+Since $m_1$ is good and $m_2$ is bad, $m_1$ is ranked higher on $w_2$'s preference list than $m_2$.
+Similarly, since $w_1$ is bad and $w_2$ is good, $w_2$ is ranked higher on $m_1$'s preference list than $w_1$.
+Thus the pair $m_1 - w_2$ is unstable, a contradiction to our assumption that the matching is stable, and so it must be the case that each good man is married to a good woman, as desired.
+
+
+\section{} % Section 2
+\subsection{} % Section 2.a
+Consider a situation where one very long job starts before any other job and ends after every other job.
+The algorithm will chooes this job
+
+
+\subsection{} % Section 2.b
+
+
+\section{} % Section 3
+
+
+\section{} % Section 4
+Below is our table after we've filled it out:
+\begin{center}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{| c |c |c |c |c |c |c | c |}
+	\hline
+	  &   & P & A & L & A & T & E \\ \hline
+	  & 0 & 2 & 4 & 6 & 8 & 10 & 12 \\ \hline
+	P & 2 & 0 & 2 & 4 & 6 & 8 & 10 \\ \hline
+	A & 4 & 2 & 0 & 2 & 4 & 6 & 8 \\ \hline
+	L & 6 & 4 & 2 & 0 & 2 & 4 & 6 \\ \hline
+	E & 8 & 6 & 4 & 2 & 1 & 3 & 5 \\ \hline
+	T & 10 & 8 & 6 & 4 & 3 & 1 & 3 \\ \hline
+	T & 12 & 10 & 8 & 6 & 5 & 3 & 2 \\ \hline
+	E & 14 & 12 & 10 & 8 & 7 & 5 & 3 \\ \hline
+\end{tabular}
+\end{center}
+Our final answer is 3, and it is obtained with the following alignment:
+\newline
+P A L A T -- E
+\newline
+P A L E T T E
+
+
+\end{document}

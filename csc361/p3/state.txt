@@ -1,0 +1,208 @@
+closed:
+	send(): Error
+	recv(): Error
+	accept(): Go to `listen` state
+	connect():
+		- Select new ISS
+		- Set snd.una to ISS
+		- Set snd.nxt to ISS + 1
+		- Go to `syn_sent` state
+	close(): Error
+	Segment Arrive: Send RST
+
+listen:
+	send(): Error
+	recv(): Error
+	accept(): Error
+	connect(): Error
+	close(): Go to `closed` state
+	Segment Arrive:
+		- RST: nop
+		- ACK: Send RST
+		- SYN:
+			- Set rcv.nxt to seg.seq + 1
+			- Set IRS to seg.seq
+			- Select new ISS
+			- Send SYN|ACK: SEQ=ISS, ACK=rcv.next
+			- Set snd.nxt to ISS + 1
+			- Set snd.una to ISS
+			- Go to `syn_rcvd` state
+	Retransmit timeout: Send head of retransmission queue
+
+syn_sent:
+	send(): Error
+	recv(): Error
+	accept(): Error
+	connect(): Error
+	close(): Go to `closed` state
+	Segment Arrive:
+		- ACK:
+			- If seg.ack <= ISS or seg.ack > snd.nxt, or
+			- If seg.ack < snd.una or seg.ack > snd.nxt:
+				- send RST
+			- If SYN is on:
+				- Set rcv.nxt to seg.seq + 1
+				- Set IRS to seg.seq
+				- Set snd.una to seg.ack
+				- Remove the acked packet from the retransmission queue
+				- If snd.una > ISS:
+					- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+					- Go to `established` state
+				- Else:
+					- Send SYN|ACK: SEQ=ISS, ACK=rcv.nxt
+					- Go to `syn_rcvd` state
+	Retransmit timeout: Send front of retransmission queue
+
+syn_rcvd:
+	send(): Error
+	recv(): Error
+	accept(): Error
+	connect(): Error
+	close(): Error
+	Segment Arrive:
+		- Check sequence number: if seg.seq != rcv.nxt:
+			- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+		- RST:
+			- If prev_state was `listen`:
+				- Go to `listen` state
+			- Else (prev_state was `closed`:
+				- Go to `closed` state
+		- SYN:
+			- Send RST
+			- Go to `closed` state
+		- ACK:
+			- If snd.una <= seg.ack and seg.ack <= snd.nxt
+				- Go to `established` state
+			- Else:
+				- If FIN is on:
+					- Go to `closed_wait` state
+				Else:
+					- Send RST
+					- Go to `closed` state
+		- Else: nop
+	Retransmit timeout: Send front of retransmission queue
+
+established:
+	send():
+		- If snd.nxt >= (snd.una + snd.win): nop
+		- Else:
+			- Send ACK|DAT: SEQ=snd.nxt, ACK=rcv.nxt
+			- Set snd.nxt = snd.nxt + seg.len
+			- Add packet to retransmission queue
+	recv():
+		- If receiver buffer is ready, return its contents and empty it
+	close():
+		- Send FIN: SEQ=snd.nxt
+		- Go to `fin_wait_1` state
+	accept(): Error
+	connect(): Error
+	Segment Arrive:
+		- Check sequence number: if seg.seq != rcv.nxt or seg.len > rcv.win:
+			- If RST is on: nop
+			- Else: Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+		- Else:
+			- If RST is on: Error
+			- Else:
+				- If SYN is on:
+					- Send RST
+					- Go to `closed` state
+				- Else:
+					- If ACK is not on: nop
+					- Else:
+						- If snd.una < seg.ack and seg.ack <= snd.nxt:
+							- Set snd.win to min(cwnd, seg.win)
+							- Remove any packets acked by this packet from the retransmission queue
+							- Set snd.una to seg.ack
+							- If seg.seq != rcv.nxt: nop
+							- Else:
+								- Copy segment's data to rcv buffer
+								- Set rcv.nxt to seg.seq + seg.len
+								- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+							- If FIN is on: Go to `close_wait` state
+							- Else: nop
+						- Else:
+							- If seg.ack != snd.una: nop
+							- Else:
+								- dack = dack + 1
+								- If dack == 3:
+									- ES4
+								- Else:
+									- If seg.seq != rcv.nxt: nop
+									- Else:
+										- Copy segment's data to rcv buffer
+										- Set rcv.nxt to seg.seq + seg.len
+										- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+									- If FIN is on: Go to `close_wait` state
+									- Else: nop
+
+	Retransmit timeout: Send front of retransmission queue
+
+fin_wait_1:
+	send(): Error
+	recv():
+		- If receiver buffer is ready, return its contents and empty it
+	close(): Error
+	accept(): Error
+	connect(): Error
+	Segment Arrive:
+		- Check sequence number: if seg.seq != rcv.nxt or seg.len > rcv.win:
+			- If RST is on: nop
+			- Else: Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+		- Else:
+			- If RST is on: Go to `closed` state
+			- Else:
+				- If SYN is on:
+					- Send RST
+					- Go to `closed` state
+				- Else:
+					- If ACK is not on: nop
+					- Else:
+						- If snd.una < seg.ack and seg.ack <= snd.nxt:
+							- Set snd.win to min(cwnd, seg.win)
+							- Set snd.una to seg.ack
+							- Remove the acked packet from the retransmission queue
+						- If seg.seq != rcv.nxt: nop
+						- Else:
+							- Copy segment's data to rcv buffer
+							- Set rcv.nxt to seg.seq + seg.len
+							- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+							- If seg.ack acknowledges our FIN:
+								- If FIN is on: Go to `time_wait` state
+								- Else: Go to `fin_wait_2` state
+							- Else:
+								- If FIN is on:
+									- Go to `closing` state
+								- Else: nop
+
+	Retransmit timeout: Send front of retransmission queue
+
+fin_wait_2:
+	send(): Error
+	recv():
+		- If receiver buffer is ready, return its contents and empty it
+	close(): Error
+	accept(): Error
+	connect(): Error
+	Segment Arrive:
+		- Check sequence number: if seg.seq != rcv.nxt:
+			- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+		- RST: Go to `closed` state
+		- SYN:
+			- Send RST
+			- Go to `closed` state
+		- If ACK is not on: nop
+		- Else:
+			- If snd.una < seg.ack and seg.ack <= snd.nxt:
+				- Set snd.win to min(cwnd, seg.win)
+				- Set snd.una to seg.ack
+				- Remove the acked packet from the retransmission queue
+
+			- If seg.seq != rcv.nxt: nop
+			- Else:
+				- Copy segment's data to rcv buffer
+				- Set rcv.nxt to seg.seq + seg.len
+				- Send ACK: SEQ=snd.nxt, ACK=rcv.nxt
+			- If FIN is on: Go to `time_wait` state
+			- Else: nop
+
+	Retransmit timeout: Send front of retransmission queue

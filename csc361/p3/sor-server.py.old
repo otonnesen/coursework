@@ -1,0 +1,38 @@
+import sys
+
+from rdp import RDPSocket
+
+
+def parse_args():
+    try:
+        return sys.argv[1], int(sys.argv[2]),\
+               int(sys.argv[3]), int(sys.argv[4])
+    except (IndexError, ValueError):
+        print('Usage: python3 sor-server.py server_ip_address \
+server_udp_port_number server_buffer_size \
+server_payload_length')
+        exit(1)
+
+
+def main():
+
+    ip_addr, port, buf_size, payload_len = parse_args()
+
+    sock = RDPSocket(buf_size, payload_len)
+    sock.bind((ip_addr, port))
+    sock.settimeout(10)
+
+    conn = sock.accept()
+
+    while True:
+        sock._loop_server()
+
+    r = a.recv()
+    with open('cut_test_1_w', 'w') as f:
+        f.truncate(0)
+        f.seek(0)
+        f.write(r)
+
+
+if __name__ == '__main__':
+    main()
